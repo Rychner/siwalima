@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" dir="ltr">
+<html lang="zxx" dir="ltr">    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -281,8 +281,8 @@
                 container.insertAdjacentHTML("beforeend", otherPostsHTML);
             })
             .catch(err => {
-                console.error("Gagal memuat berita kategori 36:", err);
-            });s
+                console.error("Gagal memuat berita kategori Kriminal:", err);
+            });
             </script>
 
             <!-- Berita Politik --> 
@@ -348,6 +348,274 @@
                     document.getElementById('berita').innerHTML = "<p>Gagal memuat berita.</p>";
                 });
             </script>
+
+            <!-- Iklan 1 -->             
+            <script>
+            fetch("https://siwalimanews.com/wp-json/wp/v2/media?search=adv-1-19042025-3&per_page=1")
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('iklan1');
+
+                data.forEach(post => { 
+                // Ambil featured image (jika ada)
+                const gambar = post.source_url || "";
+
+                const item = document.createElement('div');
+
+                item.innerHTML = `         
+                <div>                                                    
+                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                    <a href=#" class="position-cover"></a>
+                </div>
+                `;
+
+                container.appendChild(item);
+                });
+            })
+            .catch(err => {
+                console.error("Gagal fetch data:", err);
+                document.getElementById('berita').innerHTML = "<p>Gagal memuat iklan.</p>";
+            });
+        </script>
+
+        <!-- Berita Kesehatan-->
+        <script>
+            fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=32&per_page=4&_embed")
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('beritakesehatan');
+            
+                // Format tanggal (contoh: Jul 8, 2025)
+                const formatTanggal = (str) => {
+                const date = new Date(str);
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                };
+            
+                // Dapatkan URL gambar
+                const getImage = (post) =>
+                post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
+            
+                // ========== POST PERTAMA ==========
+                const post1 = data[0];
+                const post1HTML = `                
+                    <div>
+                    <article class="post type-post panel vstack gap-1 lg:gap-2">
+                        <div class="post-media panel uc-transition-toggle overflow-hidden">
+                        <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                            <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                data-src="${getImage(post1)}"
+                                alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                        </div>
+                        <a href="#" class="position-cover"></a>
+                        </div>
+                        <div class="post-header panel vstack gap-1">
+                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                            <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-primary dark:text-primary duration-150" href="#">
+                                ${post1._embedded["wp:term"]?.[0]?.[0]?.name || ""}
+                                </a>
+                            </div>
+                            </div>
+                            <div class="sep d-none md:d-block">❘</div>
+                            <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${formatTanggal(post1.date)}</span>
+                            </div>
+                            </div>
+                        </div>
+                        <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
+                            <a class="text-none hover:text-primary duration-150" href="#">${post1.title.rendered}</a>
+                        </h3>
+                        </div>
+                    </article>
+                    </div>
+                `;
+            
+                // ========== POST 2–4 ==========
+                let postListHTML = '';
+                data.slice(1).forEach(post => {
+                postListHTML += `
+                    <div>
+                    <article class="post type-post panel">
+                        <div class="row child-cols g-2" data-uc-grid>
+                        <div>
+                            <div class="post-header panel vstack justify-between gap-1">
+                            <h3 class="post-title h6 m-0 text-truncate-2">
+                                <a class="text-none hover:text-primary duration-150" href="#">
+                                ${post.title.rendered}
+                                </a>
+                            </h3>
+                            <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                                <div class="post-date hstack gap-narrow">
+                                <span>${formatTanggal(post.date)}</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
+                            <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
+                                <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(post)}"
+                                    alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
+                            <a href="#" class="position-cover"></a>
+                            </div>
+                        </div>
+                        </div>
+                    </article>
+                    </div>
+                `;
+                });
+            
+                // Gabungkan semuanya dan masukkan ke DOM
+                container.innerHTML = `
+                ${post1HTML}
+                ${postListHTML}
+                </div> <!-- tutup block-content -->
+                `;
+            })
+            .catch(err => {
+                console.error("Gagal fetch berita kategori Kesehatan:", err);
+                document.getElementById('social-news').innerHTML = "<p>Gagal memuat berita kategori Kesehatan.</p>";
+            });
+            </script>
+
+            <!-- Berita Olahraga-->
+            <script>
+                fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=31&per_page=4&_embed")
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('beritaolahraga');
+                
+                    // Format tanggal (contoh: Jul 8, 2025)
+                    const formatTanggal = (str) => {
+                    const date = new Date(str);
+                    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    };
+                
+                    // Dapatkan URL gambar
+                    const getImage = (post) =>
+                    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
+                
+                    // ========== POST PERTAMA ==========
+                    const post1 = data[0];
+                    const post1HTML = `                
+                        <div>
+                        <article class="post type-post panel vstack gap-1 lg:gap-2">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden">
+                            <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                                <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(post1)}"
+                                    alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
+                            <a href="#" class="position-cover"></a>
+                            </div>
+                            <div class="post-header panel vstack gap-1">
+                            <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                                <div>
+                                <div class="post-category hstack gap-narrow fw-semibold">
+                                    <a class="text-none hover:text-primary dark:text-primary duration-150" href="#">
+                                    ${post1._embedded["wp:term"]?.[0]?.[0]?.name || ""}
+                                    </a>
+                                </div>
+                                </div>
+                                <div class="sep d-none md:d-block">❘</div>
+                                <div class="d-none md:d-block">
+                                <div class="post-date hstack gap-narrow">
+                                    <span>${formatTanggal(post1.date)}</span>
+                                </div>
+                                </div>
+                            </div>
+                            <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
+                                <a class="text-none hover:text-primary duration-150" href="#">${post1.title.rendered}</a>
+                            </h3>
+                            </div>
+                        </article>
+                        </div>
+                    `;
+                
+                    // ========== POST 2–4 ==========
+                    let postListHTML = '';
+                    data.slice(1).forEach(post => {
+                    postListHTML += `
+                        <div>
+                        <article class="post type-post panel">
+                            <div class="row child-cols g-2" data-uc-grid>
+                            <div>
+                                <div class="post-header panel vstack justify-between gap-1">
+                                <h3 class="post-title h6 m-0 text-truncate-2">
+                                    <a class="text-none hover:text-primary duration-150" href="#">
+                                    ${post.title.rendered}
+                                    </a>
+                                </h3>
+                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                                    <div class="post-date hstack gap-narrow">
+                                    <span>${formatTanggal(post.date)}</span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
+                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
+                                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                        data-src="${getImage(post)}"
+                                        alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                                </div>
+                                <a href="#" class="position-cover"></a>
+                                </div>
+                            </div>
+                            </div>
+                        </article>
+                        </div>
+                    `;
+                    });
+                
+                    // Gabungkan semuanya dan masukkan ke DOM
+                    container.innerHTML = `
+                    ${post1HTML}
+                    ${postListHTML}
+                    </div> <!-- tutup block-content -->
+                    `;
+                })
+                .catch(err => {
+                    console.error("Gagal fetch berita kategori Kesehatan:", err);
+                    document.getElementById('social-news').innerHTML = "<p>Gagal memuat berita kategori Kesehatan.</p>";
+                });
+                </script>
+
+                <!-- Iklan 2 -->             
+                <script>
+                    fetch("https://siwalimanews.com/wp-json/wp/v2/media?search=adv-2-Muharram&per_page=1")
+                    .then(res => res.json())
+                    .then(data => {
+                        const container = document.getElementById('iklan2');
+        
+                        data.forEach(post => { 
+                        // Ambil featured image (jika ada)
+                        const gambar = post.source_url || "";
+        
+                        const item = document.createElement('div');
+        
+                        item.innerHTML = `                                      
+                            <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                            <a href=#" class="position-cover"></a>
+                        `;
+        
+                        container.appendChild(item);
+                        });
+                    })
+                    .catch(err => {
+                        console.error("Gagal fetch data:", err);
+                        document.getElementById('berita').innerHTML = "<p>Gagal memuat iklan.</p>";
+                    });
+                </script>
     
     </head>
     <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
@@ -561,7 +829,7 @@
         <!-- Wrapper start -->
         <div id="wrapper" class="wrap overflow-hidden-x">
 
-            <!-- Section start -->
+            <!-- Berita Terkini Section start -->
             <div class="section panel overflow-hidden">
                 <div class="section-outer panel pb-4 pt-3 sm:py-4 sm:py-5">
                     <div class="container max-w-xl">
@@ -707,9 +975,9 @@
                 </div>
             </div>
 
-            <!-- Section end -->
+            <!-- Berita Terkini Section end -->
 
-            <!-- Section start -->
+            <!-- Berita Kriminal Section start -->
             <div id="tv-posts" class="tv-posts section panel overflow-hidden bg-gray-800 text-white uc-dark">
                 <div class="section-outer panel py-4 sm:py-5">
                     <div class="container max-w-xl">
@@ -734,9 +1002,9 @@
                 </div>
             </div>
 
-            <!-- Section end -->
+            <!-- Berita Kriminal Section end -->
 
-            <!-- Section start -->
+            <!-- Iklan 1 dan Berita Politik Section start -->
             <div id="trending-posts" class="trending-posts section panel overflow-hidden">
                 <div class="section-outer panel py-4 sm:py-5">
                     <div class="container max-w-xl">
@@ -744,100 +1012,9 @@
                             <div class="row child-cols-12 lg:child-cols col-match g-3 xl:g-4" data-uc-grid>
                                 <div class="lg:col-4">
                                     <div class="block-layout grid-layout vstack gap-2 lg:gap-3 panel overflow-hidden p-3 bg-gray-25 dark:bg-gray-800">
-                                        <div class="block-header panel">
-                                            <h2 class="h6 lg:h5 m-0 text-inherit dark:text-white hstack gap-1">
-                                                <span class="panel d-inline-block bg-primary w-8px h-8px translate-y-px"></span>
-                                                <a class="text-none hover:text-primary duration-150" href="blog-category.html">Most watched</a>
-                                            </h2>
-                                        </div>
                                         <div class="block-content">
-                                            <div class="row child-cols-12 g-3">
-                                                <div>
-                                                    <article class="post type-post panel">
-                                                        <div class="row child-cols g-2" data-uc-grid>
-                                                            <div>
-                                                                <div class="post-header panel vstack justify-between gap-1">
-                                                                    <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                        <a class="text-none hover:text-primary duration-150" href="blog-details.html">Solo Travel: Some Tips and Destinations for the Adventurous Explorer</a>
-                                                                    </h3>
-                                                                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                        <div class="post-date hstack gap-narrow">
-                                                                            <span>Jan 8, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image uc-transition-scale-up uc-transition-opaque" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-11.jpg" alt="Solo Travel: Some Tips and Destinations for the Adventurous Explorer" data-uc-img="loading: lazy">
-                                                                    </div>
-                                                                    <a href="blog-details.html" class="position-cover"></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel">
-                                                        <div class="row child-cols g-2" data-uc-grid>
-                                                            <div>
-                                                                <div class="post-header panel vstack justify-between gap-1">
-                                                                    <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                        <a class="text-none hover:text-primary duration-150" href="blog-details.html">AI-Powered Financial Planning: How Algorithms Revolutionizing</a>
-                                                                    </h3>
-                                                                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                        <div class="post-date hstack gap-narrow">
-                                                                            <span>Jan 8, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image uc-transition-scale-up uc-transition-opaque" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-12.jpg" alt="AI-Powered Financial Planning: How Algorithms Revolutionizing" data-uc-img="loading: lazy">
-                                                                    </div>
-                                                                    <a href="blog-details.html" class="position-cover"></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel">
-                                                        <div class="row child-cols g-2" data-uc-grid>
-                                                            <div>
-                                                                <div class="post-header panel vstack justify-between gap-1">
-                                                                    <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                        <a class="text-none hover:text-primary duration-150" href="blog-details.html">Tech Tools for your Time Management: Enhancing Productivity</a>
-                                                                    </h3>
-                                                                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                        <div class="post-date hstack gap-narrow">
-                                                                            <span>Dec 8, 2023</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image uc-transition-scale-up uc-transition-opaque" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-13.jpg" alt="Tech Tools for your Time Management: Enhancing Productivity" data-uc-img="loading: lazy">
-                                                                    </div>
-                                                                    <a href="blog-details.html" class="position-cover"></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
+                                            <div class="row child-cols-12 g-3" id="iklan1">
+                                                <!-- JS akan inject iklan di sini -->                                                
                                             </div>
                                         </div>
                                     </div>
@@ -852,7 +1029,7 @@
                                         </div>
                                         <div class="block-content">
                                             <div class="row child-cols-6 g-2 gy-3 md:gx-3 md:gy-4" id="beritapolitik">
-                                                
+                                                <!-- JS akan inject berita di sini -->
                                             </div>
                                         </div>
                                     </div>
@@ -863,7 +1040,7 @@
                 </div>
             </div>
 
-            <!-- Section end -->
+            <!-- Iklan 1 dan Berita Politik Section end -->
 
             <!-- Section start -->
             <div id="category-posts" class="category-posts section panel overflow-hidden">
@@ -876,120 +1053,11 @@
                                         <div class="block-header panel border-bottom pb-1 min-h-40px">
                                             <h2 class="h6 lg:h5 m-0 text-inherit dark:text-white hstack gap-1">
                                                 <span class="panel d-inline-block bg-primary w-8px h-8px translate-y-px"></span>
-                                                <a class="post-title text-none hover:text-primary duration-150" href="blog-category.html">Social</a>
+                                                <a class="post-title text-none hover:text-primary duration-150" href="blog-category.html">Kesehatan</a>
                                             </h2>
                                         </div>
-                                        <div class="block-content panel vstack gap-3">
-                                            <div>
-                                                <article class="post type-post panel vstack gap-1 lg:gap-2">
-                                                    <div class="post-media panel uc-transition-toggle overflow-hidden">
-                                                        <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                                                            <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-12.jpg" alt="AI-Powered Financial Planning: How Algorithms Revolutionizing" data-uc-img="loading: lazy">
-                                                        </div>
-                                                        <a href="blog-details.html" class="position-cover"></a>
-                                                    </div>
-                                                    <div class="post-header panel vstack gap-1">
-                                                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
-                                                            <div>
-                                                                <div class="post-category hstack gap-narrow fw-semibold">
-                                                                    <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">Tech</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sep d-none md:d-block">❘</div>
-                                                            <div class="d-none md:d-block">
-                                                                <div class="post-date hstack gap-narrow">
-                                                                    <span>Jan 8, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>
-                                                        <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                                                            <a class="text-none hover:text-primary duration-150" href="blog-details.html">AI-Powered Financial Planning: How Algorithms Revolutionizing</a>
-                                                        </h3>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">Tech Tools for your Time Management: Enhancing Productivity</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Dec 8, 2023</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-13.jpg" alt="Tech Tools for your Time Management: Enhancing Productivity" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">A Guide to The Rise of Gourmet Street Food: Trends and Top Picks</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Sep 8, 2023</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-14.jpg" alt="A Guide to The Rise of Gourmet Street Food: Trends and Top Picks" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">Gaming in the Age of AI: Strategies for Startups</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Jun 8, 2023</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-15.jpg" alt="Gaming in the Age of AI: Strategies for Startups" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
+                                        <div class="block-content panel vstack gap-3" id="beritakesehatan">
+                                            <!-- JS akan inject berita di sini -->
                                         </div>
                                     </div>
                                 </div>
@@ -998,263 +1066,21 @@
                                         <div class="block-header panel border-bottom pb-1 min-h-40px">
                                             <h2 class="h6 lg:h5 m-0 text-inherit dark:text-white hstack gap-1">
                                                 <span class="panel d-inline-block bg-primary w-8px h-8px translate-y-px"></span>
-                                                <a class="post-title text-none hover:text-primary duration-150" href="blog-category.html">Sports</a>
+                                                <a class="post-title text-none hover:text-primary duration-150" href="blog-category.html">Olahraga</a>
                                             </h2>
                                         </div>
-                                        <div class="block-content panel vstack gap-3">
-                                            <div>
-                                                <article class="post type-post panel vstack gap-1 lg:gap-2">
-                                                    <div class="post-media panel uc-transition-toggle overflow-hidden">
-                                                        <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                                                            <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-04.jpg" alt="The Importance of Sleep: Tips for Better Rest and Recovery" data-uc-img="loading: lazy">
-                                                        </div>
-                                                        <a href="blog-details.html" class="position-cover"></a>
-                                                    </div>
-                                                    <div class="post-header panel vstack gap-1">
-                                                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
-                                                            <div>
-                                                                <div class="post-category hstack gap-narrow fw-semibold">
-                                                                    <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">AI Powered</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sep d-none md:d-block">❘</div>
-                                                            <div class="d-none md:d-block">
-                                                                <div class="post-date hstack gap-narrow">
-                                                                    <span>Mar 8, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>
-                                                        <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                                                            <a class="text-none hover:text-primary duration-150" href="blog-details.html">The Importance of Sleep: Tips for Better Rest and Recovery</a>
-                                                        </h3>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">The Future of Sustainable Living: Driving Eco-Friendly Lifestyles</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Mar 7, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-05.jpg" alt="The Future of Sustainable Living: Driving Eco-Friendly Lifestyles" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">Hidden Gems: Underrated Travel Destinations Around the World</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Feb 14, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-09.jpg" alt="Hidden Gems: Underrated Travel Destinations Around the World" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">A Guide to The Rise of Gourmet Street Food: Trends and Top Picks</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Sep 8, 2023</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-14.jpg" alt="A Guide to The Rise of Gourmet Street Food: Trends and Top Picks" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
+                                        <div class="block-content panel vstack gap-3" id="beritaolahraga">
+                                            <!-- JS akan inject berita di sini -->
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
-                                        <div class="block-header panel border-bottom pb-1 min-h-40px">
-                                            <h2 class="h6 lg:h5 m-0 text-inherit dark:text-white hstack gap-1">
-                                                <span class="panel d-inline-block bg-primary w-8px h-8px translate-y-px"></span>
-                                                <a class="post-title text-none hover:text-primary duration-150" href="blog-category.html">Arts</a>
-                                            </h2>
+                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden"> 
+                                        <div class="block-header panel pb-1 min-h-40px">                                            
                                         </div>
-                                        <div class="block-content panel vstack gap-3">
-                                            <div>
-                                                <article class="post type-post panel vstack gap-1 lg:gap-2">
-                                                    <div class="post-media panel uc-transition-toggle overflow-hidden">
-                                                        <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                                                            <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-08.jpg" alt="AI and Marketing: Unlocking Customer Insights" data-uc-img="loading: lazy">
-                                                        </div>
-                                                        <a href="blog-details.html" class="position-cover"></a>
-                                                    </div>
-                                                    <div class="post-header panel vstack gap-1">
-                                                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
-                                                            <div>
-                                                                <div class="post-category hstack gap-narrow fw-semibold">
-                                                                    <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">Virtual Reality</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sep d-none md:d-block">❘</div>
-                                                            <div class="d-none md:d-block">
-                                                                <div class="post-date hstack gap-narrow">
-                                                                    <span>Feb 22, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>
-                                                        <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                                                            <a class="text-none hover:text-primary duration-150" href="blog-details.html">AI and Marketing: Unlocking Customer Insights</a>
-                                                        </h3>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">Hidden Gems: Underrated Travel Destinations Around the World</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Feb 14, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-09.jpg" alt="Hidden Gems: Underrated Travel Destinations Around the World" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">Eco-Tourism: Traveling Responsibly and Sustainably</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Feb 8, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-10.jpg" alt="Eco-Tourism: Traveling Responsibly and Sustainably" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div>
-                                                <article class="post type-post panel">
-                                                    <div class="row child-cols g-2" data-uc-grid>
-                                                        <div>
-                                                            <div class="post-header panel vstack justify-between gap-1">
-                                                                <h3 class="post-title h6 m-0 text-truncate-2">
-                                                                    <a class="text-none hover:text-primary duration-150" href="blog-details.html">Solo Travel: Some Tips and Destinations for the Adventurous Explorer</a>
-                                                                </h3>
-                                                                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                                                                    <div class="post-date hstack gap-narrow">
-                                                                        <span>Jan 8, <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                                                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
-                                                                    <img class=" uc-transition-scale-up uc-transition-opaque media-cover uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="https://html.themewant.com/news5/assets/images/demo-two/posts/img-11.jpg" alt="Solo Travel: Some Tips and Destinations for the Adventurous Explorer" data-uc-img="loading: lazy">
-                                                                </div>
-                                                                <a href="blog-details.html" class="position-cover"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                        </div>
+                                        <div class="block-content panel vstack gap-3" id="iklan2">
+                                            <img src="https://siwalimanews.com/wp-content/uploads/2025/06/adv-2-Muharram.jpg" alt="">                                            
+                                        </div>                                       
                                     </div>
                                 </div>
                                 <div>
