@@ -61,7 +61,7 @@ function swiperBerita()
 
         item.innerHTML = `         
             <div>
-                <article class="post type-post panel vstack gap-1 rounded" style="background-color: rgb(52, 52, 236);">                    
+                <article class="post type-post panel vstack gap-1 rounded bg-dark">                    
                     <div class="post-media panel uc-transition-toggle overflow-hidden">
                         <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                             <img class="uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
