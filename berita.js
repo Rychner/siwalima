@@ -60,30 +60,30 @@ function swiperBerita()
 
         item.innerHTML = `         
             <div>
-                <article class="post type-post panel vstack gap-3">
-                    <div class="post-header panel vstack justify-center text-center gap-1">
-                        <div class="post-meta panel hstack justify-center gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
-                            <div>
-                                <div class="post-category hstack gap-narrow fw-semibold">
-                                    <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
-                                </div>
-                            </div>
-                            <div class="sep d-none md:d-block">❘</div>
-                            <div class="d-none md:d-block">
-                                <div class="post-date hstack gap-narrow">
-                                    <span>${tanggal}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="post-title h5 xl:h4 m-0 m-0 max-w-500px mx-auto">
-                            <a class="text-none" href="#">${judul}</a>
-                        </h3>
-                    </div>
+                <article class="post type-post panel vstack gap-1" style="background-color: rgb(52, 52, 236);">                    
                     <div class="post-media panel uc-transition-toggle overflow-hidden">
                         <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
                             <img class="uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                         </div>
                         <a href="#" class="position-cover"></a>
+                    </div>
+                    <div class="post-header panel vstack justify-content gap-1">
+                        <h3 class="post-title px-1 h5 xl:h4 m-0 m-0 max-w-auto">
+                            <a class="text-none text-white" href="#">${judul}</a>
+                        </h3>
+                        <div class="post-meta px-1 panel hstack justify-content gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                            <div>
+                                <div class="post-category hstack gap-narrow fw-semibold">
+                                    <a class="text-none text-white hover:text-white dark:text-white duration-150" href="blog-category.html">${kategori}</a>
+                                </div>
+                            </div>
+                            <div class="sep d-none text-white md:d-block">❘</div>
+                            <div class="d-none md:d-block">
+                                <div class="post-date text-white hstack gap-narrow">
+                                    <span>${tanggal}</span>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                 </article>
             </div>
