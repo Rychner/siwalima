@@ -69,8 +69,8 @@ function swiperBerita()
                         <a href="#" class="position-cover"></a>
                     </div>
                     <div class="post-header panel vstack justify-content gap-1">
-                        <h3 class="post-title px-1 h5 xl:h4 m-0 m-0 max-w-auto">
-                            <a class="text-none text-white mb-1" href="#">${teksJudul}</a>
+                        <h3 class="post-title px-1 h5 xl:h4 m-0 max-w-auto">
+                            <a class="text-none text-white" href="#">${teksJudul}</a>
                         </h3>
                         <div class="post-meta px-1 mb-1 panel hstack justify-content gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
                             <div>
