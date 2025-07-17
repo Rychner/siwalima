@@ -1,21 +1,22 @@
-//listberitaterkini
+//Section 1 Start
 function beritaTerkini()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=10")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=8")
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('beritaterkini');
-            data.forEach(post => {
-            const jamTerbit = post.date.slice(11, 16);
+            data.forEach((post, index) => {            
+            //const jamTerbit = post.date.slice(11, 16);
+            const nomor = index + 1;
             const item = document.createElement('div');
             item.innerHTML = `
             <div>
                 <article class="post type-post panel d-flex gap-2">
                     <div>
-                        <div class="fs-7 fw-bold text-center translate-y-narrow bg-gray-50 dark:bg-white dark:text-black min-w-48px">${jamTerbit}</div>
+                        <div class="fs-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
                     </div>
-                    <h6 class="fs-6 lg:fs-7 xl:fs-6 fw-medium text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="#">${post.title.rendered}</a>
+                    <h6 class="fs-6 px-1 lg:fs-3 xl:fs-3 fw-medium text-truncate-2 bg-gray-50">
+                        <a class="fw-bold text-none hover:text-red duration-150" href="#">${post.title.rendered}</a>
                     </h6>
                 </article>
             </div>
@@ -31,7 +32,7 @@ function beritaTerkini()
 
 function swiperBerita()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=10&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('swiperberita');
@@ -70,12 +71,12 @@ function swiperBerita()
                     </div>
                     <div class="post-header panel vstack justify-content gap-1">
                         <h3 class="post-title px-1 h5 xl:h4 m-0 max-w-auto">
-                            <a class="text-none text-white" href="#">${teksJudul}</a>
+                            <a class="text-none text-white hover:text-red" href="#">${teksJudul}</a>
                         </h3>
                         <div class="post-meta px-1 mb-1 panel hstack justify-content gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
                             <div>
                                 <div class="post-category hstack gap-narrow fw-semibold">
-                                    <a class="text-none text-white hover:text-white dark:text-white duration-150" href="blog-category.html">${kategori}</a>
+                                    <a class="text-none text-white hover:text-red dark:text-white duration-150" href="blog-category.html">${kategori}</a>
                                 </div>
                             </div>
                             <div class="sep d-none text-white md:d-block">❘</div>
@@ -97,6 +98,70 @@ function swiperBerita()
     .catch(err => {
         console.error("Gagal fetch data:", err);
         document.getElementById('swiperberita').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
+function beritaTerkini2()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritaterkini2');
+
+        data.slice(1).forEach(post => {
+        // Ambil kategori pertama (jika ada)
+        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+
+        // Ambil tanggal (format: Mar 8, 2025)
+        const date = new Date(post.date);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const tanggal = date.toLocaleDateString('en-US', options);
+
+        // Ambil judul
+        const judul = post.title.rendered;
+
+        // Ambil featured image (jika ada)
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+        const item = document.createElement('div');
+
+        item.innerHTML = `         
+        <div>
+            <article class="post type-post panel vstack gap-1 lg:gap-2">
+                <div class="post-media panel uc-transition-toggle overflow-hidden">
+                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                    </div>
+                    <a href=#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
+                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                        <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
+                    </h3>
+                </div>
+            </article>
+        </div>
+        `;
+
+        container.appendChild(item);
+        });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('beritaterkini2').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
 
@@ -171,7 +236,7 @@ function beritaPolitik()
                     <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
                         <div>
                             <div class="post-category hstack gap-narrow fw-semibold">
-                                <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
                             </div>
                         </div>
                         <div class="sep d-none md:d-block">❘</div>
@@ -182,7 +247,7 @@ function beritaPolitik()
                         </div>                                                                
                     </div>
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-primary duration-150" href="#">${judul}</a>
+                        <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
                     </h3>
                 </div>
             </article>
@@ -197,6 +262,71 @@ function beritaPolitik()
         document.getElementById('beritapolitik').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
+
+function beritaTopnews()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=48&per_page=4&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritatopnews');
+
+        data.forEach(post => {
+        // Ambil kategori pertama (jika ada)
+        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+
+        // Ambil tanggal (format: Mar 8, 2025)
+        const date = new Date(post.date);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const tanggal = date.toLocaleDateString('en-US', options);
+
+        // Ambil judul
+        const judul = post.title.rendered;
+
+        // Ambil featured image (jika ada)
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+        const item = document.createElement('div');
+
+        item.innerHTML = `         
+        <div>
+            <article class="post type-post panel vstack gap-1 lg:gap-2">
+                <div class="post-media panel uc-transition-toggle overflow-hidden">
+                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-21x9">
+                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                    </div>
+                    <a href=#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-white text-none hover:text-white dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="text-white sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="text-white post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>                    
+                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                        <a class="text-none text-white hover:text-white duration-150" href="#">${judul}</a>
+                    </h3>
+                </div>
+            </article>
+        </div>
+        `;
+
+        container.appendChild(item);
+        });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('beritatopnews').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+//Section 1 End
 
 function beritaKriminal()
 {
@@ -813,9 +943,11 @@ function beritaHukum()
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
+    beritaTerkini2();
     bannerKoran();
     beritaTerkini();
     beritaPolitik();
+    beritaTopnews();
     beritaKriminal();
     beritaKesehatan();
     beritaOlahraga();
