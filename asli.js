@@ -51,7 +51,8 @@ function swiperBerita()
         const tanggal = date.toLocaleDateString('en-US', options);
 
         // Ambil judul
-        const judul = post.title.rendered;        
+        const judul = post.title.rendered;
+        const teksJudul = judul.slice(0,60) + '...';
         
         // Ambil featured image (jika ada)
         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
@@ -68,10 +69,23 @@ function swiperBerita()
                         </div>
                         <a href="#" class="position-cover"></a>
                     </div>
-                    <div class="post-header panel vstack justify-content gap-1 mb-1">
+                    <div class="post-header panel vstack justify-content gap-1">
                         <h3 class="post-title px-1 h5 xl:h4 m-0 max-w-auto">
-                            <a class="text-none text-white text-truncate-2 hover:text-red" href="#">${judul}</a>
-                        </h3>                                                
+                            <a class="text-none text-white hover:text-red" href="#">${teksJudul}</a>
+                        </h3>
+                        <div class="post-meta px-1 mb-1 panel hstack justify-content gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                            <div>
+                                <div class="post-category hstack gap-narrow fw-semibold">
+                                    <a class="text-none text-white hover:text-red dark:text-white duration-150" href="blog-category.html">${kategori}</a>
+                                </div>
+                            </div>
+                            <div class="sep d-none text-white md:d-block">❘</div>
+                            <div class="d-none md:d-block">
+                                <div class="post-date text-white hstack gap-narrow">
+                                    <span>${tanggal}</span>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                 </article>
             </div>
@@ -120,7 +134,20 @@ function beritaTerkini2()
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                    
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
                     </h3>
@@ -196,19 +223,35 @@ function beritaPolitik()
 
         const item = document.createElement('div');
 
-        item.innerHTML = `
+        item.innerHTML = `         
+        <div>
             <article class="post type-post panel vstack gap-1 lg:gap-2">
                 <div class="post-media panel uc-transition-toggle overflow-hidden">
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
-                    </div>                    
+                    </div>
+                    <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                    
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
                     </h3>
                 </div>
             </article>
+        </div>
         `;
 
         container.appendChild(item);
@@ -253,7 +296,20 @@ function beritaTopnews()
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                                        
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-white text-none hover:text-white dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="text-white sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="text-white post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none text-white hover:text-white duration-150" href="#">${judul}</a>
                     </h3>
@@ -306,7 +362,20 @@ function beritaKriminal()
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                    
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
                     </h3>
@@ -326,7 +395,7 @@ function beritaKriminal()
 
 function beritaKesehatan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=32&per_page=7&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=32&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritakesehatan');
@@ -347,17 +416,33 @@ function beritaKesehatan()
             <div>
             <article class="post type-post panel vstack gap-1 lg:gap-2">
                 <div class="post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                            data-src="${getImage(post1)}"
-                            alt="${post1.title.rendered}" data-uc-img="loading: lazy">
-                    </div>                
+                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                        data-src="${getImage(post1)}"
+                        alt="${post1.title.rendered}" data-uc-img="loading: lazy">
                 </div>
-                <div class="post-header panel vstack gap-1">                
-                    <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="#">${post1.title.rendered}</a>
-                    </h3>
+                <a href="#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                    <div>
+                    <div class="post-category hstack gap-narrow fw-semibold">
+                        <a class="text-none hover:text-red dark:text-primary duration-150" href="#">
+                        ${post1._embedded["wp:term"]?.[0]?.[0]?.name || ""}
+                        </a>
+                    </div>
+                    </div>
+                    <div class="sep d-none md:d-block">❘</div>
+                    <div class="d-none md:d-block">
+                    <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post1.date)}</span>
+                    </div>
+                    </div>
+                </div>
+                <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
+                    <a class="text-none hover:text-red duration-150" href="#">${post1.title.rendered}</a>
+                </h3>
                 </div>
             </article>
             </div>
@@ -372,16 +457,21 @@ function beritaKesehatan()
                 <div class="row child-cols g-2" data-uc-grid>
                 <div>
                     <div class="post-header panel vstack justify-between gap-1">
-                        <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-red duration-150" href="#">
-                            ${post.title.rendered}
-                            </a>
-                        </h3>                    
+                    <h3 class="post-title h6 m-0 text-truncate-2">
+                        <a class="text-none hover:text-red duration-150" href="#">
+                        ${post.title.rendered}
+                        </a>
+                    </h3>
+                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                        <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="col-auto">
                     <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1 ratio-16x9">
+                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
                         <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
                             src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                             data-src="${getImage(post)}"
@@ -411,7 +501,7 @@ function beritaKesehatan()
 
 function beritaOlahraga()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=31&per_page=7&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=31&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaolahraga');
@@ -437,12 +527,28 @@ function beritaOlahraga()
                         src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                         data-src="${getImage(post1)}"
                         alt="${post1.title.rendered}" data-uc-img="loading: lazy">
-                </div>                    
                 </div>
-                <div class="post-header panel vstack gap-1">                
-                    <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="#">${post1.title.rendered}</a>
-                    </h3>
+                <a href="#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                    <div>
+                    <div class="post-category hstack gap-narrow fw-semibold">
+                        <a class="text-none hover:text-red dark:text-primary duration-150" href="#">
+                        ${post1._embedded["wp:term"]?.[0]?.[0]?.name || ""}
+                        </a>
+                    </div>
+                    </div>
+                    <div class="sep d-none md:d-block">❘</div>
+                    <div class="d-none md:d-block">
+                    <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post1.date)}</span>
+                    </div>
+                    </div>
+                </div>
+                <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
+                    <a class="text-none hover:text-red duration-150" href="#">${post1.title.rendered}</a>
+                </h3>
                 </div>
             </article>
             </div>
@@ -457,16 +563,21 @@ function beritaOlahraga()
             <div class="row child-cols g-2" data-uc-grid>
             <div>
                 <div class="post-header panel vstack justify-between gap-1">
-                    <h3 class="post-title h6 m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="#">
-                        ${post.title.rendered}
-                        </a>
-                    </h3>                
+                <h3 class="post-title h6 m-0 text-truncate-2">
+                    <a class="text-none hover:text-red duration-150" href="#">
+                    ${post.title.rendered}
+                    </a>
+                </h3>
+                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                    <div class="post-date hstack gap-narrow">
+                    <span>${formatTanggal(post.date)}</span>
+                    </div>
+                </div>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
-                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-1x1">
                     <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
                         src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                         data-src="${getImage(post)}"
@@ -520,7 +631,7 @@ function beritaOpini()
 
         item.innerHTML = `         
         <div>
-            <article class="mt-2 post type-post panel d-flex flex-column items-center text-center">
+            <article class="post type-post panel d-flex flex-column items-center text-center">
                 <div class="col-auto">
                     <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-64px lg:min-w-72px">
                         <div class="justify-center featured-image m-0 ratio ratio-1x1 rounded-circle uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800"">
@@ -538,7 +649,12 @@ function beritaOpini()
                             <a class="text-none hover:text-red duration-150" href="#">
                             ${judul}
                             </a>
-                        </h3>                        
+                        </h3>
+                        <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 w-100 text-center">
+                            <div class="post-date justify-content-center w-100">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>                            
             </article>
@@ -589,7 +705,20 @@ function beritaPendidikan()
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                    
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-primary duration-150" href="#">${judul}</a>
                     </h3>
@@ -611,7 +740,7 @@ function beritaPendidikan()
 //Section 4 start
 function beritaVisi()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=5&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=7&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritavisi');
@@ -628,7 +757,7 @@ function beritaVisi()
         // Ambil judul dan isi
         const judul = post.title.rendered;
         const isi = post.content.rendered;
-        const potonganIsi = isi.length > 100 ? isi.slice(0, 150) + "..." : isi;
+        const potonganIsi = isi.length > 100 ? isi.slice(0, 125) + "..." : isi;
 
         // Ambil featured image (jika ada)
         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
@@ -640,7 +769,7 @@ function beritaVisi()
             <article class="post type-post panel d-flex flex-row gap-3 align-items-start">
                 <!-- Gambar di kiri -->
                 <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
                             src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
                             data-src="${gambar}" 
@@ -650,7 +779,10 @@ function beritaVisi()
                 </div>
 
                 <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1">                    
+                <div class="post-header panel vstack gap-1 flex-grow-1">
+                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">                        
+                        <div class="post-date text-muted" style="font-size: 0.9rem;">${tanggal}</div>
+                    </div>
                     <h3 class="post-title h6 fw-semibold m-0 text-truncate-2">
                         <a class="text-none hover:text-primary duration-150" href="#">${judul}</a>
                     </h3>
@@ -704,7 +836,20 @@ function beritaCovid()
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                                       
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-white text-none hover:text-white dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="text-white sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="text-white post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none text-white hover:text-white duration-150" href="#">${judul}</a>
                     </h3>
@@ -757,7 +902,20 @@ function beritaPemerintahan()
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                    
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-primary dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-primary duration-150" href="#">${judul}</a>
                     </h3>
@@ -777,7 +935,7 @@ function beritaPemerintahan()
 
 function beritaDaerah()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=37&per_page=4&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=37&per_page=3&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritadaerah');
@@ -798,13 +956,30 @@ function beritaDaerah()
             <div>
             <article class="post type-post panel vstack gap-1 lg:gap-2">
                 <div class="post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                            data-src="${getImage(post1)}"
-                            alt="${post1.title.rendered}" data-uc-img="loading: lazy">
-                    </div>                
-                </div>                
+                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                        data-src="${getImage(post1)}"
+                        alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                </div>
+                <a href="#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                    <div>
+                    <div class="post-category hstack gap-narrow fw-semibold">
+                        <a class="text-none hover:text-primary dark:text-primary duration-150" href="#">
+                        ${post1._embedded["wp:term"]?.[0]?.[0]?.name || ""}
+                        </a>
+                    </div>
+                    </div>
+                    <div class="sep d-none md:d-block">❘</div>
+                    <div class="d-none md:d-block">
+                    <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post1.date)}</span>
+                    </div>
+                    </div>
+                </div>
                 <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
                     <a class="text-none hover:text-primary duration-150" href="#">${post1.title.rendered}</a>
                 </h3>
@@ -822,11 +997,16 @@ function beritaDaerah()
                 <div class="row child-cols g-2" data-uc-grid>
                 <div>
                     <div class="post-header panel vstack justify-between gap-1">
-                        <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-primary duration-150" href="#">
-                            ${post.title.rendered}
-                            </a>
-                        </h3>                        
+                    <h3 class="post-title h6 m-0 text-truncate-2">
+                        <a class="text-none hover:text-primary duration-150" href="#">
+                        ${post.title.rendered}
+                        </a>
+                    </h3>
+                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                        <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="col-auto">
@@ -861,7 +1041,7 @@ function beritaDaerah()
 
 function beritaHukum()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=42&per_page=4&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=42&per_page=3&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritahukum');
@@ -882,13 +1062,30 @@ function beritaHukum()
             <div>
             <article class="post type-post panel vstack gap-1 lg:gap-2">
                 <div class="post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                            data-src="${getImage(post1)}"
-                            alt="${post1.title.rendered}" data-uc-img="loading: lazy">
-                    </div>               
-                </div>                
+                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                        data-src="${getImage(post1)}"
+                        alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                </div>
+                <a href="#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                    <div>
+                    <div class="post-category hstack gap-narrow fw-semibold">
+                        <a class="text-none hover:text-primary dark:text-primary duration-150" href="#">
+                        ${post1._embedded["wp:term"]?.[0]?.[0]?.name || ""}
+                        </a>
+                    </div>
+                    </div>
+                    <div class="sep d-none md:d-block">❘</div>
+                    <div class="d-none md:d-block">
+                    <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post1.date)}</span>
+                    </div>
+                    </div>
+                </div>
                 <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
                     <a class="text-none hover:text-primary duration-150" href="#">${post1.title.rendered}</a>
                 </h3>
@@ -906,11 +1103,16 @@ function beritaHukum()
                 <div class="row child-cols g-2" data-uc-grid>
                 <div>
                     <div class="post-header panel vstack justify-between gap-1">
-                        <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-primary duration-150" href="#">
-                            ${post.title.rendered}
-                            </a>
-                        </h3>                    
+                    <h3 class="post-title h6 m-0 text-truncate-2">
+                        <a class="text-none hover:text-primary duration-150" href="#">
+                        ${post.title.rendered}
+                        </a>
+                    </h3>
+                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                        <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="col-auto">
