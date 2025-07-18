@@ -140,7 +140,7 @@ function beritaTerkini2()
 
 function bannerKoran()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/media?search=banner-1-HL-1107.jpg&per_page=1")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/media?search=banner-1-HL&per_page=1")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('bannerKoran');
@@ -151,14 +151,29 @@ function bannerKoran()
 
         data.forEach(post => { 
         // Ambil featured image (jika ada)
-        const gambar = post.source_url || "";
+        const gambar = post.source_url || ""; 
+        
+        const date = new Date(post.date);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let tanggal = date.toLocaleDateString('id-ID', options);
+        tanggal = tanggal.replace(',', '');
 
         const item = document.createElement('div');
 
-        item.innerHTML = `         
-        <div>                                                    
-            <img class="uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="bannerKoran" data-uc-img="loading: lazy">
-            <a href=#" class="position-cover"></a>
+        item.innerHTML = `
+        <div class="block-header panel vstack items-center justify-center text-center gap-1 mb-1">
+            <h2 class="text-yellow block-title h5 m-0 hstack justify-center gap-1 dark:text-yellow">                                                    
+                <span class="bg-dark p-1 rounded dark:bg-gray-25">
+                    Edisi Cetak, ${tanggal}                    
+                </span>
+            </h2>
+        </div>
+        <div class="block-layout lg:gap-3 panel overflow-hidden bg-gray-25 dark:bg-gray-800">
+            <div class="block-content">
+                <div>                                                    
+                    <img class="uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="bannerKoran" data-uc-img="loading: lazy">                    
+                </div> 
+            </div>
         </div>
         `;
 
