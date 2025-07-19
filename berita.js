@@ -66,11 +66,11 @@ function swiperBerita()
                         <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                             <img class="uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                         </div>
-                        <a href="#" class="position-cover"></a>
+                        <a href="detail.html" class="position-cover"></a>
                     </div>
                     <div class="post-header panel vstack justify-content gap-1 mb-1">
                         <h3 class="post-title px-1 h5 xl:h4 m-0 max-w-auto">
-                            <a class="text-none text-white text-truncate-2 hover:text-red" href="#">${judul}</a>
+                            <a class="text-none text-white text-truncate-2 hover:text-red" href="detail.html">${judul}</a>
                         </h3>                                                
                     </div>
                 </article>
@@ -116,7 +116,7 @@ function beritaTerkini2()
             <article class="post type-post panel vstack gap-1 lg:gap-2">
                 <div class="post-media panel uc-transition-toggle overflow-hidden">
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
                     </div>
                     <a href=#" class="position-cover"></a>
                 </div>
@@ -1028,6 +1028,57 @@ function beritaCoba()
     .catch(err => {
         console.error("Gagal fetch berita", err);
         document.getElementById('beritavisi').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
+function detailBerita()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('detailberita');
+
+        data.slice(1).forEach(post => {
+        // Ambil kategori pertama (jika ada)
+        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+
+        // Ambil tanggal (format: Mar 8, 2025)
+        const date = new Date(post.date);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const tanggal = date.toLocaleDateString('en-US', options);
+
+        // Ambil judul
+        const judul = post.title.rendered;
+
+        // Ambil featured image (jika ada)
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+        const item = document.createElement('div');
+
+        item.innerHTML = `         
+        <div>
+            <article class="post type-post panel vstack gap-1 lg:gap-2">
+                <div class="post-media panel uc-transition-toggle overflow-hidden">
+                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                    </div>
+                    <a href=#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">                    
+                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                        <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
+                    </h3>
+                </div>
+            </article>
+        </div>
+        `;
+
+        container.appendChild(item);
+        });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('detailberita').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
 
