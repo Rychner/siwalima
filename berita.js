@@ -16,7 +16,7 @@ function beritaTerkini()
                         <div class="fs-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
                     </div>
                     <h6 class="fs-6 px-1 lg:fs-3 xl:fs-3 fw-medium text-truncate-2 bg-gray-50">
-                        <a class="fw-bold text-none hover:text-red duration-150" href="detail.html">${post.title.rendered}</a>
+                        <a class="fw-bold text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h6>
                 </article>
             </div>
@@ -66,11 +66,11 @@ function swiperBerita()
                         <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                             <img class="uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                         </div>
-                        <a href="detail.html" class="position-cover"></a>
+                        <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                     <div class="post-header panel vstack justify-content gap-1 mb-1">
                         <h3 class="post-title px-1 h5 xl:h4 m-0 max-w-auto">
-                            <a class="text-none text-white text-truncate-2 hover:text-red" href="detail.html">${judul}</a>
+                            <a class="text-none text-white text-truncate-2 hover:text-red" href="detail.html?id=${post.id}">${judul}</a>
                         </h3>                                                
                     </div>
                 </article>
@@ -118,11 +118,11 @@ function beritaTerkini2()
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${judul}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
             </article>
@@ -213,7 +213,7 @@ function beritaPolitik()
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${post1.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                     </h3>                    
                 </div>
 
@@ -225,6 +225,7 @@ function beritaPolitik()
                             data-src="${getImage(post1)}" 
                             alt="${post1.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
                     </div>
                 </div>                
             </article>
@@ -245,13 +246,14 @@ function beritaPolitik()
                             data-src="${getImage(post)}" 
                             alt="${post.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                 </div>
 
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${post.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h3>                    
                 </div>
             </article>
@@ -303,11 +305,11 @@ function beritaTopnews()
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                                        
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none text-white hover:text-white duration-150" href="detail.html">${judul}</a>
+                        <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
             </article>
@@ -356,11 +358,11 @@ function beritaKriminal()
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${judul}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
             </article>
@@ -407,13 +409,14 @@ function beritaKesehatan()
                             data-src="${getImage(post1)}" 
                             alt="${post1.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
                     </div>
                 </div>
 
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${post1.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                     </h3>                    
                 </div>
             </article>
@@ -429,7 +432,7 @@ function beritaKesehatan()
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${post.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h3>                    
                 </div>
 
@@ -441,6 +444,7 @@ function beritaKesehatan()
                             data-src="${getImage(post)}" 
                             alt="${post.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                 </div>                
             </article>
@@ -496,13 +500,13 @@ function beritaOpini()
                                 data-src="${gambar}"
                                 alt="${judul}" data-uc-img="loading: lazy">
                         </div>
-                        <a href="detail.html" class="position-cover"></a>
+                        <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                 </div>
                 <div class="row child-cols g-2" data-uc-grid>                    
                     <div class="post-header panel vstack justify-between gap-1">
                         <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-red duration-150" href="detail.html">
+                            <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                             ${judul}
                             </a>
                         </h3>                        
@@ -554,11 +558,11 @@ function beritaPendidikan()
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${judul}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
             </article>
@@ -602,7 +606,7 @@ function beritaOlahraga()
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${post1.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                     </h3>                    
                 </div>
 
@@ -614,6 +618,7 @@ function beritaOlahraga()
                             data-src="${getImage(post1)}" 
                             alt="${post1.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
                     </div>
                 </div>                
             </article>
@@ -634,13 +639,14 @@ function beritaOlahraga()
                             data-src="${getImage(post)}" 
                             alt="${post.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                 </div>
 
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${post.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h3>                    
                 </div>
             </article>
@@ -692,11 +698,11 @@ function beritaVisi()
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                                       
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none text-white hover:text-white duration-150" href="detail.html">${judul}</a>
+                        <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
             </article>
@@ -745,12 +751,12 @@ function beritaPemerintahan()
                     <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${judul}</a>
-                    </h3>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                    </h3>                    
                 </div>
             </article>
         </div>
@@ -796,13 +802,14 @@ function beritaDaerah()
                             data-src="${getImage(post1)}" 
                             alt="${post1.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
                     </div>
                 </div>
 
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${post1.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                     </h3>                    
                 </div>
             </article>
@@ -818,7 +825,7 @@ function beritaDaerah()
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
                     <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${post.title.rendered}</a>
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h3>                    
                 </div>
 
@@ -830,6 +837,7 @@ function beritaDaerah()
                             data-src="${getImage(post)}" 
                             alt="${post.title.rendered}" 
                             data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                 </div>                
             </article>
@@ -879,10 +887,11 @@ function beritaHukum()
                             src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                             data-src="${getImage(post1)}"
                             alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
                     </div>               
                 </div>                
                 <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                    <a class="text-none hover:text-primary duration-150" href="detail.html">${post1.title.rendered}</a>
+                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                 </h3>
                 </div>
             </article>
@@ -899,7 +908,7 @@ function beritaHukum()
                 <div>
                     <div class="post-header panel vstack justify-between gap-1">
                         <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-primary duration-150" href="detail.html">
+                            <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                             ${post.title.rendered}
                             </a>
                         </h3>                    
@@ -912,8 +921,9 @@ function beritaHukum()
                             src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                             data-src="${getImage(post)}"
                             alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
-                    <a href="detail.html" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                     </div>
                 </div>
                 </div>
@@ -974,7 +984,7 @@ function beritaCoba()
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1">                    
                     <h3 class="post-title h6 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${post1.title.rendered}</a>
+                        <a class="text-none hover:text-primary duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                     </h3>
                     <p class="m-0">
                         ${potonganIsi1}
@@ -996,7 +1006,7 @@ function beritaCoba()
                 <!-- Konten teks di kanan -->
                 <div class="post-header panel vstack gap-1 flex-grow-1">                    
                     <h3 class="post-title h6 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-primary duration-150" href="detail.html">${post.title.rendered}</a>
+                        <a class="text-none hover:text-primary duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h3>
                     <p class="m-0">
                         ${potonganIsi}
@@ -1031,57 +1041,6 @@ function beritaCoba()
     });
 }
 
-function detailBerita()
-{
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
-    .then(res => res.json())
-    .then(data => {
-        const container = document.getElementById('detailberita');
-
-        data.slice(1).forEach(post => {
-        // Ambil kategori pertama (jika ada)
-        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
-
-        // Ambil tanggal (format: Mar 8, 2025)
-        const date = new Date(post.date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const tanggal = date.toLocaleDateString('en-US', options);
-
-        // Ambil judul
-        const judul = post.title.rendered;
-
-        // Ambil featured image (jika ada)
-        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
-
-        const item = document.createElement('div');
-
-        item.innerHTML = `         
-        <div>
-            <article class="post type-post panel vstack gap-1 lg:gap-2">
-                <div class="post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
-                    </div>
-                    <a href="detail.html" class="position-cover"></a>
-                </div>
-                <div class="post-header panel vstack gap-1">                    
-                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html">${judul}</a>
-                    </h3>
-                </div>
-            </article>
-        </div>
-        `;
-
-        container.appendChild(item);
-        });
-    })
-    .catch(err => {
-        console.error("Gagal fetch data:", err);
-        document.getElementById('detailberita').innerHTML = "<p>Gagal memuat berita.</p>";
-    });
-}
-
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
@@ -1097,7 +1056,7 @@ function initApp() {
     beritaPendidikan();
     beritaDaerah();
     beritaPemerintahan();
-    beritaVisi();
+    beritaVisi();    
 }
 
 // Jalankan setelah halaman dimuat

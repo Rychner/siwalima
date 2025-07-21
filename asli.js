@@ -1146,6 +1146,72 @@ function beritaHukum()
 }
 //Section 5 end
 
+//Detail Berita start
+function detailBerita()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('detailberita');
+
+        data.slice(1).forEach(post => {
+        // Ambil kategori pertama (jika ada)
+        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+
+        // Ambil tanggal (format: Mar 8, 2025)
+        const date = new Date(post.date);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const tanggal = date.toLocaleDateString('en-US', options);
+
+        // Ambil judul
+        const judul = post.title.rendered;
+
+        // Ambil featured image (jika ada)
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+        const item = document.createElement('div');
+
+        item.innerHTML = `         
+        <div>
+            <article class="post type-post panel vstack gap-1 lg:gap-2">
+                <div class="post-media panel uc-transition-toggle overflow-hidden">
+                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                        <img class=" uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
+                    </div>
+                    <a href=#" class="position-cover"></a>
+                </div>
+                <div class="post-header panel vstack gap-1">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 d-none md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="blog-category.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep d-none md:d-block">❘</div>
+                        <div class="d-none md:d-block">
+                            <div class="post-date hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>
+                        </div>                                                                
+                    </div>
+                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                        <a class="text-none hover:text-red duration-150" href="#">${judul}</a>
+                    </h3>
+                </div>
+            </article>
+        </div>
+        `;
+
+        container.appendChild(item);
+        });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('detailberita').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+// Detail Berita end
+
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
