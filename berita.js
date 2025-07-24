@@ -15,7 +15,7 @@ function beritaTerkini()
                     <div>
                         <div class="fs-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
                     </div>
-                    <h6 class="fs-6 px-1 lg:fs-3 xl:fs-3 fw-medium text-truncate-2 bg-gray-50">
+                    <h6 class="fs-6 px-1 lg:fs-3 xl:fs-3 fw-medium text-truncate-2">
                         <a class="fw-bold text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h6>
                 </article>
@@ -189,7 +189,7 @@ function bannerKoran()
 
 function beritaPolitik()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=38&per_page=6&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=38&per_page=7&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapolitik');
@@ -207,57 +207,65 @@ function beritaPolitik()
     
         // ========== POST PERTAMA ==========
         const post1 = data[0];
-        const post1HTML = `
+        const post1HTML = `                
         <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
-                    </h3>                    
-                </div>
-
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post1)}" 
-                            alt="${post1.title.rendered}" 
-                            data-uc-img="loading: lazy">
-                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
+            <article class="post type-post panel">
+                <div class="row child-cols g-2" data-uc-grid>                    
+                    <div>
+                        <div class="post-header panel vstack gap-1">                    
+                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                    ${post1.title.rendered}
+                                </a>
+                            </h3>                    
+                        </div>                        
                     </div>
-                </div>                
+                    <div class="col-auto">
+                        <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(post1)}"
+                                    alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
+                        </div>
+                    </div>                            
+                </div>
             </article>
-        </div>        
+        </div>
         `;
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
         data.slice(1).forEach(post => {
         postListHTML += `
-        <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post)}" 
-                            alt="${post.title.rendered}" 
-                            data-uc-img="loading: lazy">
-                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
+            <div>
+                <article class="post type-post panel">
+                    <div class="row child-cols g-2" data-uc-grid>
+                        <div class="col-auto">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                        data-src="${getImage(post)}"
+                                        alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                                </div>
+                                <a href="#" class="position-cover"></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="post-header panel vstack gap-1">                    
+                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                        ${post.title.rendered}
+                                    </a>
+                                </h3>                    
+                            </div>                        
+                        </div>                        
                     </div>
-                </div>
-
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
-                    </h3>                    
-                </div>
-            </article>
-        </div>
+                </article>
+            </div>
         `;
         });
     
@@ -380,7 +388,7 @@ function beritaKriminal()
 
 function beritaKesehatan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=32&per_page=4&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=32&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritakesehatan');
@@ -398,26 +406,30 @@ function beritaKesehatan()
     
         // ========== POST PERTAMA ==========
         const post1 = data[0];
-        const post1HTML = `
+        const post1HTML = `                
         <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post1)}" 
-                            alt="${post1.title.rendered}" 
-                            data-uc-img="loading: lazy">
+            <article class="post type-post panel">
+                <div class="row child-cols g-2" data-uc-grid>
+                    <div class="col-auto">
+                        <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(post1)}"
+                                    alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
                             <a href="detail.html?id=${post1.id}" class="position-cover"></a>
-                    </div>
-                </div>
-
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
-                    </h3>                    
+                        </div>
+                    </div>                    
+                    <div>
+                        <div class="post-header panel vstack gap-1">                    
+                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                    ${post1.title.rendered}
+                                </a>
+                            </h3>                    
+                        </div>                        
+                    </div>                                                
                 </div>
             </article>
         </div>
@@ -426,29 +438,33 @@ function beritaKesehatan()
         // ========== POST 2–4 ==========
         let postListHTML = '';
         data.slice(1).forEach(post => {
-        postListHTML += ` 
-        <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
-                    </h3>                    
-                </div>
-
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post)}" 
-                            alt="${post.title.rendered}" 
-                            data-uc-img="loading: lazy">
-                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
+        postListHTML += `
+            <div>
+                <article class="post type-post panel">
+                    <div class="row child-cols g-2" data-uc-grid>                        
+                        <div>
+                            <div class="post-header panel vstack gap-1">                    
+                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                        ${post.title.rendered}
+                                    </a>
+                                </h3>                    
+                            </div>                        
+                        </div>
+                        <div class="col-auto">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                        data-src="${getImage(post)}"
+                                        alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                                </div>
+                                <a href="#" class="position-cover"></a>
+                            </div>
+                        </div>                        
                     </div>
-                </div>                
-            </article>
-        </div> 
+                </article>
+            </div>
         `;
         });
     
@@ -582,7 +598,7 @@ function beritaPendidikan()
 //Section 4 start
 function beritaOlahraga()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=31&per_page=6&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=31&per_page=7&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaolahraga');
@@ -600,57 +616,65 @@ function beritaOlahraga()
     
         // ========== POST PERTAMA ==========
         const post1 = data[0];
-        const post1HTML = `
+        const post1HTML = `                
         <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
-                    </h3>                    
-                </div>
-
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post1)}" 
-                            alt="${post1.title.rendered}" 
-                            data-uc-img="loading: lazy">
-                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
+            <article class="post type-post panel">
+                <div class="row child-cols g-2" data-uc-grid>                    
+                    <div>
+                        <div class="post-header panel vstack gap-1">                    
+                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                    ${post1.title.rendered}
+                                </a>
+                            </h3>                    
+                        </div>                        
                     </div>
-                </div>                
+                    <div class="col-auto">
+                        <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(post1)}"
+                                    alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
+                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
+                        </div>
+                    </div>                            
+                </div>
             </article>
-        </div>        
+        </div>
         `;
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
         data.slice(1).forEach(post => {
         postListHTML += `
-        <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post)}" 
-                            alt="${post.title.rendered}" 
-                            data-uc-img="loading: lazy">
-                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
+            <div>
+                <article class="post type-post panel">
+                    <div class="row child-cols g-2" data-uc-grid>
+                        <div class="col-auto">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                        data-src="${getImage(post)}"
+                                        alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                                </div>
+                                <a href="#" class="position-cover"></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="post-header panel vstack gap-1">                    
+                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                        ${post.title.rendered}
+                                    </a>
+                                </h3>                    
+                            </div>                        
+                        </div>                        
                     </div>
-                </div>
-
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
-                    </h3>                    
-                </div>
-            </article>
-        </div>
+                </article>
+            </div>
         `;
         });
     
@@ -700,8 +724,8 @@ function beritaVisi()
                     </div>
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                                       
-                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                <div class="post-header panel vstack gap-1 mb-1">                                       
+                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2">
                         <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
@@ -791,26 +815,30 @@ function beritaDaerah()
     
         // ========== POST PERTAMA ==========
         const post1 = data[0];
-        const post1HTML = `
+        const post1HTML = `                
         <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post1)}" 
-                            alt="${post1.title.rendered}" 
-                            data-uc-img="loading: lazy">
+            <article class="post type-post panel">
+                <div class="row child-cols g-2" data-uc-grid>
+                    <div class="col-auto">
+                        <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(post1)}"
+                                    alt="${post1.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
                             <a href="detail.html?id=${post1.id}" class="position-cover"></a>
-                    </div>
-                </div>
-
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
-                    </h3>                    
+                        </div>
+                    </div>                    
+                    <div>
+                        <div class="post-header panel vstack gap-1">                    
+                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                    ${post1.title.rendered}
+                                </a>
+                            </h3>                    
+                        </div>                        
+                    </div>                                                
                 </div>
             </article>
         </div>
@@ -819,29 +847,33 @@ function beritaDaerah()
         // ========== POST 2–4 ==========
         let postListHTML = '';
         data.slice(1).forEach(post => {
-        postListHTML += ` 
-        <div>
-            <article class="post type-post panel d-flex flex-row gap-2 align-items-start">
-                <!-- Konten teks di kanan -->
-                <div class="post-header panel vstack gap-1 flex-grow-1 justify-center">                    
-                    <h3 class="post-title h3 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
-                    </h3>                    
-                </div>
-
-                <!-- Gambar di kiri -->
-                <div class="post-media uc-transition-toggle overflow-hidden flex-shrink-0" style="width: 240px;">
-                    <div class="featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image w-100 h-100 object-cover" 
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" 
-                            data-src="${getImage(post)}" 
-                            alt="${post.title.rendered}" 
-                            data-uc-img="loading: lazy">
-                            <a href="detail.html?id=${post.id}" class="position-cover"></a>
+        postListHTML += `
+            <div>
+                <article class="post type-post panel">
+                    <div class="row child-cols g-2" data-uc-grid>                        
+                        <div>
+                            <div class="post-header panel vstack gap-1">                    
+                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                        ${post.title.rendered}
+                                    </a>
+                                </h3>                    
+                            </div>                        
+                        </div>
+                        <div class="col-auto">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                                <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                        data-src="${getImage(post)}"
+                                        alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                                </div>
+                                <a href="#" class="position-cover"></a>
+                            </div>
+                        </div>                        
                     </div>
-                </div>                
-            </article>
-        </div> 
+                </article>
+            </div>
         `;
         });
     
