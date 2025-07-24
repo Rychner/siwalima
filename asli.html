@@ -185,43 +185,24 @@
                 const highlightHTML = `
                 <div>
                     <div>
-                    <article class="post type-post panel vstack gap-2 lg:gap-3 h-100">
-                        <div class="post-media panel uc-transition-toggle overflow-hidden h-100">
-                        <div class="featured-image bg-gray-25 dark:bg-gray-800 h-100 d-none md:d-block">
-                            <canvas class="h-100 w-100"></canvas>
-                            <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                            data-src="${getImage(highlightPost)}"
-                            alt="${highlightPost.title.rendered}" data-uc-img="loading: lazy">
-                        </div>
-                        <div class="featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9 d-block md:d-none">
-                            <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
-                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                            data-src="${getImage(highlightPost)}"
-                            alt="${highlightPost.title.rendered}" data-uc-img="loading: lazy">
-                        </div>
-                        </div>
-                        <div class="position-cover bg-gradient-to-t from-black to-transparent opacity-90"></div>
-                        <div class="post-header panel vstack justify-end items-start gap-1 sm:gap-2 p-2 sm:p-4 position-cover text-white">
-                        <h3 class="post-title h5 sm:h4 xl:h3 m-0 max-w-600px text-white text-truncate-2">
-                            <a class="text-none text-white" href="#" target="_blank">${highlightPost.title.rendered}</a>
-                        </h3>
-                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-white text-opacity-60 d-none md:d-flex z-1">
-                            <div>
-                            <div class="post-category hstack gap-narrow fw-semibold">
-                                <a class="text-none hover:text-primary dark:text-primary duration-150" href="#">${highlightPost._embedded["wp:term"]?.[0]?.[0]?.name || ""}</a>
+                        <article class="post type-post panel vstack gap-2 lg:gap-3 h-100">
+                            <div class="post-media panel uc-transition-toggle overflow-hidden h-100">
+                                <div class="featured-image bg-gray-25 dark:bg-gray-800 h-100 d-none md:d-block">
+                                    <canvas class="h-100 w-100"></canvas>
+                                    <img class="uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${getImage(highlightPost)}"
+                                    alt="${highlightPost.title.rendered}" data-uc-img="loading: lazy">
+                                </div>                        
                             </div>
+                            <div class="position-cover bg-gradient-to-t from-black to-transparent opacity-90"></div>
+                            <div class="post-header panel vstack justify-end items-start gap-1 sm:gap-2 p-2 sm:p-4 position-cover text-white">
+                                <h3 class="post-title h5 sm:h4 xl:h3 m-0 max-w-600px text-white text-truncate-2">
+                                    <a class="text-none text-white" href="#" target="_blank">${highlightPost.title.rendered}</a>
+                                </h3>                        
                             </div>
-                            <div class="sep d-none md:d-block">❘</div>
-                            <div class="d-none md:d-block">
-                            <div class="post-date hstack gap-narrow">
-                                <span>${formatTanggal(highlightPost.date)}</span>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        <a href="#" class="position-cover" target="_blank"></a>
-                    </article>
+                            <a href="#" class="position-cover" target="_blank"></a>
+                        </article>
                     </div>
                 </div>
                 `;
