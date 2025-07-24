@@ -213,9 +213,9 @@ function beritaPolitik()
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
-                <div class="row child-cols g-2" data-uc-grid>                    
+                <div class="row child-cols items-center">                    
                     <div>
-                        <div class="post-header panel vstack gap-1">                    
+                        <div class="post-header panel vstack gap-1 justify-center">                    
                             <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
                                 <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
@@ -245,7 +245,7 @@ function beritaPolitik()
         postListHTML += `
             <div>
                 <article class="post type-post panel">
-                    <div class="row child-cols g-2" data-uc-grid>
+                    <div class="row child-cols items-center">
                         <div class="col-auto">
                             <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
                                 <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
@@ -412,7 +412,7 @@ function beritaKesehatan()
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
-                <div class="row child-cols g-2" data-uc-grid>
+                <div class="row child-cols items-center">
                     <div class="col-auto">
                         <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
                             <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
@@ -444,7 +444,7 @@ function beritaKesehatan()
         postListHTML += `
             <div>
                 <article class="post type-post panel">
-                    <div class="row child-cols g-2" data-uc-grid>                        
+                    <div class="row child-cols items-center">                        
                         <div>
                             <div class="post-header panel vstack gap-1">                    
                                 <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
@@ -622,7 +622,7 @@ function beritaOlahraga()
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
-                <div class="row child-cols g-2" data-uc-grid>                    
+                <div class="row child-cols items-center">                    
                     <div>
                         <div class="post-header panel vstack gap-1">                    
                             <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
@@ -654,7 +654,7 @@ function beritaOlahraga()
         postListHTML += `
             <div>
                 <article class="post type-post panel">
-                    <div class="row child-cols g-2" data-uc-grid>
+                    <div class="row child-cols items-center">
                         <div class="col-auto">
                             <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
                                 <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
@@ -821,7 +821,7 @@ function beritaDaerah()
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
-                <div class="row child-cols g-2" data-uc-grid>
+                <div class="row child-cols items-center">
                     <div class="col-auto">
                         <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
                             <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
@@ -853,7 +853,7 @@ function beritaDaerah()
         postListHTML += `
             <div>
                 <article class="post type-post panel">
-                    <div class="row child-cols g-2" data-uc-grid>                        
+                    <div class="row child-cols items-center">                        
                         <div>
                             <div class="post-header panel vstack gap-1">                    
                                 <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
