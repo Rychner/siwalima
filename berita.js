@@ -1,7 +1,7 @@
 //Section 1 start
 function beritaTerkini()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=8")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=10")
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('beritaterkini');
@@ -15,7 +15,7 @@ function beritaTerkini()
                     <div>
                         <div class="fs-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
                     </div>
-                    <h6 class="fs-6 px-1 lg:fs-3 xl:fs-3 fw-medium text-truncate-2">
+                    <h6 class="fs-6 px-1 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 translate-y-narrow">
                         <a class="fw-bold text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${post.title.rendered}</a>
                     </h6>
                 </article>
@@ -124,7 +124,7 @@ function beritaTerkini2()
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                    
-                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                    <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
@@ -196,13 +196,39 @@ function beritaPolitik()
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapolitik');
-    
-        // Format tanggal (contoh: Jul 8, 2025)
+
         const formatTanggal = (str) => {
-        const date = new Date(str);
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        };
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
         
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
     
         // Dapatkan URL gambar
         const getImage = (post) =>
@@ -216,11 +242,14 @@ function beritaPolitik()
                 <div class="row child-cols items-center">                    
                     <div>
                         <div class="post-header panel vstack gap-1 justify-center">                    
-                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                 <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>
-                            </h3>                    
+                            </h3>
+                            <div class="post-date hstack gap-narrow">
+                                <span>${formatTanggal(post1.date)}</span>
+                            </div>                  
                         </div>                        
                     </div>
                     <div class="col-auto">
@@ -259,11 +288,14 @@ function beritaPolitik()
                         </div>
                         <div>
                             <div class="post-header panel vstack gap-1">                    
-                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                     <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
-                                </h3>                    
+                                </h3>
+                                <div class="post-date hstack gap-narrow">
+                                    <span>${formatTanggal(post.date)}</span>
+                                </div>                    
                             </div>                        
                         </div>                        
                     </div>
@@ -396,12 +428,38 @@ function beritaKesehatan()
     .then(data => {
         const container = document.getElementById('beritakesehatan');
     
-        // Format tanggal (contoh: Jul 8, 2025)
         const formatTanggal = (str) => {
-        const date = new Date(str);
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        };
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
         
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };    
     
         // Dapatkan URL gambar
         const getImage = (post) =>
@@ -426,11 +484,14 @@ function beritaKesehatan()
                     </div>                    
                     <div>
                         <div class="post-header panel vstack gap-1">                    
-                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                 <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
-                                </a>
-                            </h3>                    
+                                </a>                                
+                            </h3>
+                            <div class="post-date hstack gap-narrow">
+                                <span>${formatTanggal(post1.date)}</span>
+                            </div>                    
                         </div>                        
                     </div>                                                
                 </div>
@@ -447,11 +508,14 @@ function beritaKesehatan()
                     <div class="row child-cols items-center">                        
                         <div>
                             <div class="post-header panel vstack gap-1">                    
-                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                     <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
-                                </h3>                    
+                                </h3>
+                                <div class="post-date hstack gap-narrow">
+                                    <span>${formatTanggal(post.date)}</span>
+                                </div>                    
                             </div>                        
                         </div>
                         <div class="col-auto">
@@ -606,12 +670,38 @@ function beritaOlahraga()
     .then(data => {
         const container = document.getElementById('beritaolahraga');
     
-        // Format tanggal (contoh: Jul 8, 2025)
         const formatTanggal = (str) => {
-        const date = new Date(str);
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        };
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
         
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
     
         // Dapatkan URL gambar
         const getImage = (post) =>
@@ -625,11 +715,14 @@ function beritaOlahraga()
                 <div class="row child-cols items-center">                    
                     <div>
                         <div class="post-header panel vstack gap-1">                    
-                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                 <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>
-                            </h3>                    
+                            </h3>
+                            <div class="post-date hstack gap-narrow">
+                                <span>${formatTanggal(post1.date)}</span>
+                            </div>                    
                         </div>                        
                     </div>
                     <div class="col-auto">
@@ -668,11 +761,14 @@ function beritaOlahraga()
                         </div>
                         <div>
                             <div class="post-header panel vstack gap-1">                    
-                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                     <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
-                                </h3>                    
+                                </h3>
+                                <div class="post-date hstack gap-narrow">
+                                    <span>${formatTanggal(post.date)}</span>
+                                </div>                    
                             </div>                        
                         </div>                        
                     </div>
@@ -805,12 +901,38 @@ function beritaDaerah()
     .then(data => {
         const container = document.getElementById('beritadaerah');
     
-        // Format tanggal (contoh: Jul 8, 2025)
         const formatTanggal = (str) => {
-        const date = new Date(str);
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        };
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
         
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
     
         // Dapatkan URL gambar
         const getImage = (post) =>
@@ -835,11 +957,14 @@ function beritaDaerah()
                     </div>                    
                     <div>
                         <div class="post-header panel vstack gap-1">                    
-                            <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                 <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>
-                            </h3>                    
+                            </h3>
+                            <div class="post-date hstack gap-narrow">
+                                <span>${formatTanggal(post1.date)}</span>
+                            </div>                    
                         </div>                        
                     </div>                                                
                 </div>
@@ -856,11 +981,14 @@ function beritaDaerah()
                     <div class="row child-cols items-center">                        
                         <div>
                             <div class="post-header panel vstack gap-1">                    
-                                <h3 class="post-title h6 fw-semibold m-0 text-truncate-2 lg:h3">
+                                <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                     <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
-                                </h3>                    
+                                </h3>
+                                <div class="post-date hstack gap-narrow">
+                                    <span>${formatTanggal(post1.date)}</span>
+                                </div>                    
                             </div>                        
                         </div>
                         <div class="col-auto">
