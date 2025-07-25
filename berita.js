@@ -247,7 +247,7 @@ function beritaPolitik()
                                     ${post1.title.rendered}
                                 </a>
                             </h3>
-                            <div class="post-date hstack gap-narrow">
+                            <div class="post-date fs-7 hstack gap-narrow">
                                 <span>${formatTanggal(post1.date)}</span>
                             </div>                  
                         </div>                        
@@ -293,7 +293,7 @@ function beritaPolitik()
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
-                                <div class="post-date hstack gap-narrow">
+                                <div class="post-date fs-7 hstack gap-narrow">
                                     <span>${formatTanggal(post.date)}</span>
                                 </div>                    
                             </div>                        
@@ -489,7 +489,7 @@ function beritaKesehatan()
                                     ${post1.title.rendered}
                                 </a>                                
                             </h3>
-                            <div class="post-date hstack gap-narrow">
+                            <div class="post-date fs-7 hstack gap-narrow">
                                 <span>${formatTanggal(post1.date)}</span>
                             </div>                    
                         </div>                        
@@ -513,7 +513,7 @@ function beritaKesehatan()
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
-                                <div class="post-date hstack gap-narrow">
+                                <div class="post-date fs-7 hstack gap-narrow">
                                     <span>${formatTanggal(post.date)}</span>
                                 </div>                    
                             </div>                        
@@ -720,7 +720,7 @@ function beritaOlahraga()
                                     ${post1.title.rendered}
                                 </a>
                             </h3>
-                            <div class="post-date hstack gap-narrow">
+                            <div class="post-date fs-7 hstack gap-narrow">
                                 <span>${formatTanggal(post1.date)}</span>
                             </div>                    
                         </div>                        
@@ -766,7 +766,7 @@ function beritaOlahraga()
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
-                                <div class="post-date hstack gap-narrow">
+                                <div class="post-date fs-7 hstack gap-narrow">
                                     <span>${formatTanggal(post.date)}</span>
                                 </div>                    
                             </div>                        
@@ -962,7 +962,7 @@ function beritaDaerah()
                                     ${post1.title.rendered}
                                 </a>
                             </h3>
-                            <div class="post-date hstack gap-narrow">
+                            <div class="post-date fs-7 hstack gap-narrow">
                                 <span>${formatTanggal(post1.date)}</span>
                             </div>                    
                         </div>                        
@@ -986,7 +986,7 @@ function beritaDaerah()
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
-                                <div class="post-date hstack gap-narrow">
+                                <div class="post-date fs-7 hstack gap-narrow">
                                     <span>${formatTanggal(post1.date)}</span>
                                 </div>                    
                             </div>                        
