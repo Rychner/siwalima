@@ -67,8 +67,8 @@ function swiperBerita()
                         <div class="featured-image rounded-top-1 rounded-bottom-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                             <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                             <!-- Overlay + Judul -->
-                            <div class="post-header panel vstack justify-end items-start text-white w-100">
-                                <h3 class="p-2 rounded-bottom-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 sm:h3">
+                            <div class="post-header panel vstack justify-end items-start">
+                                <h3 class="p-2 rounded-bottom-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 w-100 sm:h3">
                                     <a class="text-white text-none hover:text-red" href="detail.html?id=${post.id}">${judul}</a>
                                 </h3>
                             </div>
