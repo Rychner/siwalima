@@ -68,7 +68,7 @@ function swiperBerita()
                             <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                             <!-- Overlay + Judul -->
                             <div class="post-header panel vstack justify-end items-start">
-                                <h3 class="p-2 rounded-bottom-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 w-100 sm:h3">
+                                <h3 class="p-2 rounded-bottom-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 w-100 sm:h4">
                                     <a class="text-white text-none hover:text-red" href="detail.html?id=${post.id}">${judul}</a>
                                 </h3>
                             </div>
@@ -192,7 +192,7 @@ function bannerKoran()
 
 function beritaPolitik()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=38&per_page=7&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=38&per_page=8&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapolitik');
@@ -253,8 +253,8 @@ function beritaPolitik()
                         </div>                        
                     </div>
                     <div class="col-auto">
-                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
-                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
+                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                                 <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                     src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                                     data-src="${getImage(post1)}"
@@ -276,7 +276,7 @@ function beritaPolitik()
                 <article class="post type-post panel">
                     <div class="row child-cols items-center">
                         <div class="col-auto">
-                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-215px">
                                 <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
                                     <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                         src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
@@ -319,7 +319,7 @@ function beritaPolitik()
 
 function beritaTopnews()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=48&per_page=4&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=48&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritatopnews');
@@ -341,22 +341,20 @@ function beritaTopnews()
 
         const item = document.createElement('div');
 
-        item.innerHTML = `         
-        <div>
-            <article class="post type-post panel vstack gap-1 lg:gap-2">
-                <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
-                    </div>
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
+        item.innerHTML = ` 
+        <article class="post type-post panel vstack gap-1 lg:gap-2">
+            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                 </div>
-                <div class="post-header panel vstack gap-1">                                        
-                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
-                    </h3>
-                </div>
-            </article>
-        </div>
+                <a href="detail.html?id=${post.id}" class="position-cover"></a>
+            </div>
+            <div class="post-header panel vstack gap-1">                                        
+                <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                    <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                </h3>
+            </div>
+        </article>
         `;
 
         container.appendChild(item);
@@ -472,8 +470,8 @@ function beritaKesehatan()
             <article class="post type-post panel">
                 <div class="row child-cols items-center">
                     <div class="col-auto">
-                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
-                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
+                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                                 <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                     src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                                     data-src="${getImage(post1)}"
@@ -504,7 +502,7 @@ function beritaKesehatan()
         data.slice(1).forEach(post => {
         postListHTML += `
             <div>
-                <article class="post type-post panel">
+                <article class="mt-1 post type-post panel">
                     <div class="row child-cols items-center">                        
                         <div>
                             <div class="post-header panel vstack gap-1">                    
@@ -519,7 +517,7 @@ function beritaKesehatan()
                             </div>                        
                         </div>
                         <div class="col-auto">
-                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-215px">
                                 <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
                                     <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                         src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
@@ -550,7 +548,7 @@ function beritaKesehatan()
 
 function beritaOpini()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=285&per_page=10&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=285&per_page=12&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaopini');
@@ -726,8 +724,8 @@ function beritaOlahraga()
                         </div>                        
                     </div>
                     <div class="col-auto">
-                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
-                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
+                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                                 <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                     src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                                     data-src="${getImage(post1)}"
@@ -749,7 +747,7 @@ function beritaOlahraga()
                 <article class="post type-post panel">
                     <div class="row child-cols items-center">
                         <div class="col-auto">
-                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-215px">
                                 <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
                                     <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                         src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
@@ -792,7 +790,7 @@ function beritaOlahraga()
 
 function beritaVisi()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=4&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritavisi');
@@ -824,7 +822,7 @@ function beritaVisi()
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1 mb-1">                                       
-                    <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2">
+                    <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
                         <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                 </div>
@@ -945,8 +943,8 @@ function beritaDaerah()
             <article class="post type-post panel">
                 <div class="row child-cols items-center">
                     <div class="col-auto">
-                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
-                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
+                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                                 <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                     src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
                                     data-src="${getImage(post1)}"
@@ -992,7 +990,7 @@ function beritaDaerah()
                             </div>                        
                         </div>
                         <div class="col-auto">
-                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-200px">
+                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-215px">
                                 <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
                                     <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
                                         src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"

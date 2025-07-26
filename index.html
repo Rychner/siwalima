@@ -69,6 +69,14 @@
             a {
                 font-family: 'Montserrat', sans-serif;
             }
+            @media (min-width:1200px) {
+                .lg\:min-w-215px {
+                min-width: 215px !important;
+                }
+            }            
+            .lg\:fs-2 {
+                font-size: 20px !important;
+            }
         </style>
         
     </head>
@@ -192,13 +200,13 @@
                                                 <!-- JS akan inject berita di sini -->
                                             </div>                                            
                                         </div>
-                                        <div class="block-layout panel mt-2">
+                                        <div class="block-layout panel mt-4">
                                             <div class="block-header panel vstack items-center justify-center text-center gap-1 mb-1">
                                                 <h2 class="text-blue block-title h5 m-0 hstack justify-center gap-1 border-bottom border-red border-md-5 pb-1 dark:text-blue">                                                    
                                                     <span>TOP NEWS</span>
                                                 </h2>
                                             </div>
-                                            <div class="mt-2 block-content panel row bg-red sep-x gx-4 gy-3 lg:gy-2" id="beritatopnews">
+                                            <div class="mt-2 block-content panel row bg-red gx-4 gy-3 lg:gy-2" id="beritatopnews">
                                                 <!-- JS akan inject berita di sini -->
                                             </div>                                            
                                         </div>
@@ -366,7 +374,7 @@
                     <div class="container max-w-xl">
                         <div class="section-inner">
                             <div class="row child-cols-12 lg:child-cols-4 gx-3 xl:gx-6 gy-6" data-uc-grid>                                
-                                <div class="mt-4 block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
+                                <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
                                     <div class="block-content panel vstack gap-3" id="beritadaerah">
                                         <!-- JS akan inject berita di sini -->
                                     </div>
