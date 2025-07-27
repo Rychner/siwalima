@@ -64,7 +64,13 @@
         <script src="https://html.themewant.com/news5/assets/js/uni-core/js/uni-core-bundle.min.js"></script>
 
         <style>
-            a {
+            .judul{
+                font-family: 'Montserrat', Arial, Tahoma, sans-serif !important;
+            }
+            .isi {
+                font-family: Helvetica, Arial, Tahoma, sans-serif !important;
+            }
+            body, a {
                 font-family: 'Montserrat', sans-serif;
             }
         </style>
@@ -108,7 +114,7 @@
                                         </div>
                                     </div>                                                                
                                 </div>
-                                <h1 class="h4 sm:h2 lg:h2 xl:h2">
+                                <h1 class="h4 judul fw-bold sm:h2 lg:h2 xl:h2">
                                     ${judul}
                                 </h1>
                                 <figure class="featured-image m-0">
@@ -136,7 +142,7 @@
                                 <div class="content-wrap row child-col-12 lg:child-cols g-4 lg:g-6">
                                     <div class="max-w-lg">
                                         <!-- Isi start -->
-                                        <div class="panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
+                                        <div class="isi panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
                                             ${isi}
                                         </div>
                                         <!-- Isi end -->
@@ -471,18 +477,8 @@
                                     <!-- Banner Koran start -->
                                     <div id="bannerKoran" class="mb-2"></div>
                                     <!-- Banner Koran end -->
-                                    <section id="media_image-1" class="mb-2 widget widget_media_image"><img width="600" height="700" src="featuregraphic.jpg" class="image wp-image-10098 attachment-full size-full" alt="" decoding="async" srcset="featuregraphic.jpg 600w, featuregraphic.jpg 257w" sizes="(max-width: 600px) 100vw, 600px"></section>
-                                    <!-- Iklan Kotak start -->
-                                    <div class="mb-2 block-layout panel">
-                                        <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
-                                            <div class="block-content panel vstack gap-3" id="iklan2">
-                                                <img src="https://siwalimanews.com/wp-content/uploads/2025/06/adv-2-Muharram.jpg" alt="">                                            
-                                            </div>                                       
-                                        </div>                                           
-                                    </div>
-                                    <!-- Iklan Kotak end -->
                                     <!-- Terpopuler start -->
-                                    <div class="block-layout panel mt-2">
+                                    <div class="block-layout panel mb-2">
                                         <div class="block-header panel vstack items-center justify-center text-center gap-1 mb-1">
                                             <h2 class="text-blue block-title h5 m-0 hstack justify-center gap-1 border-bottom border-red border-md-5 pb-1 dark:text-blue">                                                    
                                                 <span>TERPOPULER</span>
@@ -492,7 +488,17 @@
                                             <!-- JS akan inject berita di sini -->
                                         </div>                                            
                                     </div>
-                                    <!-- Terpopuler end -->                                    
+                                    <!-- Terpopuler end -->
+                                    <section id="media_image-1" class="mb-2 widget widget_media_image"><img width="600" height="700" src="featuregraphic.jpg" class="image wp-image-10098 attachment-full size-full" alt="" decoding="async" srcset="featuregraphic.jpg 600w, featuregraphic.jpg 257w" sizes="(max-width: 600px) 100vw, 600px"></section>
+                                    <!-- Iklan Kotak start -->
+                                    <div class="mb-2 block-layout panel">
+                                        <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
+                                            <div class="block-content panel vstack gap-3" id="iklan2">
+                                                <img src="https://siwalimanews.com/wp-content/uploads/2025/06/adv-2-Muharram.jpg" alt="">                                            
+                                            </div>                                       
+                                        </div>                                           
+                                    </div>
+                                    <!-- Iklan Kotak end -->                                                                        
                                 </div>
                             </div>
                         </div>
