@@ -113,7 +113,7 @@
                             .then(res => res.json())
                             .then(posts => {
                                 const judulBacaJuga = posts.map(p => {
-                                    return `<a href='detail.html?id=${p.id}' class="fw-bold fs-3 text-none">${p.title.rendered}</a>`;
+                                    return `<a href='detail.html?id=${p.id}' class="judul fs-3 text-none">${p.title.rendered}</a>`;
                                 }).join('');
         
                                 const bacaJugaHTML = `<div class="mt-2 mb-2">
