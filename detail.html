@@ -419,65 +419,7 @@
                         document.getElementById("detailberita").innerHTML = "<p>Gagal memuat detail berita.</p>";
                     });
             });
-        </script>
-
-        <script>
-            // Ambil data berita utama
-            fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}`)
-            .then(res => res.json())
-            .then(post => {
-                document.getElementById("judul").textContent = post.title.rendered;
-                const isiAsli = post.content.rendered;
-
-                // Bagi isi jadi paragraf
-                const paragraphs = isiAsli.split("</p>").filter(p => p.trim() !== "").map(p => p + "</p>");
-
-                // Ambil kategori pertama (jika ada)
-                const kategoriId = post.categories?.[0];
-
-                if (kategoriId) {
-                // Fetch "baca juga" berdasarkan kategori
-                fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?categories=${kategoriId}&exclude=${postId}&per_page=1`)
-                    .then(res => res.json())
-                    .then(posts => {
-                    if (posts.length > 0) {
-                        const baca = posts[0];
-                        const bacaJugaHTML = `
-                        <div class="my-6">
-                            <div class="border-l-4 border-red-600 bg-gray-100 p-4 text-sm md:text-base">
-                            <div class="text-gray-500 font-semibold mb-1">Baca Juga:</div>
-                            <a href="detail.html?id=${baca.id}" class="font-bold text-blue-800 hover:underline">
-                                ${baca.title.rendered}
-                            </a>
-                            </div>
-                        </div>
-                        `;
-
-                        // Sisipkan "Baca Juga" setelah paragraf kedua
-                        if (paragraphs.length >= 2) {
-                        paragraphs.splice(2, 0, bacaJugaHTML);
-                        }
-
-                        document.querySelector(".isi").innerHTML = paragraphs.join("");
-                    } else {
-                        // Jika tidak ada baca juga
-                        document.querySelector(".isi").innerHTML = paragraphs.join("");
-                    }
-                    })
-                    .catch(() => {
-                    document.querySelector(".isi").innerHTML = paragraphs.join("");
-                    });
-                } else {
-                // Jika tidak ada kategori
-                document.querySelector(".isi").innerHTML = paragraphs.join("");
-                }
-            })
-            .catch(error => {
-                console.error("Gagal memuat berita:", error);
-                document.querySelector(".isi").innerHTML = "<p>Gagal memuat isi berita.</p>";
-            });
-        </script>
-        
+        </script>    
     </head>
 
     <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
