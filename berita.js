@@ -69,7 +69,7 @@ function swiperBerita()
                             <!-- Overlay + Judul -->
                             <div class="post-header panel vstack justify-end items-start">
                                 <h3 class="p-2 rounded-bottom-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 w-100 sm:h4">
-                                    <a class="text-white text-none hover:text-red" href="detail.html?id=${post.id}">${judul}</a>
+                                    <a class="text-white text-none" href="detail.html?id=${post.id}">${judul}</a>
                                 </h3>
                             </div>
                         </div>
