@@ -73,322 +73,407 @@
             body, a {
                 font-family: 'Montserrat', sans-serif;
             }
+            .baca-juga {
+                background: #f9f9f9;
+                padding: 10px;
+                margin: 15px 0;
+                border-left: 4px solid #c00;
+            }
         </style>
         
         <!-- Detail -->
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get("id");
-
-            if (!id) {
-                document.getElementById("detailberita").innerHTML = "<p>ID tidak ditemukan.</p>";
-                return;
-            }
-
-            fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
-                .then(res => res.json())
-                .then(post => {
-                    const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
-                    const date = new Date(post.date);
-                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    let tanggal = date.toLocaleDateString('id-ID', options);
-                    const judul = post.title.rendered;
-                    const isi = post.content.rendered;
-                    const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
-
-                    const container = document.getElementById("detailberita");
-                    container.innerHTML = `                        
-                        <div class="post-header">
-                            <div class="panel vstack mx-auto gap-2 md:gap-3">
-                                <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 md:d-flex z-1">
-                                    <div>
-                                        <div class="post-category hstack gap-narrow fw-semibold">
-                                            <a class="text-none hover:text-red dark:text-primary duration-150" href="tes.html">${kategori}</a>
-                                        </div>
-                                    </div>
-                                    <div class="sep md:d-block">❘</div>
-                                    <div class="md:d-block">
-                                        <div class="post-date hstack gap-narrow">
-                                            <span>${tanggal}</span>
-                                        </div>
-                                    </div>                                                                
-                                </div>
-                                <h1 class="h4 judul fw-bold sm:h2 lg:h2 xl:h2">
-                                    ${judul}
-                                </h1>
-                                <figure class="featured-image m-0">
-                                    <figure
-                                        class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                        <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                            src="${gambar}"
-                                            data-src="${gambar}"
-                                            alt="${judul}"
-                                            data-uc-img="loading: lazy">
-                                    </figure>
-                                </figure>                                        
-                            </div>
-                        </div>
-                        <!-- Iklan 2 start -->
-                        <div class="container max-w-xl mt-3">
-                            <div class="section-inner panel">                                                    
-                                <img class="text-dark dark:text-white" src="iklanpanjang.png" data-src="iklanpanjang.png" alt="iklanpanjang" data-uc-img="loading: lazy">
-                                <a href=#" class="position-cover"></a>
-                            </div>
-                        </div>
-                        <!-- Iklan 2 end -->
-                        <div class="panel position-relative mt-2 lg:mt-2 xl:mt-4">
-                            <div class="container">
-                                <div class="content-wrap row child-col-12 lg:child-cols g-4 lg:g-6">
-                                    <div class="max-w-lg">
-                                        <!-- Isi start -->
-                                        <div class="isi panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
-                                            ${isi}
-                                        </div>
-                                        <!-- Isi end -->
-                                        <!-- Tags & Share start -->
-                                        <div
-                                            class="post-footer panel vstack sm:hstack gap-3 justify-between justifybetween border-top py-4 mt-2 xl:py-9 xl:mt-5">
-                                            <ul class="nav-x gap-narrow text-primary">
-                                                <li><span class="text-black dark:text-white me-narrow">Tags:</span></li>
-                                                <li>
-                                                    <a href="#" class="uc-link gap-0 dark:text-white">Food <span
-                                                            class="text-black dark:text-white">,</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="uc-link gap-0 dark:text-white">Life Style <span
-                                                            class="text-black dark:text-white">,</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="uc-link gap-0 dark:text-white">Tech <span
-                                                            class="text-black dark:text-white">,</span></a>
-                                                </li>
-                                                <li><a href="#" class="uc-link gap-0 dark:text-white">Travel</a></li>
-                                            </ul>
-                                            <ul class="post-share-icons nav-x gap-narrow">
-                                                <li class="me-1"><span class="text-black dark:text-white">Share:</span></li>
-                                                <li>
-                                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
-                                                        href="#"><i class="unicon-logo-facebook icon-1"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
-                                                        href="#"><i class="unicon-logo-x-filled icon-1"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
-                                                        href="#"><i class="unicon-email icon-1"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
-                                                        href="#"><i class="unicon-link icon-1"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <!-- Tags & Share end -->
-                                        <!-- Next & Previous Article start -->                                                
-                                        <div class="post-navigation panel vstack sm:hstack justify-between gap-2 mt-0 xl:mt-1">
-                                            <div class="new-post panel hstack w-100 sm:w-1/2">
-                                                <div class="panel hstack justify-center w-100px h-100px">
-                                                    <figure
-                                                        class="featured-image m-0 ratio ratio-1x1 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                        <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                            src="../assets/images/common/img-fallback.png"
-                                                            data-src="../assets/images/demo-two/posts/img-02.jpg"
-                                                            alt="Tech Innovations Reshaping the Retail Landscape: AI Payments"
-                                                            data-uc-img="loading: lazy">
-                                                        <a href="blog-details.html" class="position-cover"
-                                                            data-caption="Tech Innovations Reshaping the Retail Landscape: AI Payments"></a>
-                                                    </figure>
-                                                </div>
-                                                <div class="panel vstack justify-center px-2 gap-1 w-1/3">
-                                                    <span class="fs-7 opacity-60">Prev Article</span>
-                                                    <h6 class="h6 lg:h5 m-0">Tech Innovations Reshaping the Retail Landscape: AI
-                                                        Payments</h6>
-                                                </div>
-                                                <a href="blog-details.html" class="position-cover"></a>
-                                            </div>
-                                            <div class="new-post panel hstack w-100 sm:w-1/2">
-                                                <div class="panel vstack justify-center px-2 gap-1 w-1/3 text-end">
-                                                    <span class="fs-7 opacity-60">Next Article</span>
-                                                    <h6 class="h6 lg:h5 m-0">The Rise of AI-Powered Personal Assistants: How
-                                                        They Manage</h6>
-                                                </div>
-                                                <div class="panel hstack justify-center w-100px h-100px">
-                                                    <figure
-                                                        class="featured-image m-0 ratio ratio-1x1 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                        <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                            src="../assets/images/common/img-fallback.png"
-                                                            data-src="../assets/images/demo-two/posts/img-01.jpg"
-                                                            alt="The Rise of AI-Powered Personal Assistants: How They Manage"
-                                                            data-uc-img="loading: lazy">
-                                                        <a href="blog-details.html" class="position-cover"
-                                                            data-caption="The Rise of AI-Powered Personal Assistants: How They Manage"></a>
-                                                    </figure>
-                                                </div>
-                                                <a href="blog-details.html" class="position-cover"></a>
-                                            </div>
-                                        </div>
-                                        <!-- Next & Previous Article end -->
-                                        <!-- Berita Terkait start -->
-                                        <div class="post-related panel border-top pt-2 mt-8 xl:mt-9">
-                                            <div class="block-header panel gap-1 mb-2">
-                                                <h2 class="text-blue block-title h5 m-0 gap-1 d-inline-block border-bottom border-red border-md-5 pb-1 dark:text-blue">                                                    
-                                                    <span>BERITA TERKAIT</span>
-                                                </h2>
-                                            </div>
-                                            <div class="row child-cols-6 md:child-cols-4 gx-2 gy-4 sm:gx-3 sm:gy-6">
-                                                <div>
-                                                    <article class="post type-post panel vstack gap-2">
-                                                        <figure
-                                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                                src="../assets/images/common/img-fallback.png"
-                                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
-                                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
-                                                                data-uc-img="loading: lazy">
-                                                            <a href="blog-details.html" class="position-cover"
-                                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
-                                                        </figure>
-                                                        <div class="post-header panel vstack gap-1">
-                                                            <h5 class="h6 md:h5 m-0">
-                                                                <a class="text-none" href="blog-details.html">The Art of Baking:
-                                                                    From Classic Bread to Artisan Pastries</a>
-                                                            </h5>
-                                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
-                                                                <span>Feb 28, <span>Feb 28, 2025</span>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel vstack gap-2">
-                                                        <figure
-                                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                                src="../assets/images/common/img-fallback.png"
-                                                                data-src="../assets/images/demo-two/posts/img-08.jpg"
-                                                                alt="AI and Marketing: Unlocking Customer Insights"
-                                                                data-uc-img="loading: lazy">
-                                                            <a href="blog-details.html" class="position-cover"
-                                                                data-caption="AI and Marketing: Unlocking Customer Insights"></a>
-                                                        </figure>
-                                                        <div class="post-header panel vstack gap-1">
-                                                            <h5 class="h6 md:h5 m-0">
-                                                                <a class="text-none" href="blog-details.html">AI and Marketing:
-                                                                    Unlocking Customer Insights</a>
-                                                            </h5>
-                                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
-                                                                <span>Feb 22, <span>Feb 28, 2025</span>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel vstack gap-2">
-                                                        <figure
-                                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                                src="../assets/images/common/img-fallback.png"
-                                                                data-src="../assets/images/demo-two/posts/img-09.jpg"
-                                                                alt="Hidden Gems: Underrated Travel Destinations Around the World"
-                                                                data-uc-img="loading: lazy">
-                                                            <a href="blog-details.html" class="position-cover"
-                                                                data-caption="Hidden Gems: Underrated Travel Destinations Around the World"></a>
-                                                        </figure>
-                                                        <div class="post-header panel vstack gap-1">
-                                                            <h5 class="h6 md:h5 m-0">
-                                                                <a class="text-none" href="blog-details.html">Hidden Gems:
-                                                                    Underrated Travel Destinations Around the World</a>
-                                                            </h5>
-                                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
-                                                                <span>Feb 14, <span>Feb 28, 2025</span>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel vstack gap-2">
-                                                        <figure
-                                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                                src="../assets/images/common/img-fallback.png"
-                                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
-                                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
-                                                                data-uc-img="loading: lazy">
-                                                            <a href="blog-details.html" class="position-cover"
-                                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
-                                                        </figure>
-                                                        <div class="post-header panel vstack gap-1">
-                                                            <h5 class="h6 md:h5 m-0">
-                                                                <a class="text-none" href="blog-details.html">The Art of Baking:
-                                                                    From Classic Bread to Artisan Pastries</a>
-                                                            </h5>
-                                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
-                                                                <span>Feb 28, 2025</span>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel vstack gap-2">
-                                                        <figure
-                                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                                src="../assets/images/common/img-fallback.png"
-                                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
-                                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
-                                                                data-uc-img="loading: lazy">
-                                                            <a href="blog-details.html" class="position-cover"
-                                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
-                                                        </figure>
-                                                        <div class="post-header panel vstack gap-1">
-                                                            <h5 class="h6 md:h5 m-0">
-                                                                <a class="text-none" href="blog-details.html">The Art of Baking:
-                                                                    From Classic Bread to Artisan Pastries</a>
-                                                            </h5>
-                                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
-                                                                <span>Feb 28, 2025</span>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article class="post type-post panel vstack gap-2">
-                                                        <figure
-                                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
-                                                                src="../assets/images/common/img-fallback.png"
-                                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
-                                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
-                                                                data-uc-img="loading: lazy">
-                                                            <a href="blog-details.html" class="position-cover"
-                                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
-                                                        </figure>
-                                                        <div class="post-header panel vstack gap-1">
-                                                            <h5 class="h6 md:h5 m-0">
-                                                                <a class="text-none" href="blog-details.html">The Art of Baking:
-                                                                    From Classic Bread to Artisan Pastries</a>
-                                                            </h5>
-                                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
-                                                                <span>Feb 28, <span>Feb 28, 2025</span>
-                                                            </div>
-                                                        </div>
-                                                    </article>
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get("id");
+        
+                if (!id) {
+                    document.getElementById("detailberita").innerHTML = "<p>ID tidak ditemukan.</p>";
+                    return;
+                }
+        
+                fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
+                    .then(res => res.json())
+                    .then(post => {
+                        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+                        const kategoriId = post._embedded["wp:term"]?.[0]?.[0]?.id;
+                        const date = new Date(post.date);
+                        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        let tanggal = date.toLocaleDateString('id-ID', options);
+                        const judul = post.title.rendered;
+                        const isi = post.content.rendered;
+                        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+        
+                        // Ambil berita lain dengan kategori sama
+                        fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?categories=${kategoriId}&exclude=${id}&per_page=1&_embed`)
+                            .then(res => res.json())
+                            .then(posts => {
+                                const judulBacaJuga = posts.map(p => {
+                                    return `<a href='detail.html?id=${p.id}' class="fw-bold fs-3 text-none">${p.title.rendered}</a>`;
+                                }).join('');
+        
+                                const bacaJugaHTML = `<div class='baca-juga'>Baca Juga:<br>${judulBacaJuga}</div>`;
+        
+                                // Sisipkan ke paragraf kedua isi berita
+                                const tempDiv = document.createElement("div");
+                                tempDiv.innerHTML = isi;
+                                const paragraphs = tempDiv.querySelectorAll("p");
+                                if (paragraphs.length > 1) {
+                                    paragraphs[1].insertAdjacentHTML("afterend", bacaJugaHTML);
+                                } else {
+                                    tempDiv.innerHTML += bacaJugaHTML;
+                                }
+        
+                                const container = document.getElementById("detailberita");
+                                container.innerHTML = `
+                                <div class="post-header">
+                                    <div class="panel vstack mx-auto gap-2 md:gap-3">
+                                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 md:d-flex z-1">
+                                            <div>
+                                                <div class="post-category hstack gap-narrow fw-semibold">
+                                                    <a class="text-none hover:text-red dark:text-primary duration-150" href="tes.html">${kategori}</a>
                                                 </div>
                                             </div>
+                                            <div class="sep md:d-block">❘</div>
+                                            <div class="md:d-block">
+                                                <div class="post-date hstack gap-narrow">
+                                                    <span>${tanggal}</span>
+                                                </div>
+                                            </div>                                                                
                                         </div>
-                                        <!-- Berita Terkait end -->
+                                        <h1 class="h4 judul fw-bold sm:h2 lg:h2 xl:h2">
+                                            ${judul}
+                                        </h1>
+                                        <figure class="featured-image m-0">
+                                            <figure
+                                                class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                    src="${gambar}"
+                                                    data-src="${gambar}"
+                                                    alt="${judul}"
+                                                    data-uc-img="loading: lazy">
+                                            </figure>
+                                        </figure>                                        
                                     </div>
                                 </div>
+                                <!-- Iklan 2 start -->
+                                <div class="container max-w-xl mt-3">
+                                    <div class="section-inner panel">                                                    
+                                        <img class="text-dark dark:text-white" src="iklanpanjang.png" data-src="iklanpanjang.png" alt="iklanpanjang" data-uc-img="loading: lazy">
+                                        <a href=#" class="position-cover"></a>
+                                    </div>
+                                </div>
+                                <!-- Iklan 2 end -->
+                                <div class="panel position-relative mt-2 lg:mt-2 xl:mt-4">
+                                    <div class="container">
+                                        <div class="content-wrap row child-col-12 lg:child-cols g-4 lg:g-6">
+                                            <div class="max-w-lg">
+                                                <!-- Isi start -->
+                                                <div class="isi panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
+                                                    ${tempDiv.innerHTML}
+                                                </div>
+                                                <!-- Isi end -->
+                                                <!-- Tags & Share start -->
+                                                <div
+                                                    class="post-footer panel vstack sm:hstack gap-3 justify-between justifybetween border-top py-4 mt-2 xl:py-9 xl:mt-5">
+                                                    <ul class="nav-x gap-narrow text-primary">
+                                                        <li><span class="text-black dark:text-white me-narrow">Tags:</span></li>
+                                                        <li>
+                                                            <a href="#" class="uc-link gap-0 dark:text-white">Food <span
+                                                                    class="text-black dark:text-white">,</span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="uc-link gap-0 dark:text-white">Life Style <span
+                                                                    class="text-black dark:text-white">,</span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="uc-link gap-0 dark:text-white">Tech <span
+                                                                    class="text-black dark:text-white">,</span></a>
+                                                        </li>
+                                                        <li><a href="#" class="uc-link gap-0 dark:text-white">Travel</a></li>
+                                                    </ul>
+                                                    <ul class="post-share-icons nav-x gap-narrow">
+                                                        <li class="me-1"><span class="text-black dark:text-white">Share:</span></li>
+                                                        <li>
+                                                            <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                                                href="#"><i class="unicon-logo-facebook icon-1"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                                                href="#"><i class="unicon-logo-x-filled icon-1"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                                                href="#"><i class="unicon-email icon-1"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                                                href="#"><i class="unicon-link icon-1"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Tags & Share end -->
+                                                <!-- Next & Previous Article start -->                                                
+                                                <div class="post-navigation panel vstack sm:hstack justify-between gap-2 mt-0 xl:mt-1">
+                                                    <div class="new-post panel hstack w-100 sm:w-1/2">
+                                                        <div class="panel hstack justify-center w-100px h-100px">
+                                                            <figure
+                                                                class="featured-image m-0 ratio ratio-1x1 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                    src="../assets/images/common/img-fallback.png"
+                                                                    data-src="../assets/images/demo-two/posts/img-02.jpg"
+                                                                    alt="Tech Innovations Reshaping the Retail Landscape: AI Payments"
+                                                                    data-uc-img="loading: lazy">
+                                                                <a href="blog-details.html" class="position-cover"
+                                                                    data-caption="Tech Innovations Reshaping the Retail Landscape: AI Payments"></a>
+                                                            </figure>
+                                                        </div>
+                                                        <div class="panel vstack justify-center px-2 gap-1 w-1/3">
+                                                            <span class="fs-7 opacity-60">Prev Article</span>
+                                                            <h6 class="h6 lg:h5 m-0">Tech Innovations Reshaping the Retail Landscape: AI
+                                                                Payments</h6>
+                                                        </div>
+                                                        <a href="blog-details.html" class="position-cover"></a>
+                                                    </div>
+                                                    <div class="new-post panel hstack w-100 sm:w-1/2">
+                                                        <div class="panel vstack justify-center px-2 gap-1 w-1/3 text-end">
+                                                            <span class="fs-7 opacity-60">Next Article</span>
+                                                            <h6 class="h6 lg:h5 m-0">The Rise of AI-Powered Personal Assistants: How
+                                                                They Manage</h6>
+                                                        </div>
+                                                        <div class="panel hstack justify-center w-100px h-100px">
+                                                            <figure
+                                                                class="featured-image m-0 ratio ratio-1x1 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                    src="../assets/images/common/img-fallback.png"
+                                                                    data-src="../assets/images/demo-two/posts/img-01.jpg"
+                                                                    alt="The Rise of AI-Powered Personal Assistants: How They Manage"
+                                                                    data-uc-img="loading: lazy">
+                                                                <a href="blog-details.html" class="position-cover"
+                                                                    data-caption="The Rise of AI-Powered Personal Assistants: How They Manage"></a>
+                                                            </figure>
+                                                        </div>
+                                                        <a href="blog-details.html" class="position-cover"></a>
+                                                    </div>
+                                                </div>
+                                                <!-- Next & Previous Article end -->
+                                                <!-- Berita Terkait start -->
+                                                <div class="post-related panel border-top pt-2 mt-8 xl:mt-9">
+                                                    <div class="block-header panel gap-1 mb-2">
+                                                        <h2 class="text-blue block-title h5 m-0 gap-1 d-inline-block border-bottom border-red border-md-5 pb-1 dark:text-blue">                                                    
+                                                            <span>BERITA TERKAIT</span>
+                                                        </h2>
+                                                    </div>
+                                                    <div class="row child-cols-6 md:child-cols-4 gx-2 gy-4 sm:gx-3 sm:gy-6">
+                                                        <div>
+                                                            <article class="post type-post panel vstack gap-2">
+                                                                <figure
+                                                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                    <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                        src="../assets/images/common/img-fallback.png"
+                                                                        data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                                        alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                                        data-uc-img="loading: lazy">
+                                                                    <a href="blog-details.html" class="position-cover"
+                                                                        data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                                                </figure>
+                                                                <div class="post-header panel vstack gap-1">
+                                                                    <h5 class="h6 md:h5 m-0">
+                                                                        <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                                            From Classic Bread to Artisan Pastries</a>
+                                                                    </h5>
+                                                                    <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                                        <span>Feb 28, <span>Feb 28, 2025</span>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                        <div>
+                                                            <article class="post type-post panel vstack gap-2">
+                                                                <figure
+                                                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                    <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                        src="../assets/images/common/img-fallback.png"
+                                                                        data-src="../assets/images/demo-two/posts/img-08.jpg"
+                                                                        alt="AI and Marketing: Unlocking Customer Insights"
+                                                                        data-uc-img="loading: lazy">
+                                                                    <a href="blog-details.html" class="position-cover"
+                                                                        data-caption="AI and Marketing: Unlocking Customer Insights"></a>
+                                                                </figure>
+                                                                <div class="post-header panel vstack gap-1">
+                                                                    <h5 class="h6 md:h5 m-0">
+                                                                        <a class="text-none" href="blog-details.html">AI and Marketing:
+                                                                            Unlocking Customer Insights</a>
+                                                                    </h5>
+                                                                    <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                                        <span>Feb 22, <span>Feb 28, 2025</span>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                        <div>
+                                                            <article class="post type-post panel vstack gap-2">
+                                                                <figure
+                                                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                    <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                        src="../assets/images/common/img-fallback.png"
+                                                                        data-src="../assets/images/demo-two/posts/img-09.jpg"
+                                                                        alt="Hidden Gems: Underrated Travel Destinations Around the World"
+                                                                        data-uc-img="loading: lazy">
+                                                                    <a href="blog-details.html" class="position-cover"
+                                                                        data-caption="Hidden Gems: Underrated Travel Destinations Around the World"></a>
+                                                                </figure>
+                                                                <div class="post-header panel vstack gap-1">
+                                                                    <h5 class="h6 md:h5 m-0">
+                                                                        <a class="text-none" href="blog-details.html">Hidden Gems:
+                                                                            Underrated Travel Destinations Around the World</a>
+                                                                    </h5>
+                                                                    <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                                        <span>Feb 14, <span>Feb 28, 2025</span>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                        <div>
+                                                            <article class="post type-post panel vstack gap-2">
+                                                                <figure
+                                                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                    <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                        src="../assets/images/common/img-fallback.png"
+                                                                        data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                                        alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                                        data-uc-img="loading: lazy">
+                                                                    <a href="blog-details.html" class="position-cover"
+                                                                        data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                                                </figure>
+                                                                <div class="post-header panel vstack gap-1">
+                                                                    <h5 class="h6 md:h5 m-0">
+                                                                        <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                                            From Classic Bread to Artisan Pastries</a>
+                                                                    </h5>
+                                                                    <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                                        <span>Feb 28, 2025</span>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                        <div>
+                                                            <article class="post type-post panel vstack gap-2">
+                                                                <figure
+                                                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                    <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                        src="../assets/images/common/img-fallback.png"
+                                                                        data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                                        alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                                        data-uc-img="loading: lazy">
+                                                                    <a href="blog-details.html" class="position-cover"
+                                                                        data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                                                </figure>
+                                                                <div class="post-header panel vstack gap-1">
+                                                                    <h5 class="h6 md:h5 m-0">
+                                                                        <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                                            From Classic Bread to Artisan Pastries</a>
+                                                                    </h5>
+                                                                    <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                                        <span>Feb 28, 2025</span>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                        <div>
+                                                            <article class="post type-post panel vstack gap-2">
+                                                                <figure
+                                                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                                                    <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                                        src="../assets/images/common/img-fallback.png"
+                                                                        data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                                        alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                                        data-uc-img="loading: lazy">
+                                                                    <a href="blog-details.html" class="position-cover"
+                                                                        data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                                                </figure>
+                                                                <div class="post-header panel vstack gap-1">
+                                                                    <h5 class="h6 md:h5 m-0">
+                                                                        <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                                            From Classic Bread to Artisan Pastries</a>
+                                                                    </h5>
+                                                                    <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                                        <span>Feb 28, <span>Feb 28, 2025</span>
+                                                                    </div>
+                                                                </div>
+                                                            </article>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Berita Terkait end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                            });
+                    })
+                    .catch(err => {
+                        console.error("Gagal mengambil detail berita:", err);
+                        document.getElementById("detailberita").innerHTML = "<p>Gagal memuat detail berita.</p>";
+                    });
+            });
+        </script>
+
+        <script>
+            // Ambil data berita utama
+            fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}`)
+            .then(res => res.json())
+            .then(post => {
+                document.getElementById("judul").textContent = post.title.rendered;
+                const isiAsli = post.content.rendered;
+
+                // Bagi isi jadi paragraf
+                const paragraphs = isiAsli.split("</p>").filter(p => p.trim() !== "").map(p => p + "</p>");
+
+                // Ambil kategori pertama (jika ada)
+                const kategoriId = post.categories?.[0];
+
+                if (kategoriId) {
+                // Fetch "baca juga" berdasarkan kategori
+                fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?categories=${kategoriId}&exclude=${postId}&per_page=1`)
+                    .then(res => res.json())
+                    .then(posts => {
+                    if (posts.length > 0) {
+                        const baca = posts[0];
+                        const bacaJugaHTML = `
+                        <div class="my-6">
+                            <div class="border-l-4 border-red-600 bg-gray-100 p-4 text-sm md:text-base">
+                            <div class="text-gray-500 font-semibold mb-1">Baca Juga:</div>
+                            <a href="detail.html?id=${baca.id}" class="font-bold text-blue-800 hover:underline">
+                                ${baca.title.rendered}
+                            </a>
                             </div>
                         </div>
-                    `;
-                })
-                .catch(err => {
-                    console.error("Gagal mengambil detail berita:", err);
-                    document.getElementById("detailberita").innerHTML = "<p>Gagal memuat detail berita.</p>";
-                });
+                        `;
+
+                        // Sisipkan "Baca Juga" setelah paragraf kedua
+                        if (paragraphs.length >= 2) {
+                        paragraphs.splice(2, 0, bacaJugaHTML);
+                        }
+
+                        document.querySelector(".isi").innerHTML = paragraphs.join("");
+                    } else {
+                        // Jika tidak ada baca juga
+                        document.querySelector(".isi").innerHTML = paragraphs.join("");
+                    }
+                    })
+                    .catch(() => {
+                    document.querySelector(".isi").innerHTML = paragraphs.join("");
+                    });
+                } else {
+                // Jika tidak ada kategori
+                document.querySelector(".isi").innerHTML = paragraphs.join("");
+                }
+            })
+            .catch(error => {
+                console.error("Gagal memuat berita:", error);
+                document.querySelector(".isi").innerHTML = "<p>Gagal memuat isi berita.</p>";
             });
         </script>
         
@@ -467,7 +552,10 @@
                 <div class="container max-w-xl">
                     <div class="row child-cols-12 g-3 xl:g-4">
                         <!-- Detail Berita start -->
-                        <div class="lg:col-8 lg:order-1" id="detailberita">                            
+                        <div class="lg:col-8 lg:order-1" id="detailberita">
+                            <div class="isi panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
+                                
+                            </div>                            
                         </div>
                         <!-- Detail Berita end -->
                         <!-- Right Sidebar start -->
