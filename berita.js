@@ -192,7 +192,7 @@ function bannerKoran()
 
 function beritaPolitik()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=38&per_page=8&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=15&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapolitik');
@@ -235,7 +235,7 @@ function beritaPolitik()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[0];
+        const post1 = data[7];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -270,7 +270,7 @@ function beritaPolitik()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(1).forEach(post => {
+        data.slice(8).forEach(post => {
         postListHTML += `
             <div>
                 <article class="post type-post panel">
@@ -370,12 +370,12 @@ function beritaTopnews()
 //Section 2 start
 function beritaKriminal()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=36&per_page=6&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=21&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritakriminal');
 
-        data.forEach(post => {
+        data.slice(15).forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
@@ -421,7 +421,7 @@ function beritaKriminal()
 
 function beritaKesehatan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=32&per_page=5&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=26&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritakesehatan');
@@ -464,7 +464,7 @@ function beritaKesehatan()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[0];
+        const post1 = data[21];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -499,7 +499,7 @@ function beritaKesehatan()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(1).forEach(post => {
+        data.slice(22).forEach(post => {
         postListHTML += `
             <div>
                 <article class="mt-1 post type-post panel">
@@ -610,12 +610,12 @@ function beritaOpini()
 //Section 3 start
 function beritaPendidikan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=41&per_page=6&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=32&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapendidikan');
 
-        data.forEach(post => {
+        data.slice(26).forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
@@ -663,7 +663,7 @@ function beritaPendidikan()
 //Section 4 start
 function beritaOlahraga()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=31&per_page=7&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=39&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaolahraga');
@@ -706,7 +706,7 @@ function beritaOlahraga()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[0];
+        const post1 = data[32];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -741,7 +741,7 @@ function beritaOlahraga()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(1).forEach(post => {
+        data.slice(33).forEach(post => {
         postListHTML += `
             <div>
                 <article class="post type-post panel">
@@ -843,12 +843,12 @@ function beritaVisi()
 //Section 5 start
 function beritaPemerintahan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=43&per_page=6&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=45&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapemerintahan');
 
-        data.forEach(post => {
+        data.slice(39).forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
@@ -894,7 +894,7 @@ function beritaPemerintahan()
 
 function beritaDaerah()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=37&per_page=3&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=48&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritadaerah');
@@ -937,7 +937,7 @@ function beritaDaerah()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[0];
+        const post1 = data[45];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -972,7 +972,7 @@ function beritaDaerah()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(1).forEach(post => {
+        data.slice(46).forEach(post => {
         postListHTML += `
             <div>
                 <article class="post type-post panel">
