@@ -74,9 +74,6 @@
                 font-family: 'Montserrat', sans-serif;
             }
             .baca-juga {
-                background: #f9f9f9;
-                padding: 10px;
-                margin: 15px 0;
                 border-left: 4px solid #c00;
             }
         </style>
@@ -112,14 +109,18 @@
                                     return `<a href='detail.html?id=${p.id}' class="fw-bold fs-3 text-none">${p.title.rendered}</a>`;
                                 }).join('');
         
-                                const bacaJugaHTML = `<div class='baca-juga'>Baca Juga:<br>${judulBacaJuga}</div>`;
+                                const bacaJugaHTML = `<div class="mt-2 mb-2">
+                                    <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>${judulBacaJuga}
+                                    </div>
+                                </div>
+                                `;
         
                                 // Sisipkan ke paragraf kedua isi berita
                                 const tempDiv = document.createElement("div");
                                 tempDiv.innerHTML = isi;
                                 const paragraphs = tempDiv.querySelectorAll("p");
                                 if (paragraphs.length > 1) {
-                                    paragraphs[1].insertAdjacentHTML("afterend", bacaJugaHTML);
+                                    paragraphs[3].insertAdjacentHTML("afterend", bacaJugaHTML);
                                 } else {
                                     tempDiv.innerHTML += bacaJugaHTML;
                                 }
