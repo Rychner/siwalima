@@ -41,6 +41,39 @@ function swiperBerita()
             return;
         }
 
+        const formatTanggal = (str) => {
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
+        
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+
         data.forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
@@ -68,9 +101,14 @@ function swiperBerita()
                             <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                             <!-- Overlay + Judul -->
                             <div class="post-header panel vstack justify-end items-start">
-                                <h3 class="p-2 rounded-bottom-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 w-100 sm:h4">
-                                    <a class="text-white text-none" href="detail.html?id=${post.id}">${judul}</a>
+                                <h3 class="px-2 pt-1 h6 text-white m-0 text-truncate-2 bg-blue opacity-90 w-100 sm:h4">
+                                    <a class="text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
                                 </h3>
+                                <div class="d-none w-100 md:d-block">
+                                    <div class="px-2 w-100 text-white bg-blue opacity-90 post-date fs-7 text-white hstack gap-narrow">
+                                        <span>${formatTanggal(post.date)}</span>
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                         <a href="detail.html?id=${post.id}" class="position-cover"></a>
