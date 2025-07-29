@@ -45,11 +45,16 @@ function swiperBerita()
             const date = new Date(str);
             const now = new Date();
             const diffMs = now - date;
+            console.log("📌 Post date (raw):", str);
+            console.log("📌 Parsed post date:", date.toString());
+            console.log("📌 Now:", now.toString());
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
             const diffHours = Math.floor(diffMinutes / 60);
             const diffDays = Math.floor(diffHours / 24);
+            console.log("📌 diffMs:", diffMs);
+            console.log("📌 diffMinutes:", Math.floor(diffMs / 1000 / 60));
         
             if (diffMinutes < 1) {
                 return 'baru saja';
