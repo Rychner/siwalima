@@ -94,6 +94,7 @@
                     document.getElementById("detailberita").innerHTML = "<p>ID tidak ditemukan.</p>";
                     return;
                 }
+                
         
                 fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
                     .then(res => res.json())
@@ -107,6 +108,19 @@
                         const isi = post.content.rendered;
                         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
                         const kataPertama = judul.split(" ")[0];
+
+                        const konten = document.getElementById('konten-berita');
+        
+                        konten.addEventListener('copy', function (e) {
+                        e.preventDefault();
+                    
+                        const shareText = "Baca artikel Siwalima, " + `"${judul}"` + " selengkapnya " + `${window.location.href}` + "\n\nDownload Apps Siwalima Sekarang ...";
+                        if (e.clipboardData) {
+                            e.clipboardData.setData('text/plain', shareText);
+                        } else if (window.clipboardData) { // fallback for IE
+                            window.clipboardData.setData('Text', shareText);
+                        }
+                        });
         
                         // Ambil berita lain dengan kategori sama
                         fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?search=${kataPertama}&exclude=${id}&per_page=1&_embed`)
@@ -134,7 +148,7 @@
         
                                 const container = document.getElementById("detailberita");
                                 container.innerHTML = `
-                                <div class="post-header">
+                                <div class="post-header" id="konten-berita">
                                     <div class="panel vstack mx-auto gap-2 md:gap-3">
                                         <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 md:d-flex z-1">
                                             <div>
@@ -426,7 +440,24 @@
                         document.getElementById("detailberita").innerHTML = "<p>Gagal memuat detail berita.</p>";
                     });
             });
-        </script>    
+        </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const konten = document.getElementById('konten-berita');
+        
+            konten.addEventListener('copy', function (e) {
+            e.preventDefault();
+        
+            const shareText = `Baca selengkapnya di: ${window.location.href}`;
+            if (e.clipboardData) {
+                e.clipboardData.setData('text/plain', shareText);
+            } else if (window.clipboardData) { // fallback for IE
+                window.clipboardData.setData('Text', shareText);
+            }
+            });
+        });
+    </script>
     </head>
 
     <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
@@ -498,14 +529,12 @@
                 </div>
             </div>
 
-            <article class="post type-post single-post py-4 lg:py-6 xl:py-9">
+            <article class="post type-post single-post py-4 lg:py-6 xl:py-9" id="konten-berita">
                 <div class="container max-w-xl">
                     <div class="row child-cols-12 g-3 xl:g-4">
                         <!-- Detail Berita start -->
                         <div class="lg:col-8 lg:order-1" id="detailberita">
-                            <div class="isi panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
-                                
-                            </div>                            
+                            <!-- Inject single post disini -->                        
                         </div>
                         <!-- Detail Berita end -->
                         <!-- Right Sidebar start -->
