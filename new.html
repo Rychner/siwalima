@@ -30,3 +30,42 @@
     </article>
 </body>
 </html>
+
+const formatTanggal = (str) => {
+    const date = new Date(str);
+    const now = new Date();
+    const diffMs = now - date;
+
+    const diffSeconds = Math.floor(diffMs / 1000);
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffMinutes < 1) {
+        return 'baru saja';
+    } else if (diffMinutes < 60) {
+        return `${diffMinutes} menit lalu`;
+    } else if (diffHours < 24) {
+        return `${diffHours} jam lalu`;
+    } else {
+        const tanggal = date.toLocaleDateString('id-ID', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
+        const jam = date.toLocaleTimeString('id-ID', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        return `${tanggal} ${jam} WIB`; 
+        
+    }
+};
+
+<div class="d-none md:d-block">
+    <div class="post-date hstack gap-narrow">
+        <span>${formatTanggal(post.date)}</span>
+    </div>
+</div>

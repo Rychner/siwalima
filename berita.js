@@ -57,6 +57,8 @@ function swiperBerita()
                 return `${diffMinutes} menit lalu`;
             } else if (diffHours < 24) {
                 return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
             } else {
                 const tanggal = date.toLocaleDateString('id-ID', {
                     weekday: 'long',
@@ -147,6 +149,8 @@ function beritaTerkini2()
                 return `${diffMinutes} menit lalu`;
             } else if (diffHours < 24) {
                 return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
             } else {
                 const tanggal = date.toLocaleDateString('id-ID', {
                     weekday: 'long',
@@ -186,7 +190,7 @@ function beritaTerkini2()
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack gap-1">                    
-                    <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2 mb-1">
+                    <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
                         <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                     <div class="d-none md:d-block">
@@ -280,6 +284,8 @@ function beritaPolitik()
                 return `${diffMinutes} menit lalu`;
             } else if (diffHours < 24) {
                 return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
             } else {
                 const tanggal = date.toLocaleDateString('id-ID', {
                     weekday: 'long',
@@ -396,9 +402,40 @@ function beritaTopnews()
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
         // Ambil tanggal (format: Mar 8, 2025)
-        const date = new Date(post.date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const tanggal = date.toLocaleDateString('en-US', options);
+        const formatTanggal = (str) => {
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
+        
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
 
         // Ambil judul
         const judul = post.title.rendered;
@@ -417,9 +454,14 @@ function beritaTopnews()
                 <a href="detail.html?id=${post.id}" class="position-cover"></a>
             </div>
             <div class="post-header panel vstack gap-1">                                        
-                <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
                     <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
                 </h3>
+                <div class="d-none md:d-block">
+                    <div class="post-date text-white hstack gap-narrow">
+                        <span>${formatTanggal(post.date)}</span>
+                    </div>
+                </div>
             </div>
         </article>
         `;
@@ -446,10 +488,42 @@ function beritaKriminal()
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
-        // Ambil tanggal (format: Mar 8, 2025)
-        const date = new Date(post.date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const tanggal = date.toLocaleDateString('en-US', options);
+        
+        // Ambil tanggal (format: Mar 8, 2025)        
+        const formatTanggal = (str) => {
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
+        
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
 
         // Ambil judul
         const judul = post.title.rendered;
@@ -472,6 +546,11 @@ function beritaKriminal()
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
+                    <div class="d-none md:d-block">
+                        <div class="post-date hstack gap-narrow">
+                            <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>
                 </div>
             </article>
         </div>
@@ -509,6 +588,8 @@ function beritaKesehatan()
                 return `${diffMinutes} menit lalu`;
             } else if (diffHours < 24) {
                 return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
             } else {
                 const tanggal = date.toLocaleDateString('id-ID', {
                     weekday: 'long',
@@ -687,9 +768,40 @@ function beritaPendidikan()
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
         // Ambil tanggal (format: Mar 8, 2025)
-        const date = new Date(post.date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const tanggal = date.toLocaleDateString('en-US', options);
+        const formatTanggal = (str) => {
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
+        
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
 
         // Ambil judul
         const judul = post.title.rendered;
@@ -712,6 +824,11 @@ function beritaPendidikan()
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
+                    <div class="d-none md:d-block">
+                        <div class="post-date hstack gap-narrow">
+                            <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>
                 </div>
             </article>
         </div>
@@ -751,6 +868,8 @@ function beritaOlahraga()
                 return `${diffMinutes} menit lalu`;
             } else if (diffHours < 24) {
                 return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
             } else {
                 const tanggal = date.toLocaleDateString('id-ID', {
                     weekday: 'long',
@@ -867,9 +986,41 @@ function beritaVisi()
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
         // Ambil tanggal (format: Mar 8, 2025)
-        const date = new Date(post.date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const tanggal = date.toLocaleDateString('en-US', options);
+        const formatTanggal = (str) => {
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
+        
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } 
+            else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
 
         // Ambil judul
         const judul = post.title.rendered;
@@ -892,6 +1043,11 @@ function beritaVisi()
                     <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
                         <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
+                    <div class="d-none md:d-block">
+                        <div class="post-date text-white hstack gap-narrow">
+                            <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>
                 </div>
             </article>
         </div>
@@ -920,9 +1076,40 @@ function beritaPemerintahan()
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
         // Ambil tanggal (format: Mar 8, 2025)
-        const date = new Date(post.date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const tanggal = date.toLocaleDateString('en-US', options);
+        const formatTanggal = (str) => {
+            const date = new Date(str);
+            const now = new Date();
+            const diffMs = now - date;
+        
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
 
         // Ambil judul
         const judul = post.title.rendered;
@@ -944,7 +1131,12 @@ function beritaPemerintahan()
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
                         <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
-                    </h3>                    
+                    </h3>
+                    <div class="d-none md:d-block">
+                        <div class="post-date hstack gap-narrow">
+                            <span>${formatTanggal(post.date)}</span>
+                        </div>
+                    </div>                    
                 </div>
             </article>
         </div>
@@ -982,6 +1174,8 @@ function beritaDaerah()
                 return `${diffMinutes} menit lalu`;
             } else if (diffHours < 24) {
                 return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
             } else {
                 const tanggal = date.toLocaleDateString('id-ID', {
                     weekday: 'long',
