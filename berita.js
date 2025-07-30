@@ -981,7 +981,7 @@ function beritaOlahraga()
 
 function beritaVisi()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=5&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=4&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritavisi');
