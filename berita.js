@@ -42,18 +42,18 @@ function swiperBerita()
         }
 
         const formatTanggal = (str) => {
-            const date = new Date(str + "Z");            
+            const date = new Date(str);            
             const now = new Date();
-            const UTC = new Date(now + "Z");            
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
             const diffMs = UTC - date;            
-            console.log("📌 Parsed post date:", date.toString());
-            console.log("📌 Now:", UTC.toString())
+            //console.log("📌 Parsed post date:", date.toString());
+            //console.log("📌 Now:", UTC.toString())
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
             const diffHours = Math.floor(diffMinutes / 60);
             const diffDays = Math.floor(diffHours / 24);
-            //console.log("📌 diffMs:", diffMs);
+            console.log("📌 diffMs:", diffMs);
             //console.log("📌 diffMinutes:", Math.floor(diffMs / 1000 / 60));
         
             if (diffMinutes < 1) {
@@ -139,9 +139,10 @@ function beritaTerkini2()
 
         // Ambil tanggal (format: Mar 8, 2025)        
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -274,9 +275,10 @@ function beritaPolitik()
         const container = document.getElementById('beritapolitik');
 
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -496,9 +498,10 @@ function beritaKriminal()
         
         // Ambil tanggal (format: Mar 8, 2025)        
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -578,9 +581,10 @@ function beritaKesehatan()
         const container = document.getElementById('beritakesehatan');
     
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -774,9 +778,10 @@ function beritaPendidikan()
 
         // Ambil tanggal (format: Mar 8, 2025)
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -858,9 +863,10 @@ function beritaOlahraga()
         const container = document.getElementById('beritaolahraga');
     
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -1080,9 +1086,10 @@ function beritaPemerintahan()
 
         // Ambil tanggal (format: Mar 8, 2025)
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
@@ -1162,9 +1169,10 @@ function beritaDaerah()
         const container = document.getElementById('beritadaerah');
     
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str);            
             const now = new Date();
-            const diffMs = now - date;
+            const UTC = new Date(now.getTime() + 2 * 60 * 60 * 1000);          
+            const diffMs = UTC - date;
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
