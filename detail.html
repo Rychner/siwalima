@@ -144,15 +144,48 @@
                                     </div>
                                 </div>
                                 `;
+
+                                const iklanbody1 = `<div class="mt-2 mb-2 d-flex justify-center">
+                                    <div class='p-2 max-w-500px'>
+                                        <img src="iklan_body_isi_berita_1.jpg">
+                                    </div>
+                                </div>
+                                `;
+
+                                const iklanbody2 = `<div class="mt-2 mb-2 d-flex justify-center">
+                                    <div class='p-2 max-w-500px'>
+                                        <img src="iklan_body_isi_berita_2.jpg">
+                                    </div>
+                                </div>
+                                `;
         
                                 // Sisipkan ke paragraf kedua isi berita
                                 const tempDiv = document.createElement("div");
                                 tempDiv.innerHTML = isi;
                                 const paragraphs = tempDiv.querySelectorAll("p");
-                                if (paragraphs.length > 1) {
-                                    paragraphs[3].insertAdjacentHTML("afterend", bacaJugaHTML);
-                                } else {
+                                if (paragraphs.length > 3) {
+                                    paragraphs[2].insertAdjacentHTML("afterend", bacaJugaHTML);
+                                    //paragraphs[6].insertAdjacentHTML("afterend", iklanbody1);
+                                    //paragraphs[9].insertAdjacentHTML("afterend", iklanbody2);
+                                }
+                                else {
                                     tempDiv.innerHTML += bacaJugaHTML;
+                                }
+
+                                if (paragraphs.length > 6) {                                    
+                                    paragraphs[5].insertAdjacentHTML("afterend", iklanbody1);
+                                    
+                                }
+                                else {
+                                    tempDiv.innerHTML += iklanbody1;
+                                }
+
+                                if (paragraphs.length > 9) {                                    
+                                    paragraphs[8].insertAdjacentHTML("afterend", iklanbody2);
+                                    
+                                }
+                                else {
+                                    tempDiv.innerHTML += iklanbody2;
                                 }
         
                                 const container = document.getElementById("detailberita");
