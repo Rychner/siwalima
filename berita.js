@@ -42,19 +42,19 @@ function swiperBerita()
         }
 
         const formatTanggal = (str) => {
-            const date = new Date(str);
+            const date = new Date(str + "Z");            
             const now = new Date();
-            const diffMs = now - date;
-            console.log("📌 Post date (raw):", str);
+            const UTC = new Date(now + "Z");            
+            const diffMs = UTC - date;            
             console.log("📌 Parsed post date:", date.toString());
-            console.log("📌 Now:", now.toString());
+            console.log("📌 Now:", UTC.toString())
         
             const diffSeconds = Math.floor(diffMs / 1000);
             const diffMinutes = Math.floor(diffSeconds / 60);
             const diffHours = Math.floor(diffMinutes / 60);
             const diffDays = Math.floor(diffHours / 24);
-            console.log("📌 diffMs:", diffMs);
-            console.log("📌 diffMinutes:", Math.floor(diffMs / 1000 / 60));
+            //console.log("📌 diffMs:", diffMs);
+            //console.log("📌 diffMinutes:", Math.floor(diffMs / 1000 / 60));
         
             if (diffMinutes < 1) {
                 return 'baru saja';
@@ -194,11 +194,11 @@ function beritaTerkini2()
                     </div>
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
-                <div class="post-header panel vstack gap-1">                    
+                <div class="post-header panel vstack justify-between gap-1">                    
                     <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
                         <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
-                    <div class="d-none md:d-block">
+                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
                         <div class="post-date hstack gap-narrow">
                             <span>${formatTanggal(post.date)}</span>
                         </div>
@@ -852,7 +852,7 @@ function beritaPendidikan()
 //Section 4 start
 function beritaOlahraga()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=39&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=40&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaolahraga');
@@ -981,7 +981,7 @@ function beritaOlahraga()
 
 function beritaVisi()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=4&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritavisi');
@@ -1036,26 +1036,24 @@ function beritaVisi()
         const item = document.createElement('div');
 
         item.innerHTML = `         
-        <div>
-            <article class="post type-post panel vstack gap-1 lg:gap-2">
-                <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
-                    </div>
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
+        <article class="post type-post panel vstack gap-1 lg:gap-2">
+            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                 </div>
-                <div class="post-header panel vstack gap-1 mb-1">                                       
-                    <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
-                    </h3>
-                    <div class="d-none md:d-block">
-                        <div class="post-date text-white hstack gap-narrow">
-                            <span>${formatTanggal(post.date)}</span>
-                        </div>
+                <a href="detail.html?id=${post.id}" class="position-cover"></a>
+            </div>
+            <div class="post-header panel vstack gap-1">                                        
+                <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
+                    <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                </h3>
+                <div class="d-none md:d-block">
+                    <div class="post-date text-white hstack gap-narrow">
+                        <span>${formatTanggal(post.date)}</span>
                     </div>
                 </div>
-            </article>
-        </div>
+            </div>
+        </article>
         `;
 
         container.appendChild(item);
@@ -1071,12 +1069,12 @@ function beritaVisi()
 //Section 5 start
 function beritaPemerintahan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=45&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=46&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapemerintahan');
 
-        data.slice(39).forEach(post => {
+        data.slice(40).forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
@@ -1158,7 +1156,7 @@ function beritaPemerintahan()
 
 function beritaDaerah()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=48&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=49&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritadaerah');
@@ -1203,7 +1201,7 @@ function beritaDaerah()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[45];
+        const post1 = data[46];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -1238,7 +1236,7 @@ function beritaDaerah()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(46).forEach(post => {
+        data.slice(47).forEach(post => {
         postListHTML += `
             <div>
                 <article class="post type-post panel">
