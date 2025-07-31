@@ -106,7 +106,7 @@ function swiperBerita()
                                 <h3 class="px-2 pt-1 h6 text-white m-0 text-truncate-2 bg-blue-800 opacity-90 w-100 sm:h3">
                                     <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
                                 </h3>
-                                <div class="d-none w-100 md:d-block">
+                                <div class="w-100">
                                     <div class="px-2 w-100 text-white bg-blue-800 opacity-90 post-date fs-7 text-white hstack gap-narrow">
                                         <span class="mb-1">${formatTanggal(post.date)}</span>
                                     </div>
