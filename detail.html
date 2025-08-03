@@ -114,7 +114,8 @@
                         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                         let tanggal = date.toLocaleDateString('id-ID', options);
                         const judul = post.title.rendered;
-                        const isi = post.content.rendered;
+                        let isi = post.content.rendered;
+                        isi = isi.replaceAll("Siwalimanews", "Siwalima.id");
                         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
                         const kataPertama = judul.split(" ")[0];
 
