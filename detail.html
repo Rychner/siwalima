@@ -91,6 +91,9 @@
             .sticky-active .home-icon {
                 display: inline;
             }
+            .align-item-top {
+                align-items: flex-start !important;
+            }
         </style>
         
         <!-- Detail -->
@@ -131,7 +134,7 @@
                             window.clipboardData.setData('Text', shareText);
                         }
                         });
-        
+
                         // Ambil berita lain dengan kategori sama
                         fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?search=${kataPertama}&exclude=${id}&per_page=1&_embed`)
                             .then(res => res.json())
@@ -232,8 +235,15 @@
                                         <div class="content-wrap row child-col-12 lg:child-cols g-4 lg:g-6">
                                             <div class="max-w-lg">
                                                 <!-- Isi start -->
-                                                <div class="isi panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
-                                                    ${tempDiv.innerHTML}
+                                                <div class="isi row panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
+                                                    <div class="lg:col-8 lg:order-1 px-2">
+                                                        ${tempDiv.innerHTML}
+                                                    </div>
+                                                    <div class="lg:col-4 lg:order-2 align-item-top">
+                                                        <div data-uc-sticky="sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">                                                        
+                                                            <img src="iklan_panjangkebawah_isiberita.jpg" data-src="iklan_panjangkebawah_isiberita.jpg" alt="iklan_panjangkebawah_isiberita" data-uc-img="loading: lazy">                                                                                                             
+                                                        </div>
+                                                    </div>                                                    
                                                 </div>
                                                 <!-- Isi end -->
                                                 <!-- Tags & Share start -->
@@ -610,7 +620,7 @@
             <article class="post type-post single-post py-4 lg:py-6 xl:py-9" id="konten-berita">
                 <div class="container max-w-xl">
                     <div class="row child-cols-12 g-3 xl:g-4">
-                        <!-- Detail Berita start -->
+                        <!-- Detail Berita start -->                        
                         <div class="lg:col-8 lg:order-1" id="detailberita">
                             <!-- Inject single post disini -->                        
                         </div>
