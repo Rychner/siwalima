@@ -220,6 +220,9 @@
                     /*  document.getElementById("pageInfo").innerText = `Halaman ${page} dari ${totalHalaman}`;
                     document.getElementById("prevBtn").disabled = page === 1;
                     document.getElementById("nextBtn").disabled = page === totalHalaman; */
+                    
+                    // Scroll ke atas konten setelah render
+                    document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
                     renderPagination();                
                 }
 
@@ -299,7 +302,7 @@
             </div>
             <!-- Iklan 1 start -->
             <div class="container max-w-xl mt-3">
-                <div class="section-inner panel">                                                    
+                <div class="section-inner panel" id="iklan-panjang">                                                    
                     <img class="text-dark dark:text-white" src="iklanpanjang.png" data-src="iklanpanjang.png" alt="iklanpanjang" data-uc-img="loading: lazy">
                     <a href=#" class="position-cover"></a>
                 </div>
