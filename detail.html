@@ -206,13 +206,17 @@
                         kontenHTML += paragrafHalaman[i].outerHTML;
         
                         // Hanya pada halaman pertama dan setelah paragraf ke-3
-                        if (page === 1 && i === 2) {
+                        if (i === 0) {
                         kontenHTML += iklanbody1;
+                        }
+
+                        // Hanya pada halaman pertama dan setelah paragraf ke-3
+                        if (i === 2) {                        
                         kontenHTML += bacaJugaHTML;
                         }
         
                         // Hanya pada halaman pertama dan setelah paragraf ke-4
-                        if (page === 1 && i === 3) {
+                        if (i === 4) {
                         kontenHTML += iklanbody2;
                         }
                     }
@@ -255,6 +259,7 @@
                     nextBtn.innerHTML = "&raquo;";
                     nextBtn.disabled = halamanSekarang === totalHalaman;
                     nextBtn.addEventListener("click", () => {
+                        document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
                         if (halamanSekarang < totalHalaman) {
                         halamanSekarang++;
                         renderHalaman(halamanSekarang);
