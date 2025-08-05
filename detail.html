@@ -221,8 +221,6 @@
                     document.getElementById("prevBtn").disabled = page === 1;
                     document.getElementById("nextBtn").disabled = page === totalHalaman; */
                     
-                    // Scroll ke atas konten setelah render
-                    document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
                     renderPagination();                
                 }
 
@@ -240,8 +238,10 @@
                         btn.className = `page-link ${halamanSekarang === i ? "active" : ""}`;
                         btn.innerText = i;
                         btn.addEventListener("click", () => {
-                        halamanSekarang = i;
-                        renderHalaman(halamanSekarang);
+                            // Scroll ke atas konten setelah btn di klik
+                            document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                            halamanSekarang = i;
+                            renderHalaman(halamanSekarang);
                         });
                         li.appendChild(btn);
                         ul.appendChild(li);
@@ -280,7 +280,7 @@
                         </div>
                         <div class="sep md:d-block">❘</div>
                         <div class="md:d-block">
-                            <div class="post-date hstack gap-narrow">
+                            <div class="post-date hstack gap-narrow" id="post-date">
                                 <span>${tanggal}</span>
                             </div>
                         </div>                                                                
