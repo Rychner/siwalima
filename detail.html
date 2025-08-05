@@ -148,7 +148,7 @@
                 const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
                 const kategoriId = post._embedded["wp:term"]?.[0]?.[0]?.id;
                 const date = new Date(post.date);
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
                 let tanggal = date.toLocaleDateString('id-ID', options);
                 const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
                 const judul = post.title.rendered;
@@ -286,7 +286,7 @@
                         <div class="sep md:d-block">❘</div>
                         <div class="md:d-block">
                             <div class="post-date hstack gap-narrow">
-                                <span>${tanggal}</span>
+                                <span>${tanggal} WIT</span>
                             </div>
                         </div>                                                                
                     </div>
