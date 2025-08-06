@@ -377,7 +377,7 @@ function beritaPolitik()
             <article class="post type-post panel">
                 <div class="row child-cols items-center">                    
                     <div>
-                        <div class="post-header panel vstack gap-1 justify-center">                    
+                        <div class="post-header panel vstack gap-1">                    
                             <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
                                 <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
@@ -388,7 +388,7 @@ function beritaPolitik()
                             </div>                  
                         </div>                        
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto" style="padding-left:0;padding-right:24px;">
                         <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
                             <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                                 <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
