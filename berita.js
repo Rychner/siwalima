@@ -111,29 +111,25 @@ function swiperBerita()
         item.className = "swiper-slide";
 
         item.innerHTML = `
-        <div>
-            <div>
-                <article class="rounded-top-1 rounded-bottom-1 post type-post panel vstack gap-1 bg-dark">
-                    <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1 hover:rounded-bottom-1">
-                        <div class="featured-image rounded-top-1 rounded-bottom-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                            <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
-                            <!-- Overlay + Judul -->
-                            <div class="post-header panel vstack justify-end items-start">
-                                <h3 class="px-2 pt-1 h6 text-white m-0 text-truncate-2 bg-blue-800 opacity-90 w-100 sm:h3">
-                                    <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
-                                </h3>
-                                <div class="w-100">
-                                    <div class="px-2 w-100 text-white bg-blue-800 opacity-90 post-date fs-7 text-white hstack gap-narrow">
-                                        <span class="mb-1">${formatTanggal(post.date)}</span>
-                                    </div>
-                                </div>                                
+        <article class="rounded-top-1 rounded-bottom-1 post type-post panel vstack gap-1 bg-dark">
+            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1 hover:rounded-bottom-1">
+                <div class="featured-image rounded-top-1 rounded-bottom-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
+                    <!-- Overlay + Judul -->
+                    <div class="post-header panel vstack justify-end items-start">
+                        <h3 class="px-2 pt-1 h6 text-white m-0 text-truncate-2 bg-blue-800 opacity-90 w-100 sm:h3">
+                            <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
+                        </h3>
+                        <div class="w-100">
+                            <div class="px-2 w-100 text-white bg-blue-800 opacity-90 post-date fs-7 text-white hstack gap-narrow">
+                                <span class="mb-1">${formatTanggal(post.date)}</span>
                             </div>
-                        </div>
-                        <a href="detail.html?id=${post.id}" class="position-cover"></a>
+                        </div>                                
                     </div>
-                </article>
+                </div>
+                <a href="detail.html?id=${post.id}" class="position-cover"></a>
             </div>
-        </div>        
+        </article>                    
         `;
 
         container.appendChild(item);
@@ -956,13 +952,34 @@ function beritaPendidikan()
         // Ambil featured image (jika ada)
         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
 
+        // Array gambar (contoh)
+        const images = [
+            "featuregraphic.jpg",
+            "foto2.jpg",
+            "foto3.jpg",
+            "foto4.jpg",
+            "foto5.jpg",
+            "foto6.jpg",
+            "foto7.jpg",
+            "foto8.jpg",
+            "foto9.jpg",
+            "foto10.jpg",
+        ];
+
+        // Menampilkan jumlah foto
+        document.querySelector("#photoCount span").textContent =
+            images.length + " Foto";
+
+        // Menampilkan gambar pertama dari array
+        document.querySelector(".main-image").src = images[0];
+
         const item = document.createElement('div');
 
         item.innerHTML = `         
         <div>
             <article class="post type-post panel vstack gap-1 lg:gap-2">
                 <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9" id="photoCount">
                         <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
                     </div>
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
@@ -1683,7 +1700,7 @@ function initApp() {
     beritaKesehatan();
     beritaOlahraga();
     beritaOpini();
-    beritaPendidikan();
+    //beritaPendidikan();
     beritaDaerah();
     beritaPemerintahan();
     beritaVisi();    

@@ -97,6 +97,24 @@
             .sticky-active .home-icon {
                 display: inline;
             }
+            .photo-count {
+                position: relative;
+                top: 0px;     
+                right: 0px;   
+                background-color: rgba(0, 0, 0, 0.7); /* background gelap transparan */
+                color: white;
+                padding: 4px 8px;
+                border-radius: 5px;
+                font-size: 14px;
+                display: inline-flex; /* mengikuti ukuran konten */
+                align-items: center;
+                gap: 4px; /* jarak icon & teks */
+                white-space: nowrap; /* mencegah teks turun ke bawah */
+            }
+            .photo-count img {
+                width: 16px;
+                height: 16px;                
+            }                                
         </style>
 
         <script>
@@ -244,7 +262,7 @@
                                         <!-- Banner Koran end -->                                       
                                         <div class="block-layout panel mt-4">
                                             <div class="block-header panel vstack items-center justify-center text-center gap-1 mb-1">                                                  
-                                                <img class="text-dark dark:text-white" src="terpopuler.jpg" data-src="terpopuler.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
+                                                <img class="text-dark dark:text-white" src="terpopuler_1.jpg" data-src="terpopuler_1.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
                                                 <a href=#" class="position-cover"></a>
                                             </div>
                                             <div class="block-content panel row sep-x gx-4 gy-3 lg:gy-2" id="beritaterkini">
@@ -334,10 +352,79 @@
                         <div class="section-inner">
                             <div class="row child-cols-12 lg:child-cols col-match g-3 xl:g-4" data-uc-grid>                                
                                 <div>
-                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
+                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
+                                        <div class="block-header panel vstack items-center justify-between text-start gap-1 mb-1">                                                  
+                                            <img class="text-dark dark:text-white" src="rubrikfoto.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
+                                            <a href=#" class="position-cover"></a>
+                                        </div>                                        
                                         <div class="block-content">
-                                            <div class="row child-cols-4 g-2 gy-3 md:gx-3 md:gy-4" id="beritapendidikan">
-                                                <!-- JS akan inject berita di sini -->
+                                            <div class="row child-cols-4 g-2 gy-3 md:gx-3 md:gy-4">
+                                                <article class="post type-post panel vstack gap-1 lg:gap-2 image-container">
+                                                    <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                                                        <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                                                            <img class="main-image rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="" alt="Foto 1" data-uc-img="loading: lazy">
+                                                            <div class="photo-count bg-gray-800 w-auto bg-opacity-50">
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Icon Kamera">
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" class="position-cover"></a>
+                                                    </div>
+                                                    <div class="post-header panel vstack gap-1">                    
+                                                        <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                                                            <a class="text-none hover:text-red duration-150" href="#">Judul Berita</a>
+                                                        </h3>
+                                                        <div class="d-none md:d-block">
+                                                            <div class="post-date hstack gap-narrow">
+                                                                <span>Waktu Posting</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                                <article class="post type-post panel vstack gap-1 lg:gap-2 image-container">
+                                                    <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                                                        <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                                                            <img class="main-image rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="" alt="Foto 1" data-uc-img="loading: lazy">
+                                                            <div class="photo-count bg-gray-800 w-auto bg-opacity-50">
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Icon Kamera">
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" class="position-cover"></a>
+                                                    </div>
+                                                    <div class="post-header panel vstack gap-1">                    
+                                                        <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                                                            <a class="text-none hover:text-red duration-150" href="#">Judul Berita</a>
+                                                        </h3>
+                                                        <div class="d-none md:d-block">
+                                                            <div class="post-date hstack gap-narrow">
+                                                                <span>Waktu Posting</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                                <article class="post type-post panel vstack gap-1 lg:gap-2 image-container">
+                                                    <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                                                        <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                                                            <img class="main-image rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="" alt="Foto 1" data-uc-img="loading: lazy">
+                                                            <div class="photo-count bg-gray-800 w-auto bg-opacity-50">
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Icon Kamera">
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" class="position-cover"></a>
+                                                    </div>
+                                                    <div class="post-header panel vstack gap-1">                    
+                                                        <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                                                            <a class="text-none hover:text-red duration-150" href="#">Judul Berita</a>
+                                                        </h3>
+                                                        <div class="d-none md:d-block">
+                                                            <div class="post-date hstack gap-narrow">
+                                                                <span>Waktu Posting</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
                                             </div>
                                         </div>
                                     </div>
@@ -576,6 +663,7 @@
 
         <!-- Memanggil API Siwalima -->
         <script src="berita.js"></script>
+        <script src="rubrikfoto.js"></script>
 
     </body>
 

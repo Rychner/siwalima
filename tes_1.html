@@ -1,67 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+    .photo-count {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    .photo-count img {
+        width: 16px;
+        height: 16px;
+    }
+    img.main-image {
+        display: block;
+        width: 250px;
+        border-radius: 5px;
+    }
+    </style>
 </head>
 <body>
-    <div id="container"></div>
-<button id="readMoreBtn" style="display: none;">Read More</button>
+    <div class="image-container">
+    <img
+        src="featuregraphic.jpg"
+        alt="Foto"
+        class="main-image"
+    />
+    <div class="photo-count" id="photoCount">
+        <img
+        src="https://cdn-icons-png.flaticon.com/512/685/685655.png"
+        alt="Icon Kamera"
+        />
+        <span></span>
+    </div>
+    </div>
 
-<script>
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = `
-        <p>Paragraf 1</p>
-        <p>Paragraf 2</p>
-        <p>Paragraf 3</p>
-        <div class="iklan">[Iklan 1]</div>
-        <p>Paragraf 4</p>
-        <p>Paragraf 5</p>
-        <p>Paragraf 6</p>
-        <div class="iklan">[Iklan 2]</div>
-        <p>Paragraf 7</p>
-        <p>Paragraf 8</p>
-        <p>Paragraf 9</p>
-        <div class="iklan">[Iklan 3]</div>
-        <p>Paragraf 10</p>
-    `;
+    <script>
+    // Array gambar (contoh)
+    const images = [
+        "featuregraphic.jpg",
+        "foto2.jpg",
+        "foto3.jpg",
+        "foto4.jpg",
+        "foto5.jpg",
+        "foto6.jpg",
+        "foto7.jpg",
+        "foto8.jpg",
+        "foto9.jpg",
+        "foto10.jpg",
+    ];
 
-    const container = document.getElementById("container");
-    const readMoreBtn = document.getElementById("readMoreBtn");
+      // Menampilkan jumlah foto
+    document.querySelector("#photoCount span").textContent =
+        images.length + " Foto";
 
-    const allChildren = Array.from(tempDiv.children);
-    let paragrafCount = 0;
-    let renderIndex = 0;
-
-    // Tampilkan hanya 6 paragraf pertama + elemen-elemen terkait (iklan)
-    for (let i = 0; i < allChildren.length; i++) {
-        const el = allChildren[i];
-        if (paragrafCount < 6) {
-            container.appendChild(el.cloneNode(true));
-            if (el.tagName.toLowerCase() === 'p') {
-                paragrafCount++;
-            }
-            renderIndex = i;
-        } else {
-            break;
-        }
-    }
-
-    // Tampilkan tombol jika ada paragraf lebih dari 6
-    const totalParagraf = allChildren.filter(el => el.tagName.toLowerCase() === 'p').length;
-    if (totalParagraf > 6) {
-        readMoreBtn.style.display = "block";
-    }
-
-    readMoreBtn.addEventListener("click", () => {
-        for (let i = renderIndex + 1; i < allChildren.length; i++) {
-            container.appendChild(allChildren[i].cloneNode(true));
-        }
-        readMoreBtn.style.display = "none"; // sembunyikan tombol setelah dibuka
-    });
-</script>
-
+      // Menampilkan gambar pertama dari array
+    document.querySelector(".main-image").src = images[0];
+    </script>
 </body>
 </html>
