@@ -1011,7 +1011,7 @@ function beritaPendidikan()
 //Section 4 start
 function beritaOlahraga()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=40&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=34&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaolahraga');
@@ -1077,7 +1077,7 @@ function beritaOlahraga()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[32];
+        const post1 = data[26];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -1112,7 +1112,7 @@ function beritaOlahraga()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(33).forEach(post => {
+        data.slice(27).forEach(post => {
         postListHTML += `
             <div>
                 <article class="post type-post panel">
@@ -1249,12 +1249,12 @@ function beritaVisi()
 //Section 5 start
 function beritaPemerintahan()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=46&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=41&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritapemerintahan');
 
-        data.slice(40).forEach(post => {
+        data.slice(35).forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
@@ -1357,7 +1357,7 @@ function beritaPemerintahan()
 
 function beritaDaerah()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=49&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=44&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritadaerah');
@@ -1423,7 +1423,7 @@ function beritaDaerah()
         post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
     
         // ========== POST PERTAMA ==========
-        const post1 = data[46];
+        const post1 = data[41];
         const post1HTML = `                
         <div>
             <article class="post type-post panel">
@@ -1458,7 +1458,7 @@ function beritaDaerah()
     
         // ========== POST 2–4 ==========
         let postListHTML = '';
-        data.slice(47).forEach(post => {
+        data.slice(42).forEach(post => {
         postListHTML += `
             <div>
                 <article class="post type-post panel">
