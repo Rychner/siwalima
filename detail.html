@@ -63,6 +63,8 @@
         <!-- include scripts -->
         <script src="https://html.themewant.com/news5/assets/js/uni-core/js/uni-core-bundle.min.js"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>        
+
         <style>
             .judul{
                 font-family: 'Inter' !important;
@@ -227,6 +229,9 @@
                     /*  document.getElementById("pageInfo").innerText = `Halaman ${page} dari ${totalHalaman}`;
                     document.getElementById("prevBtn").disabled = page === 1;
                     document.getElementById("nextBtn").disabled = page === totalHalaman; */
+                    // Jalankan lozad setelah DOM diisi
+                    const observer = lozad(); 
+                    observer.observe();
                     
                     renderPagination();                
                 }
