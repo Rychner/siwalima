@@ -1,7 +1,7 @@
 //Section 1 start
 function beritaTerkini()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=8")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7")
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('beritaterkini');
