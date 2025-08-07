@@ -102,7 +102,7 @@ function swiperBerita()
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
         // Ambil judul
-        const judul = post.title.rendered;        
+        const judul = post.title.rendered;
         
         // Ambil featured image (jika ada)
         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
@@ -1690,28 +1690,125 @@ function beritaCoba()
 
 function videoYoutube()
 {
-    const API_KEY = "AIzaSyDILgb6FZGLy-wrY3TG-AOPxZZ2PvK3UHE";
+    const API_KEY = "AIzaSyDYbJ8vmu0eG7C-MC1PVwAPxPA3I9DTcG0";
     const CHANNEL_ID = "UC6JOSeUGezJtcMT-x5FtkOA";
+    
 
-    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`)
     .then(response => response.json())
     .then(data => {
-        const container = document.getElementById("video-container");
+        const container = document.getElementById("video-grid");
+        const modal = document.getElementById("video-modal");
+        const iframe = document.getElementById("modal-iframe");
+        const closeBtn = document.getElementById("close-modal");       
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
 
         data.items.forEach(item => {
         if (item.id.kind === "youtube#video") {
             const videoId = item.id.videoId;
-            const iframe = document.createElement("iframe");
-            iframe.width = 250;
-            iframe.height = 250;
-            iframe.src = `https://www.youtube.com/embed/${videoId}`;
-            iframe.frameBorder = 0;
-            iframe.allowFullscreen = true;
+            const title = item.snippet.title;
+            const publishedAt = new Date(item.snippet.publishedAt);
 
-            container.appendChild(iframe);
+            // Buat elemen article
+            const article = document.createElement("article");
+            article.className = "post type-post panel vstack gap-1 lg:gap-2 image-container";
+
+            // Isi HTML-nya
+            article.innerHTML = `
+            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" alt="${title}" class="w-100 h-100 object-cover">
+                    <div class="photo-count bg-gray-800 w-auto bg-opacity-50">
+                        <i class="fas fa-play"></i>
+                </div>
+                </div>
+                <a href="#video-modal" class="position-cover"></a>
+            </div>
+            <div class="post-header panel vstack gap-1">
+                <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                <a class="text-none hover:text-red duration-150" href="#video-modal">${title}</a>
+                </h3>
+                <div class="d-none md:d-block">
+                <div class="post-date hstack gap-narrow">
+                    <span>${formatTanggal(publishedAt)}</span>
+                </div>
+                </div>
+            </div>
+            `;
+
+            // Saat diklik tampilkan modal
+            article.addEventListener("click", () => {
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+            });
+
+            // Tambahkan ke kontainer
+            container.appendChild(article);
         }
         });
-    });
+         // Tutup modal dan hentikan video
+        closeBtn.addEventListener("click", () => {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            iframe.src = "";
+        });
+    });   
 }
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap

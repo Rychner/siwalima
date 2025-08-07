@@ -114,7 +114,28 @@
             .photo-count img {
                 width: 16px;
                 height: 16px;                
-            }                                
+            }
+            .hidden {
+                display: none !important;
+            }
+            .flex {
+                display: flex !important;
+                inset: 0 !important;
+            }
+            #video-modal {
+                position: fixed;
+                top: 0;
+                left: 0;                
+                background-color: rgba(0, 0, 0, 0.7); /* abu-abu transparan */
+                display: none; /* disembunyikan dulu */
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+
+            #video-modal.show {
+                display: flex; /* ketika muncul, pakai flex biar konten ditengah */
+            }                                           
         </style>
 
         <script>
@@ -141,6 +162,17 @@
     </head>
 
     <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
+
+        <!-- Video Modal start -->
+        <div id="video-modal" class="ratio-4x3">
+            <div class="position-relative w-full max-w-3xl p-4 shadow-lg">
+            <button id="close-modal" class="rounded-circle bg-red absolute top-2 right-2 text-xl font-bold text-gray-600 hover:text-black">&times;</button>
+            <div class="w-full h-full">
+                <iframe id="modal-iframe" class="w-full h-full rounded" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            </div>
+        </div>
+        <!-- Video Modal end -->
 
         <!--  Bottom Actions Sticky start -->
         <div class="backtotop-wrap position-fixed bottom-0 end-0 z-99 m-2 vstack">                        
@@ -285,74 +317,16 @@
                     </div>
                 </div>
             </div>
-            <!-- Berita Terkini, Politik, TopNews, Populer, BannerKoran end --> 
-
-            <!-- Iklan 2 start -->
-            <div class="container max-w-xl mt-2">
-                <div class="section-inner panel text-center">                                                    
-                    <img class="text-dark dark:text-white lg:max-w-900px" src="Coming2_3.jpg" data-src="Coming2_3.jpg" alt="iklanpanjang" data-uc-img="loading: lazy">
-                    <a href=#" class="position-cover"></a>
-                </div>
-            </div>
-            <!-- Iklan 2 end -->
-
-            <!-- Berita Kriminal, Kesehatan & Suara Netizen start-->             
+            <!-- Berita Terkini, Politik, TopNews, Populer, BannerKoran end -->
+            
+            <!-- Rubrik Foto start-->             
             <div id="trending-posts" class="trending-posts section panel overflow-hidden">
                 <div class="section-outer panel py-4 sm:py-5">
                     <div class="container max-w-xl">
-                        <div class="section-inner">
+                        <div class="section-inner border-top border-bottom">
                             <div class="row child-cols-12 lg:child-cols col-match g-3 xl:g-4" data-uc-grid>                                
                                 <div>
-                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
-                                        <div class="block-content">
-                                            <div class="row child-cols-4 g-2 gy-3 md:gx-3 md:gy-4" id="beritakriminal">
-                                                <!-- JS akan inject berita di sini -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row child-cols-12 lg:child-cols-4 gx-3 xl:gx-6 gy-6" data-uc-grid>                                
-                                <div class="mt-4 block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
-                                    <div class="block-content panel vstack gap-3" id="beritakesehatan">
-                                        <!-- JS akan inject berita di sini -->
-                                    </div>
-                                </div>                                                           
-                                <div class="block-layout panel">
-                                    <div class="mt-4 block-header panel vstack items-center justify-center text-center gap-1 mb-1">
-                                        <img class="text-dark dark:text-white" src="suaranetizen.jpg" data-src="suaranetizen.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
-                                            <a href=#" class="position-cover"></a>
-                                    </div>
-                                    <div class="block-content panel hstack items-start gap-3 overflow-hidden">
-                                        <div class="row bg-gray-25 p-1 justify-center items-center text-center child-cols-12 sm:child-cols-6 xl:child-cols-6 gx-3 gy-4 xl:gy-6 dark:bg-gray-800" id="beritaopini">
-                                            <!-- JS akan inject berita di sini -->                                            
-                                        </div>
-                                    </div>                                            
-                                </div>                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>            
-            <!-- Berita Kriminal, Kesehatan & Suara Netizen end-->           
-
-            <!-- Iklan 3 start -->
-            <div class="container max-w-xl">
-                <div class="section-inner panel text-center">                                                    
-                    <img class="text-dark dark:text-white lg:max-w-900px" src="Coming3_3.jpg" data-src="Coming3_3.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
-                    <a href=#" class="position-cover"></a>
-                </div>
-            </div>
-            <!-- Iklan 3 end -->
-
-            <!-- Berita Pendidikan start-->             
-            <div id="trending-posts" class="trending-posts section panel overflow-hidden">
-                <div class="section-outer panel py-4 sm:py-5">
-                    <div class="container max-w-xl">
-                        <div class="section-inner">
-                            <div class="row child-cols-12 lg:child-cols col-match g-3 xl:g-4" data-uc-grid>                                
-                                <div>
-                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
+                                    <div class="pt-2 pb-2 block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
                                         <div class="block-header panel vstack items-start gap-1 mb-1">                                                  
                                             <img class="text-dark dark:text-white max-w-96px" src="rubrikfoto_2.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
                                             <a href=#" class="position-cover"></a>
@@ -434,7 +408,89 @@
                     </div>
                 </div>
             </div>            
-            <!-- Berita Pendidikan end-->
+            <!-- Rubrik Foto end-->
+
+            <!-- Iklan 2 start -->
+            <div class="container max-w-xl mt-2">
+                <div class="section-inner panel text-center">                                                    
+                    <img class="text-dark dark:text-white lg:max-w-900px" src="Coming2_3.jpg" data-src="Coming2_3.jpg" alt="iklanpanjang" data-uc-img="loading: lazy">
+                    <a href=#" class="position-cover"></a>
+                </div>
+            </div>
+            <!-- Iklan 2 end -->
+
+            <!-- Berita Kriminal, Kesehatan & Suara Netizen start-->             
+            <div id="trending-posts" class="trending-posts section panel overflow-hidden">
+                <div class="section-outer panel py-4 sm:py-5">
+                    <div class="container max-w-xl">
+                        <div class="section-inner">
+                            <div class="row child-cols-12 lg:child-cols col-match g-3 xl:g-4" data-uc-grid>                                
+                                <div>
+                                    <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
+                                        <div class="block-content">
+                                            <div class="row child-cols-4 g-2 gy-3 md:gx-3 md:gy-4" id="beritakriminal">
+                                                <!-- JS akan inject berita di sini -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row child-cols-12 lg:child-cols-4 gx-3 xl:gx-6 gy-6" data-uc-grid>                                
+                                <div class="mt-4 block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                        
+                                    <div class="block-content panel vstack gap-3" id="beritakesehatan">
+                                        <!-- JS akan inject berita di sini -->
+                                    </div>
+                                </div>                                                           
+                                <div class="block-layout panel">
+                                    <div class="mt-4 block-header panel vstack items-center justify-center text-center gap-1 mb-1">
+                                        <img class="text-dark dark:text-white" src="suaranetizen.jpg" data-src="suaranetizen.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
+                                            <a href=#" class="position-cover"></a>
+                                    </div>
+                                    <div class="block-content panel hstack items-start gap-3 overflow-hidden">
+                                        <div class="row bg-gray-25 p-1 justify-center items-center text-center child-cols-12 sm:child-cols-6 xl:child-cols-6 gx-3 gy-4 xl:gy-6 dark:bg-gray-800" id="beritaopini">
+                                            <!-- JS akan inject berita di sini -->                                            
+                                        </div>
+                                    </div>                                            
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <!-- Berita Kriminal, Kesehatan & Suara Netizen end-->           
+
+            <!-- Iklan 3 start -->
+            <div class="container max-w-xl">
+                <div class="section-inner panel text-center">                                                    
+                    <img class="text-dark dark:text-white lg:max-w-900px" src="Coming3_3.jpg" data-src="Coming3_3.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
+                    <a href=#" class="position-cover"></a>
+                </div>
+            </div>
+            <!-- Iklan 3 end -->
+
+            <!-- Video start-->             
+            <div id="trending-posts" class="trending-posts section panel overflow-hidden">
+                <div class="section-outer panel py-4 sm:py-5">
+                    <div class="container max-w-xl">
+                        <div class="section-inner border-top border-bottom">
+                            <div class="row child-cols-12 lg:child-cols col-match g-3 xl:g-4" data-uc-grid>                                
+                                <div>
+                                    <div class="block-layout pt-2 pb-2 grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">
+                                        <div class="block-header panel vstack items-start gap-1 mb-1">                                                  
+                                            <img class="text-dark dark:text-white max-w-96px" src="VideoOk_1.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
+                                            <a href=#" class="position-cover"></a>
+                                        </div>                                        
+                                        <div class="block-content">
+                                            <div class="row child-cols-4 g-2 gy-3 md:gx-3 md:gy-4" id="video-grid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <!-- Video end-->
 
             <!-- Iklan 4 start -->
             <div class="container max-w-xl">
