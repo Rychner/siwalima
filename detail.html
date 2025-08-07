@@ -284,43 +284,43 @@
                 const container = document.getElementById("detailberita");
                 container.innerHTML = `
                 <div class="post-header">
-                <div class="panel vstack mx-auto gap-2 md:gap-3">
-                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 md:d-flex z-1">
-                        <div>
-                            <div class="post-category hstack gap-narrow fw-semibold">
-                                <a class="text-none hover:text-red dark:text-primary duration-150" href="tes.html">${kategori}</a>
+                    <div class="panel vstack mx-auto gap-2 md:gap-3">
+                        <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 md:d-flex z-1">
+                            <div>
+                                <div class="post-category hstack gap-narrow fw-semibold">
+                                    <a class="text-none hover:text-red dark:text-primary duration-150" href="tes.html">${kategori}</a>
+                                </div>
                             </div>
+                            <div class="sep md:d-block">❘</div>
+                                <div class="md:d-block">
+                                    <div class="post-date hstack gap-narrow">
+                                        <span>${tanggal} WIT</span>
+                                    </div>
+                                </div>                                                                
+                            </div>
+                            <div class="h4 judul fw-bold sm:h2 lg:h2 xl:h2">
+                                ${judul}
+                            </div>
+                            <figure class="featured-image m-0">
+                                <figure
+                                    class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                    <img class="media-cover image uc-transition-opaque"
+                                        src="${gambar}"
+                                        data-src="${gambar}"
+                                        alt="${judul}"
+                                        data-uc-img="loading: lazy">
+                                </figure>
+                            </figure>
+                        </div>                                        
+                    </div>            
+                    <!-- Iklan 1 start -->
+                    <div class="container max-w-xl mt-3">
+                        <div class="section-inner panel" id="iklan-panjang">                                                    
+                            <img class="text-dark dark:text-white" src="iklanpanjang.png" data-src="iklanpanjang.png" alt="iklanpanjang" data-uc-img="loading: lazy">
+                            <a href=#" class="position-cover"></a>
                         </div>
-                        <div class="sep md:d-block">❘</div>
-                        <div class="md:d-block">
-                            <div class="post-date hstack gap-narrow">
-                                <span>${tanggal} WIT</span>
-                            </div>
-                        </div>                                                                
                     </div>
-                    <div class="h4 judul fw-bold sm:h2 lg:h2 xl:h2">
-                        ${judul}
-                    </div>
-                    <figure class="featured-image m-0">
-                        <figure
-                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
-                            <img class="media-cover image uc-transition-opaque"
-                                src="${gambar}"
-                                data-src="${gambar}"
-                                alt="${judul}"
-                                data-uc-img="loading: lazy">
-                        </figure>
-                    </figure>                                        
-                </div>
-            </div>
-            <!-- Iklan 1 start -->
-            <div class="container max-w-xl mt-3">
-                <div class="section-inner panel" id="iklan-panjang">                                                    
-                    <img class="text-dark dark:text-white" src="iklanpanjang.png" data-src="iklanpanjang.png" alt="iklanpanjang" data-uc-img="loading: lazy">
-                    <a href=#" class="position-cover"></a>
-                </div>
-            </div>
-            <!-- Iklan 1 end -->
+                    <!-- Iklan 1 end -->
             <div class="panel position-relative mt-2 lg:mt-2 xl:mt-4">
                 <div class="container">
                     <div class="content-wrap row child-col-12 lg:child-cols g-4 lg:g-6">
