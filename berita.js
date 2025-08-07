@@ -1688,6 +1688,32 @@ function beritaCoba()
     });
 }
 
+function videoYoutube()
+{
+    const API_KEY = "AIzaSyDILgb6FZGLy-wrY3TG-AOPxZZ2PvK3UHE";
+    const CHANNEL_ID = "UCebeg9q9FAFE-7s1q_dwoBw";
+
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`)
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById("video-container");
+
+        data.items.forEach(item => {
+        if (item.id.kind === "youtube#video") {
+            const videoId = item.id.videoId;
+            const iframe = document.createElement("iframe");
+            iframe.width = 300;
+            iframe.height = 500;
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.frameBorder = 0;
+            iframe.allowFullscreen = true;
+
+            container.appendChild(iframe);
+        }
+        });
+    });
+}
+
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
@@ -1703,7 +1729,8 @@ function initApp() {
     //beritaPendidikan();
     beritaDaerah();
     beritaPemerintahan();
-    beritaVisi();    
+    beritaVisi();
+    videoYoutube();    
 }
 
 // Jalankan setelah halaman dimuat
