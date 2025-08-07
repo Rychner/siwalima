@@ -1780,7 +1780,7 @@ function videoYoutube()
                 <a href="#video-modal" class="position-cover"></a>
             </div>
             <div class="post-header panel vstack gap-1">
-                <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
+                <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2">
                 <a class="text-none hover:text-red duration-150" href="#video-modal">${title}</a>
                 </h3>
                 <div class="d-none md:d-block">
