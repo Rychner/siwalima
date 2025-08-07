@@ -6,9 +6,9 @@ function swiperBerita()
             id: 535892,
             judul: "Berita Pertama",
             gambar: [
-                "featuregraphic.jpg",
-                "featuregraphic.jpg",
-                "featuregraphic.jpg"
+                "https://siwalimanews.com/wp-content/uploads/2025/08/Bendera.jpg",
+                "https://siwalimanews.com/wp-content/uploads/2025/08/Bendera1.jpg",
+                "https://siwalimanews.com/wp-content/uploads/2025/08/Bendera2.jpg"
             ],
             tanggal: "2025-08-05T14:10:00"
         },
