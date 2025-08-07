@@ -1,7 +1,7 @@
 //Section 1 start
 function beritaTerkini()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=8")
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('beritaterkini');
@@ -1690,7 +1690,7 @@ function beritaCoba()
 
 function videoYoutube()
 {
-    const API_KEY = "AIzaSyDYbJ8vmu0eG7C-MC1PVwAPxPA3I9DTcG0";
+    const API_KEY = "AIzaSyArHyfOZCcli8LxHTuATCaexukDNMjlMm0";
     const CHANNEL_ID = "UC6JOSeUGezJtcMT-x5FtkOA";
     
 
@@ -1771,20 +1771,20 @@ function videoYoutube()
             // Isi HTML-nya
             article.innerHTML = `
             <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                     <img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" alt="${title}" class="w-100 h-100 object-cover">
                     <div class="photo-count bg-gray-800 w-auto bg-opacity-50">
                         <i class="fas fa-play"></i>
                 </div>
                 </div>
-                <a href="#video-modal" class="position-cover"></a>
+                <a href="video.html?id=${videoId}" class="position-cover"></a>
             </div>
             <div class="post-header panel vstack gap-1">
                 <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2">
-                <a class="text-none hover:text-red duration-150" href="#video-modal">${title}</a>
+                <a class="text-none text-white hover:text-red duration-150" href="#video-modal">${title}</a>
                 </h3>
                 <div class="d-none md:d-block">
-                <div class="post-date hstack gap-narrow">
+                <div class="post-date text-white hstack gap-narrow">
                     <span>${formatTanggal(publishedAt)}</span>
                 </div>
                 </div>
@@ -1811,6 +1811,30 @@ function videoYoutube()
     });   
 }
 
+function rubrikVideo()
+{    
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get("id");
+
+    if (videoId) {
+        setTimeout(() => {
+            const iframe = document.createElement("iframe");
+            iframe.width = "100%";
+            iframe.height = "500";
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            iframe.frameBorder = "0";
+            iframe.allow = "autoplay; encrypted-media";
+            iframe.allowFullscreen = true;
+
+            const container = document.getElementById("video-youtube-detail");
+            container.innerHTML = ""; // Kosongkan pesan "Memuat video..."
+            container.appendChild(iframe);
+        }, 3000); // ⏱️ 3000 ms = 3 detik
+        } else {
+        document.getElementById("video-youtube-detail").innerHTML = "<p>Video ID tidak ditemukan di URL.</p>";
+        }
+}
+
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
@@ -1827,7 +1851,8 @@ function initApp() {
     beritaDaerah();
     beritaPemerintahan();
     beritaVisi();
-    videoYoutube();    
+    videoYoutube();
+    rubrikVideo();    
 }
 
 // Jalankan setelah halaman dimuat
