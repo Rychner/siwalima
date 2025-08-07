@@ -243,6 +243,23 @@
                     const ul = document.createElement("ul");
                     ul.className = "pagination-list";
 
+                    // Tombol previous «
+                    const liPrev = document.createElement("li");
+                    liPrev.className = "page-item";
+                    const prevBtn = document.createElement("button");
+                    prevBtn.className = "page-link";
+                    prevBtn.innerHTML = "&laquo;";
+                    prevBtn.disabled = halamanSekarang === 1;
+                    prevBtn.addEventListener("click", () => {
+                        document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                        if (halamanSekarang > 1) {
+                            halamanSekarang--;
+                            renderHalaman(halamanSekarang);
+                        }
+                    });
+                    liPrev.appendChild(prevBtn);
+                    ul.appendChild(liPrev);
+
                     for (let i = 1; i <= totalHalaman; i++) {
                         const li = document.createElement("li");
                         li.className = "page-item";
