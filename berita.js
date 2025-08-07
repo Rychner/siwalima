@@ -1691,7 +1691,7 @@ function beritaCoba()
 function videoYoutube()
 {
     const API_KEY = "AIzaSyDILgb6FZGLy-wrY3TG-AOPxZZ2PvK3UHE";
-    const CHANNEL_ID = "UCebeg9q9FAFE-7s1q_dwoBw";
+    const CHANNEL_ID = "UC6JOSeUGezJtcMT-x5FtkOA";
 
     fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`)
     .then(response => response.json())
@@ -1702,8 +1702,8 @@ function videoYoutube()
         if (item.id.kind === "youtube#video") {
             const videoId = item.id.videoId;
             const iframe = document.createElement("iframe");
-            iframe.width = 300;
-            iframe.height = 500;
+            iframe.width = 250;
+            iframe.height = 250;
             iframe.src = `https://www.youtube.com/embed/${videoId}`;
             iframe.frameBorder = 0;
             iframe.allowFullscreen = true;
