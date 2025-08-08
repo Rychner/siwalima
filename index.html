@@ -163,17 +163,6 @@
 
     <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
 
-        <!-- Video Modal start -->
-        <div id="video-modal" class="ratio-4x3">
-            <div class="position-relative w-full max-w-3xl p-4 shadow-lg">
-            <button id="close-modal" class="bg-black rounded-top-1 rounded-bottom-1 absolute top-2 right-2 font-bold text-white hover:text-white">X</button>
-            <div class="w-full h-full">
-                <iframe id="modal-iframe" class="w-full h-full rounded" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            </div>
-        </div>
-        <!-- Video Modal end -->
-
         <!--  Bottom Actions Sticky start -->
         <div class="backtotop-wrap position-fixed bottom-0 end-0 z-99 m-2 vstack">                        
             <a class="btn btn-sm bg-blue text-white w-40px h-40px rounded-circle" href="to_top" data-uc-backtotop>
@@ -215,7 +204,7 @@
                                         <li class="uc-active text-red" id="home-nav-item">
                                             <a href="#">
                                                 <span class="home-text">Home</span>
-                                                <img class="w-350px text-dark home-icon hidden dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                                                <img class="w-350px text-dark home-icon dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
                                             </a>
                                         </li>
                                         <li><a href="#" class="hover:text-red">Kriminal</a></li>
@@ -582,7 +571,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Berita Berita Daerah & Iklan 6 end -->
+            <!-- Berita Berita Daerah & Iklan 6 end -->        
+
+        </div>
 
         <!-- Footer start -->
         <footer id="uc-footer" class="uc-footer panel bg-blue-800">
@@ -594,7 +585,7 @@
                                 <div class="col-12 lg:col-5">
                                     <div class="vstack gap-3 dark:text-white">
                                         <a href="index.html">
-                                            <img class=" uc-transition-scale-up uc-transition-opaque uc-logo w-250px text-gray-900 dark:text-white" src="logoSiwalima.png" alt="logoSiwalima" data-uc-svg>
+                                            <img class="uc-transition-scale-up uc-transition-opaque uc-logo w-250px text-gray-900 dark:text-white" src="logoSiwalima.png" alt="logoSiwalima" data-uc-svg>
                                         </a>
                                         <p class="fs-6 me-8 text-white">
                                             Copyright © 2019 SIWALIMA. All rights reserved.
@@ -668,11 +659,7 @@
                         <hr class="m-0 dark:border-gray-100">
                         <div class="uc-footer-bottom panel hstack gap-2 items-start justify-between fs-6 dark:text-white">
                             <div class="footer-copyright text-white vstack sm:hstack gap-1 lg:gap-2">
-                                <p>Siwalima © <script>
-                                document.write(
-                                    new Date().getFullYear()
-                                )
-                            </script>, All rights reserved.</p>
+                                <p>Siwalima © 2025, All rights reserved.</p>
                                 <div class="vr d-none lg:d-block"></div>
                                 <ul class="nav-x gap-2 fw-medium text-white">
                                     <li><a href="#">Privacy policy</a></li>
@@ -685,8 +672,6 @@
             </div>
         </footer>
         <!-- Footer end -->
-
-        </div>
 
         <!-- include jquery & bootstrap js -->
         <script defer src="https://html.themewant.com/news5/assets/js/libs/jquery.min.js"></script>
