@@ -1781,7 +1781,7 @@ function videoYoutube()
             </div>
             <div class="post-header panel vstack gap-1">
                 <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2">
-                <a class="text-none text-white hover:text-blue duration-150" href="#video-modal">${title}</a>
+                <a class="text-none text-white hover:text-blue duration-150" href="video.html?id=${videoId}">${title}</a>
                 </h3>
                 <div class="d-none md:d-block">
                 <div class="post-date text-white hstack gap-narrow">
