@@ -1,7 +1,7 @@
 //Section 1 start
 function beritaTerkini()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=8")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/get_data_pvc")
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('beritaterkini');
@@ -16,7 +16,7 @@ function beritaTerkini()
                         <div class="fs-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
                     </div>
                     <h6 class="fs-6 px-1 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 translate-y-narrow dark:bg-white">
-                        <a class="fw-bold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.id}">${post.title.rendered}</a>
+                        <a class="fw-bold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
                     </h6>
                 </article>
             </div>
