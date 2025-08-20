@@ -249,7 +249,7 @@
                     const prevBtn = document.createElement("button");
                     prevBtn.className = "page-link";
                     prevBtn.innerHTML = "&laquo;";
-                    prevBtn.disabled = halamanSekarang === 1;
+                    prevBtn.hidden = halamanSekarang === 1;
                     prevBtn.addEventListener("click", () => {
                         document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
                         if (halamanSekarang > 1) {
@@ -282,7 +282,7 @@
                     const nextBtn = document.createElement("button");
                     nextBtn.className = "page-link";
                     nextBtn.innerHTML = "&raquo;";
-                    nextBtn.disabled = halamanSekarang === totalHalaman;
+                    nextBtn.hidden = halamanSekarang === totalHalaman;
                     nextBtn.addEventListener("click", () => {
                         document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
                         if (halamanSekarang < totalHalaman) {
