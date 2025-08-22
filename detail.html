@@ -257,6 +257,11 @@
                     const pagination = document.getElementById("pagination-controls");
                     pagination.innerHTML = "";
 
+                    // Jika hanya ada 1 halaman, tidak usah tampilkan pagination
+                    if (totalHalaman <= 1) {
+                        return; 
+                    }
+
                     const ul = document.createElement("ul");
                     ul.className = "pagination-list";
 
