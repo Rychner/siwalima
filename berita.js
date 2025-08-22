@@ -1690,7 +1690,7 @@ function beritaCoba()
 
 function videoYoutube()
 {
-    const API_KEY = "AIzaSyArHyfOZCcli8LxHTuATCaexukDNMjlMm0";
+    const API_KEY = "AIzaSyDILgb6FZGLy-wrY3TG-AOPxZZ2PvK3UHE";
     const CHANNEL_ID = "UC6JOSeUGezJtcMT-x5FtkOA";
     
 
