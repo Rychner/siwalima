@@ -128,7 +128,7 @@
             .uc-navbar-sticky {
                 background-color: white !important; /* ubah background jadi hitam */                
                 /*border-bottom: 2px solid rgb(234, 67, 53) !important;*/
-                border-bottom: 4px solid blue !important;                
+                border-bottom: 4px solid #21409a !important;                
             }
             .uc-navbar-sticky .nav-x li a {
                 color: black !important; /* teks menu jadi hitam */
@@ -151,6 +151,9 @@
 
             #video-modal.show {
                 display: flex; /* ketika muncul, pakai flex biar konten ditengah */
+            }
+            .bg-navbar-siwa {
+                background: linear-gradient(100deg, #21409a 50%, #5699f3 100%);;
             }                                           
         </style>
 
@@ -211,7 +214,7 @@
         </div>
         <header class="uc-header header-two uc-navbar-sticky-wrap z-999" data-uc-sticky="sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">
             <div class="container max-w-xl">
-                <nav class="uc-navbar-container shadow-xs bg-blue-800 dark:bg-gray-900 fs-6 z-1">                
+                <nav class="uc-navbar-container shadow-xs bg-navbar-siwa dark:bg-gray-900 fs-6 z-1">                
                     <div class="uc-bottom-navbar panel hstack z-1 min-h-48px lg:min-h-48px border-top border-bottom uc-navbar-sticky-wrap top-0 z-50" data-uc-navbar=" animation: uc-animation-slide-top-small; duration: 150; bg-white; text-black">
                         <div class="container max-w-xl">
                             <div class="hstack">                            
