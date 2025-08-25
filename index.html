@@ -317,14 +317,16 @@
                                                 <!-- JS akan inject berita di sini -->
                                             </div>                                            
                                         </div>
-                                        <div class="block-layout panel mt-4">
-                                            <div class="block-header panel vstack items-center justify-center text-center gap-1">
-                                                <img class="text-dark dark:text-white" src="topnewskoran.jpg" data-src="topnewskoran.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
-                                                <a href=#" class="position-cover"></a>
+                                        <div class="container max-w-xl">
+                                            <div class="block-layout panel mt-4">
+                                                <div class="block-header panel vstack items-center justify-center text-center gap-1">
+                                                    <img class="text-dark dark:text-white" src="topnewskoran.jpg" data-src="topnewskoran.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
+                                                    <a href=#" class="position-cover"></a>
+                                                </div>
+                                                <div class="mt-1 block-content panel row bg-red gx-4 gy-3 lg:gy-2" id="beritatopnews">
+                                                    <!-- JS akan inject berita di sini -->
+                                                </div>                                            
                                             </div>
-                                            <div class="mt-1 block-content panel row bg-red gx-4 gy-3 lg:gy-2" id="beritatopnews">
-                                                <!-- JS akan inject berita di sini -->
-                                            </div>                                            
                                         </div>
                                     </div>                                    
                                 </div>
@@ -517,26 +519,38 @@
             </div>
             <!-- Iklan 4 end -->
 
-            <!-- Berita Olahraga & Opini start -->
-            <div id="category-posts" class="category-posts section panel overflow-hidden mt-2">
-                <div class="section-outer panel pb-4 sm:pb-5">
+            <!-- Berita Olahraga & Opini start -->            
+            <div class="section panel overflow-hidden">
+                <div class="section-outer panel pt-3 sm:py-4 sm:py-5">
                     <div class="container max-w-xl">
-                        <div class="section-inner">
-                            <div class="row child-cols-12 lg:child-cols-4 gx-3 xl:gx-6 gy-6" data-uc-grid>                                
-                                <div class="mt-2 block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                    
-                                    <div class="block-content panel vstack gap-3" id="beritaolahraga">
-                                        <!-- JS akan inject berita di sini -->
+                        <div class="section-inner panel vstack gap-4">
+                            <div class="section-content">
+                                <div class="row child-cols-12 g-3 xl:g-4">
+                                    <div class="lg:col-8 lg:order-1">                                        
+                                        <div class="mt-5">
+                                            <div class="block-layout grid-layout vstack gap-2 xl:gap-3 panel overflow-hidden">                                                
+                                                <div class="block-content">
+                                                    <div class="row child-cols-12 g-2 gy-3 md:gx-3 md:gy-4" id="beritaolahraga">
+                                                        <!-- JS akan inject berita di sini -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                       
                                     </div>
-                                </div>                                                           
-                                <div class="block-layout panel">
-                                    <div class="mt-2 block-header panel vstack items-center justify-center text-center gap-1">
-                                        <img class="text-dark dark:text-white" src="opinikoran.jpg" data-src="opinikoran.jpg" alt="bannerKoran" data-uc-img="loading: lazy">
-                                        <a href=#" class="position-cover"></a>
-                                    </div>
-                                    <div class="mt-1 block-content panel row bg-red gx-4 gy-3 lg:gy-2" id="beritavisi">
-                                        <!-- JS akan inject berita di sini -->
-                                    </div>                                            
-                                </div>                               
+                                    <div class="lg:col-4 lg:order-2">                                        
+                                        <div class="container max-w-xl">
+                                            <div class="block-layout panel">
+                                                <div class="block-header panel vstack items-center justify-center text-center gap-1">
+                                                    <img class="text-dark dark:text-white" src="opinikoran.jpg" data-src="opinikoran.jpg" alt="opiniKoran" data-uc-img="loading: lazy">
+                                                    <a href=#" class="position-cover"></a>
+                                                </div>
+                                                <div class="mt-1 block-content panel row bg-red gx-4 gy-3 lg:gy-2" id="beritavisi">
+                                                    <!-- JS akan inject berita di sini -->
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
                             </div>
                         </div>
                     </div>
