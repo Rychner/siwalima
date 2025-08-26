@@ -148,8 +148,8 @@
                 font-weight: bold !important;
             }
             .iklanpanjangkebawah {
-                width: 160px !important;
-                border-bottom: none !important;
+                width: auto !important;
+                border-bottom: none !important;            
             }
             .bg-navbar-siwa {
                 background: linear-gradient(100deg, #21409a 50%, #5699f3 100%);
@@ -159,6 +159,14 @@
             }
             .text-footer {
                 color:rgb(29, 28, 28)
+            }
+            .none-padding-right
+            {
+                padding-right: 0px !important;
+            }
+            .none-padding-left
+            {
+                padding-left: 0px !important;
             }            
         </style>
         
@@ -375,11 +383,11 @@
                         <div class="max-w-lg">
                             <!-- Isi start -->
                             <div class="isi row panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
-                                <div class="lg:col-9 lg:order-1 px-2">
+                                <div class="lg:col-9 lg:order-1 px-2 none-padding-left">
                                     <div id="konten-berita"></div>
                                     <div id="pagination-controls" class="mt-4 text-center"></div>                                                                                                                                                                                                                               
                                 </div>
-                                <div class="lg:col-3 lg:order-2 align-item-top">
+                                <div class="lg:col-3 lg:order-2 align-item-top none-padding-right">
                                     <div class="iklanpanjangkebawah" data-uc-sticky="sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">                                                        
                                         <img src="iklan_panjangkebawah_isiberita.jpg" data-src="iklan_panjangkebawah_isiberita.jpg" alt="iklan_panjangkebawah_isiberita" data-uc-img="loading: lazy">                                                                                                             
                                     </div>
