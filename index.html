@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="zxx" dir="ltr">    
     <head>
         <meta charset="UTF-8">
@@ -138,6 +138,26 @@
                 color: red !important; /* teks menu jadi merah saat di hover */
                 font-weight: bold !important;
             }
+            /* Default: tampilkan semua menu */
+            .nav-full {
+            display: flex;
+            }
+            .nav-mini {
+            display: none;
+            }
+
+            /* Saat sticky, sembunyikan menu lain dan tampilkan hanya Home */
+            .uc-navbar-sticky .nav-full {
+            display: none !important;
+            }
+            .uc-navbar-sticky .nav-mini {
+            display: flex !important;
+            }
+            /* Saat sticky -> geser ke kiri */
+            .uc-navbar-sticky .uc-navbar-center {
+                justify-content: flex-start !important;
+                padding-left: 10px;
+            }
             #video-modal {
                 position: fixed;
                 top: 0;
@@ -160,8 +180,49 @@
             }
             .text-footer {
                 color:rgb(29, 28, 28)
+            }
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #fdfdfd;
+                overflow-x: hidden;
+                transition: 0.5s;
+            }
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            .sidenav a:hover {
+                color: #ee3333;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
             }                                           
         </style>
+
+        <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+            
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -226,14 +287,17 @@
                             <div class="hstack">                            
                                 <div class="uc-navbar-center gap-2 lg:gap-3 flex justify-center w-full">
                                     <div class="uc-navbar-item" style="--uc-nav-height: 36px">
-                                        <ul class="nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
+                                        <ul class="nav-full nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
                                             <li class="uc-active text-red" id="home-nav-item">
-                                                <a href="#">
-                                                    <span class="home-text navbar-text text-uppercase fs-6">Home</span>
-                                                    <img class="w-350px text-dark home-icon dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                                                <a href="index.html">
+                                                    <span class="home-text navbar-text text-uppercase fs-6">Home</span>                                                    
                                                 </a>
                                             </li>
-                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Kriminal</a></li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="home-text navbar-text text-uppercase fs-6 hover:text-red">Kriminal</span>                                                    
+                                                </a>                                                
+                                            </li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Daerah</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Politik</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pendidikan</a></li>
@@ -245,6 +309,39 @@
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Online</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
+                                        </ul>
+                                        <ul class="nav-mini nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
+                                            <li class="uc-active text-red" id="home-nav-item">
+                                                <a href="index.html">                                                    
+                                                    <img class="w-350px text-dark dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div id="mySidenav" class="sidenav">
+                                                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                                    <ul>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Kriminal</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Daerah</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Politik</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pendidikan</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Visi</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Hukum</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pemerintahan</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Olahraga</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Opini</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Online</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
+                                                    </ul>                                                    
+                                                </div>                                            
+                                                
+                                                <span class="btn btn-sm bg-blue-800 text-white w-32px h-32px rounded-circle" onclick="openNav()">
+                                                    &#9776;
+                                                </span>
+                                                <span class="text-black text-uppercase" onclick="openNav()">
+                                                    Menu
+                                                </span>                                               
+                                            </li>                                            
                                         </ul>
                                     </div>
                                 </div>                            
