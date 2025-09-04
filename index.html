@@ -310,13 +310,19 @@ s<!DOCTYPE html>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
                                         </ul>
-                                        <ul class="nav-mini nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
-                                            <li class="uc-active text-red" id="home-nav-item">
+                                        <ul class="nav-mini nav-x fw-semibold flex-nowrap justify-between overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
+                                            <li class="uc-active text-red flex-shrink-0" id="home-nav-item">
                                                 <a href="index.html">                                                    
                                                     <img class="w-350px text-dark dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
                                                 </a>
                                             </li>
-                                            <li>
+                                            <li class="flex-1" style="padding-left: 335px; padding-right: 335px;">
+                                                <input type="text" class="rounded" placeholder="Search...">
+                                                <span class="btn btn-sm bg-white border border-blue-800 text-black w-32px h-32px rounded-circle hover:bg-blue-800 hover:text-white">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </li>
+                                            <li class="flex-shrink-0 flex items-center gap-2">
                                                 <div id="mySidenav" class="sidenav">
                                                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                                     <ul>
@@ -335,14 +341,14 @@ s<!DOCTYPE html>
                                                     </ul>                                                    
                                                 </div>                                            
                                                 <div onclick="openNav()">
-                                                    <span class="btn btn-sm bg-blue-800 text-white w-32px h-32px rounded-circle">
-                                                        &#9776;
-                                                    </span>
                                                     <span class="fs-5 text-black text-uppercase">
                                                         Menu
-                                                    </span> 
+                                                    </span>
+                                                    <span class="btn btn-sm bg-blue-800 text-white w-32px h-32px rounded-circle">
+                                                        &#9776;
+                                                    </span>                                                     
                                                 </div>
-                                            </li>                                            
+                                            </li>                                                                                        
                                         </ul>
                                     </div>
                                 </div>                            
