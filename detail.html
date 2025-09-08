@@ -63,7 +63,9 @@
         <!-- include scripts -->
         <script src="https://html.themewant.com/news5/assets/js/uni-core/js/uni-core-bundle.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>        
+        <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <style>
             .judul{
@@ -167,6 +169,61 @@
             .none-padding-left
             {
                 padding-left: 0px !important;
+            }
+            /* Default: tampilkan semua menu */
+            .nav-full {
+            display: flex;
+            }
+            .nav-mini {
+            display: none;
+            }
+            .share-menu {
+                display: none;
+            }            
+            /* Saat sticky, sembunyikan menu lain dan tampilkan hanya Home */
+            .uc-navbar-sticky .nav-full {
+                display: none !important;
+            }
+            .uc-navbar-sticky .nav-mini {
+                display: flex !important;
+            }
+            .uc-navbar-sticky ~ .share-menu {
+                display: block !important;
+            }
+            /* Saat sticky -> geser ke kiri */
+            .uc-navbar-sticky .uc-navbar-center {
+                justify-content: flex-start !important;
+            }
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: #fdfdfd;
+                overflow-x: hidden;
+                transition: 0.5s;
+            }
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            .sidenav a:hover {
+                color: #ee3333;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
             }            
         </style>
         
@@ -682,6 +739,16 @@
                 observer.observe(navbar, { attributes: true });
             });
         </script>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+                
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
     </head>
 
     <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
@@ -724,14 +791,17 @@
                             <div class="hstack">                            
                                 <div class="uc-navbar-center gap-2 lg:gap-3 flex justify-center w-full">
                                     <div class="uc-navbar-item" style="--uc-nav-height: 36px">
-                                        <ul class="nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
+                                        <ul class="nav-full nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
                                             <li class="uc-active text-red" id="home-nav-item">
-                                                <a href="#">
-                                                    <span class="home-text navbar-text text-uppercase fs-6">Home</span>
-                                                    <img class="w-350px text-dark home-icon dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                                                <a href="index.html">
+                                                    <span class="home-text navbar-text text-uppercase fs-6">Home</span>                                                    
                                                 </a>
                                             </li>
-                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Kriminal</a></li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="home-text navbar-text text-uppercase fs-6 hover:text-red">Kriminal</span>                                                    
+                                                </a>                                                
+                                            </li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Daerah</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Politik</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pendidikan</a></li>
@@ -743,6 +813,46 @@
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Online</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
                                             <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
+                                        </ul>                                        
+                                        <ul class="nav-mini nav-x fw-semibold flex-nowrap justify-between overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-1 text-white">
+                                            <li class="uc-active" id="home-nav-item">
+                                                <a href="index.html">                                                    
+                                                    <img class="w-350px text-dark dark:text-white lg:w-150px" src="logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                                                </a>
+                                            </li>
+                                            <li style="padding-left: 360px; padding-right: 360px;">
+                                                <input type="text" class="rounded fs-6 px-1" placeholder="Cari berita...">
+                                                <span class="btn btn-sm bg-white border border-blue-800 text-black w-32px h-32px rounded-circle hover:bg-blue-800 hover:text-white">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <div id="mySidenav" class="sidenav">
+                                                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                                    <ul>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Kriminal</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Daerah</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Politik</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pendidikan</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Visi</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Hukum</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pemerintahan</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Olahraga</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Opini</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Online</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
+                                                    </ul>                                                    
+                                                </div>                                            
+                                                <div onclick="openNav()">
+                                                    <span class="fs-5 text-black text-uppercase">
+                                                        Menu
+                                                    </span>
+                                                    <span class="btn btn-sm bg-blue-800 text-white w-32px h-32px rounded-circle">
+                                                        &#9776;
+                                                    </span>                                                     
+                                                </div>
+                                            </li>                                                                                                                                    
                                         </ul>
                                     </div>
                                 </div>                            
@@ -750,6 +860,24 @@
                         </div>
                     </div>
                 </nav>
+                <!-- 🔽 Menu Share -->
+                <div class="share-menu bg-gray-25 py-1">
+                    <div class="flex justify-center gap-3">
+                        <span class="text-black fw-semibold px-1 text-uppercase">Bagikan:</span>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://contoh.com" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url=https://contoh.com&text=Judul+Berita" target="_blank" class="btn btn-sm bg-black text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?text=Judul+Berita%20https://contoh.com" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://t.me/share/url?url=https://contoh.com&text=Judul+Berita" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </header>
         <!-- Header end -->
