@@ -220,22 +220,22 @@ function beritaTerkini2()
         item.innerHTML = `         
         <div>
             <article class="rounded-top-1 rounded-bottom-1 post type-post panel vstack gap-1 lg:gap-2">
-                <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
                     <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
+                        <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
                     </div>                   
                 </div>
                 <div class="post-header panel vstack justify-between gap-1">                    
                     <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
-                        ${judul}                        
+                        ${judul}
                     </h3>
                     <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
                         <div class="post-date hstack gap-narrow">
                             <span>${formatTanggal(post.date)}</span>
                         </div>
                     </div>
-                </div>                                
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>                
+                </div>
             </article>
         </div>
         `;
