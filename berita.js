@@ -111,23 +111,22 @@ function swiperBerita()
         item.className = "swiper-slide";
 
         item.innerHTML = `
-        <article class="rounded-top-1 rounded-bottom-1 post type-post panel vstack gap-1 bg-dark">
-            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1 hover:rounded-bottom-1">
-                <div class="featured-image rounded-top-1 rounded-bottom-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
+        <article class="rounded-top-1 post type-post panel vstack gap-1 bg-dark">
+            <div class="rounded-top-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1 hover:rounded-bottom-1">
+                <div class="featured-image rounded-top-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="rounded-top-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                     <!-- Overlay + Judul -->
                     <div class="post-header panel vstack justify-end items-start">
-                        <span class="px-2 headline-font-size pt-1 text-white m-0 text-truncate-2 bg-navbar-siwa opacity-90 w-100">
-                            <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
+                        <span class="px-2 headline-font-size pt-1 text-white m-0 text-truncate-2 w-100">
+                            <a class="judul text-white text-none hover:text-red group-hover:text-red" href="detail.html?id=${post.id}">${judul}</a>                                    
                         </span>
                         <div class="w-100">
-                            <div class="px-2 w-100 text-white bg-navbar-siwa opacity-90 post-date fs-7 text-white hstack gap-narrow">
+                            <div class="px-2 w-100 text-white post-date fs-7 text-white hstack gap-narrow">
                                 <span class="mb-1">${formatTanggal(post.date)}</span>
                             </div>
                         </div>                                
                     </div>
-                </div>
-                <a href="detail.html?id=${post.id}" class="position-cover"></a>
+                </div>                
             </div>
         </article>                    
         `;

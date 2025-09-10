@@ -86,7 +86,7 @@
             }
             .judul{
                 font-family: 'Inter' !important;            
-                font-weight: bold !important;
+                font-weight: bold !important;                
             }
             .navbar-text {
                 font-weight: bold !important;
@@ -214,6 +214,9 @@
             .headline-font-size {
                 font-size: 27px;
                 line-height: 1.2;
+            }
+            .post-media:hover .judul {
+                color: rgb(248, 77, 77) !important;
             }                                           
         </style>
 
@@ -378,11 +381,31 @@
                                                 <div class="swiper-wrapper" id="swiperberita">
                                                     <!-- JS akan inject berita di sini -->
                                                 </div>
-                                                <div class="swiper-nav nav-next btn btn-gray-900 p-0 border-0 w-40px h-40px rounded-circle shadow-sm position-absolute top-50 end-0 me-2 z-1 uc-hidden-hover">
-                                                    <i class="fa-solid fa-arrow-right"></i>
-                                                </div>
-                                                <div class="swiper-nav nav-prev btn btn-gray-900 p-0 border-0 w-40px h-40px rounded-circle shadow-sm position-absolute top-50 start-0 ms-2 z-1 uc-hidden-hover">
-                                                    <i class="fa-solid fa-arrow-left"></i>
+                                                <div class="bg-navbar-siwa w-full p-2 rounded-bottom-1">
+                                                    <div class="flex items-center">
+                                                        <span class="text-red fs-6 fw-bold whitespace-nowrap">Berita Terkait</span>
+                                                        <hr class="flex-grow" style="margin-left: 40px; width:80%">
+                                                    </div>
+                                                    <div class="mt-2 flex gap-4">
+                                                        <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
+                                                            <div class="post-header panel vstack justify-between gap-1">                    
+                                                                <h3 class="post-title fs-7 lg:fs-7 fw-semibold m-0 text-truncate-2">
+                                                                    <a class="text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                                                        Soroti Anggaran Perbaikan Kapal, HMI Desak Jaksa Periksa Bupati Bursel
+                                                                    </a>
+                                                                </h3>                                                                
+                                                            </div>
+                                                        </article>
+                                                        <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
+                                                            <div class="post-header panel vstack justify-between gap-1">                    
+                                                                <h3 class="post-title fs-7 lg:fs-7 fw-semibold m-0 text-truncate-2">
+                                                                    <a class="text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                                                        Aliansi Anti Korupsi Desak Kejati Usut Dugaan Korupsi di Dindik Bursel
+                                                                    </a>
+                                                                </h3>                                                                
+                                                            </div>
+                                                        </article>
+                                                    </div>
                                                 </div>                                                
                                             </div>
                                         </div>                                        
