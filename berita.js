@@ -118,7 +118,7 @@ function swiperBerita()
                     <!-- Overlay + Judul -->
                     <div class="post-header panel vstack justify-end items-start">
                         <span class="px-2 headline-font-size pt-1 text-white m-0 text-truncate-2 w-100">
-                            <a class="judul text-white text-none hover:text-red group-hover:text-red" href="detail.html?id=${post.id}">${judul}</a>                                    
+                            <a class="judul text-white text-none hover:text-red" href="detail.html?id=${post.id}">${judul}</a>                                    
                         </span>
                         <div class="w-100">
                             <div class="px-2 w-100 text-white post-date fs-7 text-white hstack gap-narrow">
@@ -126,6 +126,7 @@ function swiperBerita()
                             </div>
                         </div>                                
                     </div>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>                
             </div>
         </article>                    
@@ -223,18 +224,18 @@ function beritaTerkini2()
                 <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
                     <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                         <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
-                    </div>                   
+                    </div>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>
                 <div class="post-header panel vstack justify-between gap-1">                    
                     <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
-                        ${judul}
+                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                     <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
                         <div class="post-date hstack gap-narrow">
                             <span>${formatTanggal(post.date)}</span>
                         </div>
                     </div>
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>                
                 </div>
             </article>
         </div>
