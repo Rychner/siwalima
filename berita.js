@@ -177,7 +177,7 @@ function beritaTerkait() {
                     container.innerHTML += `
                     <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
                         <div class="post-header panel vstack justify-between gap-1">                    
-                            <h3 class="post-title fw-semibold m-0" style="font-size: 15px;">
+                            <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0">
                                 <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                     ${judul}
                                 </a>
