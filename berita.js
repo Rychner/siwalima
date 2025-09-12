@@ -142,6 +142,58 @@ function swiperBerita()
     });
 }
 
+function beritaTerkait() {
+    // 1️⃣ Ambil berita terakhir
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
+    .then(res => res.json())
+    .then(latestPosts => {
+        if (!latestPosts.length) return;
+
+        const latestPost = latestPosts[0];
+        const latestId = latestPost.id;
+
+        // 2️⃣ Ambil kategori dari berita terakhir
+        const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
+        const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
+
+        if (!kategoriIds.length) {
+            console.warn("Berita terakhir tidak punya kategori.");
+            return;
+        }
+
+        // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
+        const kategoriParam = kategoriIds.join(",");
+        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${kategoriParam}&per_page=2&exclude=${latestId}&_embed`;
+
+        return fetch(url)
+            .then(res => res.json())
+            .then(posts => {
+                const container = document.getElementById('beritaterkait');
+                container.innerHTML = ""; // reset konten
+
+                posts.forEach(post => {
+                    const judul = post.title.rendered;
+
+                    container.innerHTML += `
+                    <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
+                        <div class="post-header panel vstack justify-between gap-1">                    
+                            <h3 class="post-title fs-5 lg:fs-5 fw-semibold m-0">
+                                <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    ${judul}
+                                </a>
+                            </h3>                                                                
+                        </div>
+                    </article>
+                    `;                    
+                });
+            });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('beritatopnews').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
 function beritaTerkini2()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7&_embed")
@@ -1838,6 +1890,7 @@ function rubrikVideo()
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
+    beritaTerkait();
     beritaTerkini2();
     bannerKoran();
     beritaTerkini();
