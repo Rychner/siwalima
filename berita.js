@@ -117,8 +117,8 @@ function swiperBerita()
                     <img class="rounded-top-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                     <!-- Overlay + Judul -->
                     <div class="post-header panel vstack justify-end items-start">
-                        <span class="px-2 headline-font-size pt-1 text-white m-0 text-truncate-2 w-100">
-                            <a class="judul text-white text-none hover:text-red" href="detail.html?id=${post.id}">${judul}</a>                                    
+                        <span class="judul px-2 headline-font-size pt-1 text-white m-0 text-truncate-2 w-100">
+                            <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
                         </span>
                         <div class="w-100">
                             <div class="px-2 w-100 text-white post-date fs-7 text-white hstack gap-narrow">
@@ -126,7 +126,7 @@ function swiperBerita()
                             </div>
                         </div>                                
                     </div>
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="judul position-cover"></a>
                 </div>                
             </div>
         </article>                    
@@ -177,7 +177,7 @@ function beritaTerkait() {
                     container.innerHTML += `
                     <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
                         <div class="post-header panel vstack justify-between gap-1">                    
-                            <h3 class="post-title fs-5 lg:fs-5 fw-semibold m-0">
+                            <h3 class="post-title fw-semibold m-0" style="font-size: 15px;">
                                 <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                     ${judul}
                                 </a>
