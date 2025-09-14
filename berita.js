@@ -13,10 +13,10 @@ function beritaTerkini()
             <div>
                 <article class="post type-post panel d-flex gap-2">
                     <div>
-                        <div class="fs-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
+                        <div class="fs-2 py-2 fw-bold text-center text-red translate-y-narrow bg-gray-50 dark:bg-white dark:text-red min-w-48px">${nomor}</div>
                     </div>
-                    <h6 class="fs-6 px-1 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 translate-y-narrow dark:bg-white">
-                        <a class="fw-bold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
+                    <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 translate-y-narrow dark:bg-white">
+                        <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
                     </h6>
                 </article>
             </div>
