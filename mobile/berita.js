@@ -275,7 +275,7 @@ function beritaTerkini2()
         <article class="min-w-[200px] max-w-[200px] snap-start rounded overflow-hidden bg-white shadow">
             <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover">
             <div class="p-3">
-                <h3 class="text-base font-semibold text-gray-900 line-clamp-2">
+                <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
                     ${judul}
                 </h3>
                 <p class="text-sm text-gray-500 mt-1">
