@@ -415,21 +415,9 @@ function bannerKoran()
 
         const item = document.createElement('div');
 
-        item.innerHTML = `
-        <div class="block-header panel vstack items-center justify-center text-center gap-1 mb-1">
-            <h2 class="text-yellow block-title h5 m-0 hstack justify-center gap-1 dark:text-yellow">                                                    
-                <span class="bg-dark p-1 rounded dark:bg-gray-25">
-                    Edisi Cetak, ${tanggal}                    
-                </span>
-            </h2>
-        </div>
-        <div class="block-layout lg:gap-3 panel overflow-hidden bg-gray-25 dark:bg-gray-800">
-            <div class="block-content">
-                <div>                                                    
-                    <img class="uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="bannerKoran" data-uc-img="loading: lazy">                    
-                </div> 
-            </div>
-        </div>
+        item.innerHTML = `                                                          
+        <img class="w-full h-50" src="${gambar}" data-src="${gambar}" alt="bannerKoran" data-uc-img="loading: lazy" loading="lazy">                    
+                
         `;
 
         container.appendChild(item);
@@ -437,7 +425,7 @@ function bannerKoran()
         console.log("Banner Koran berhasil di-render.");
     })
     .catch(err => {
-        console.error("Gagal fetch data:", err);
+        console.error("Gagal fetch data Banner Koran", err);
         document.getElementById('bannerKoran').innerHTML = "<p>Gagal memuat iklan.</p>";
     });
 }
@@ -1982,7 +1970,8 @@ function rubrikVideo()
 function initApp() {
     swiperBerita();    
     beritaTerkini2();
-    beritaTerkini5();    
+    beritaTerkini5();
+    bannerKoran();    
 }
 
 // Jalankan setelah halaman dimuat
