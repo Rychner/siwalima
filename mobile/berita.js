@@ -272,7 +272,7 @@ function beritaTerkini2()
         const item = document.createElement('div');        
 
         item.innerHTML = `        
-        <article class="w-[43.7vw] snap-start rounded-lg overflow-hidden bg-white border">
+        <article class="w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
             <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-t-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
@@ -371,7 +371,7 @@ function beritaTerkini5()
         const item = document.createElement('div');        
 
         item.innerHTML = `        
-        <article class="w-[43.7vw] snap-start rounded-lg overflow-hidden bg-white border">
+        <article class="w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
             <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-t-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
