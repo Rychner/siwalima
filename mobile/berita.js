@@ -120,7 +120,7 @@ function swiperBerita()
                 </a>
                 <div class="bg-navbar-siwa w-full p-2 rounded-b-lg">
                     <span class="pt-1 text-white m-0 text-truncate-siwa-2 w-100">
-                        <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
+                        <a class="judul text-xl text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
                     </span>
                     <div class="w-100">
                         <div class="w-100 text-white post-date text-sm gap-narrow">
