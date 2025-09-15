@@ -273,7 +273,7 @@ function beritaTerkini2()
 
         item.innerHTML = `        
         <article class="width-berita-terkini-2-6-siwa snap-start rounded-lg overflow-hidden bg-white shadow">
-            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-t-lg">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
                     ${judul}
@@ -282,16 +282,114 @@ function beritaTerkini2()
                     <span>${formatTanggal(post.date)}</span>
                 </p>
             </div>
-        </article>
-        
+        </article>        
         `;
 
         container.appendChild(item);
         });
     })
     .catch(err => {
-        console.error("Gagal fetch data:", err);
+        console.error("Gagal fetch data berita terkini 2-4", err);
         document.getElementById('beritaterkini2').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
+function beritaTerkini5()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritaterkini5');
+
+        // Ambil tanggal (format: Mar 8, 2025)        
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+
+        data.slice(4).forEach(post => {
+        // Ambil kategori pertama (jika ada)
+        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+
+        // Ambil judul
+        const judul = post.title.rendered;
+
+        // Ambil featured image (jika ada)
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+        const item = document.createElement('div');        
+
+        item.innerHTML = `        
+        <article class="width-berita-terkini-2-6-siwa snap-start rounded-lg overflow-hidden bg-white shadow">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-lg">
+            <div class="p-3">
+                <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
+                    ${judul}
+                </h3>
+                <p class="text-sm text-gray-500 mt-1">
+                    <span>${formatTanggal(post.date)}</span>
+                </p>
+            </div>
+        </article>        
+        `;
+
+        container.appendChild(item);
+        });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data berita terkini 2-4", err);
+        document.getElementById('beritaterkini5').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
 
@@ -1882,23 +1980,9 @@ function rubrikVideo()
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
-    swiperBerita();
-    beritaTerkait();
+    swiperBerita();    
     beritaTerkini2();
-    bannerKoran();
-    beritaTerkini();
-    beritaPolitik();
-    beritaTopnews();
-    beritaKriminal();
-    beritaKesehatan();
-    beritaOlahraga();
-    beritaOpini();
-    //beritaPendidikan();
-    beritaDaerah();
-    beritaPemerintahan();
-    beritaVisi();
-    videoYoutube();
-    rubrikVideo();    
+    beritaTerkini5();    
 }
 
 // Jalankan setelah halaman dimuat
