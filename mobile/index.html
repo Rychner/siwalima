@@ -4,9 +4,257 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Siwalima.id</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        a {
+            font-family: 'Montserrat', sans-serif;
+        }            
+        @media (min-width:1200px) {
+            .lg\:min-w-215px {
+            min-width: 215px !important;
+            }
+        }            
+        .lg\:fs-2 {
+            font-size: 20px !important;
+        }
+        .uc-transition-active.uc-active .uc-transition-scale-up,.uc-transition-toggle .uc-transition-scale-up:focus-within,.uc-transition-toggle:focus .uc-transition-scale-up,.uc-transition-toggle:hover .uc-transition-scale-up {
+            --uc-scale-x: 1.2;
+            --uc-scale-y: 1.2;
+            opacity: 1
+        }
+        .judul{
+            font-family: 'Montserrat', sans-serif !important;            
+            font-weight: bold !important;
+            font-size: 20px !important;                
+        }
+        .navbar-text {
+            font-weight: bold !important;
+        }
+        .home-icon {
+            display: none;
+        }
+        .sticky-active .home-text {
+            display: none;
+        }
+        .sticky-active .home-icon {
+            display: inline;
+        }
+        .photo-count {
+            position: relative;
+            top: 0px;     
+            right: 0px;   
+            background-color: rgba(0, 0, 0, 0.7); /* background gelap transparan */
+            color: white;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-flex; /* mengikuti ukuran konten */
+            align-items: center;
+            gap: 4px; /* jarak icon & teks */
+            white-space: nowrap; /* mencegah teks turun ke bawah */
+        }
+        .photo-count img {
+            width: 16px;
+            height: 16px;                
+        }
+        .hidden {
+            display: none !important;
+        }
+        .flex {
+            display: flex !important;
+            inset: 0 !important;
+        }
+        .uc-navbar-sticky {
+            background-color: white !important; /* ubah background jadi hitam */                
+            /*border-bottom: 2px solid rgb(234, 67, 53) !important;*/
+            border-bottom: 4px solid #21409a !important;                
+        }
+        .uc-navbar-sticky .nav-x li a {
+            color: black !important; /* teks menu jadi hitam */
+            font-weight: bold !important;
+        }
+        .uc-navbar-sticky .nav-x li a:hover{
+            color: red !important; /* teks menu jadi merah saat di hover */
+            font-weight: bold !important;
+        }
+        /* Default: tampilkan semua menu */
+        .nav-full {
+        display: flex;
+        }
+        .nav-mini {
+        display: none;
+        }
+
+        /* Saat sticky, sembunyikan menu lain dan tampilkan hanya Home */
+        .uc-navbar-sticky .nav-full {
+        display: none !important;
+        }
+        .uc-navbar-sticky .nav-mini {
+        display: flex !important;
+        }
+        /* Saat sticky -> geser ke kiri */
+        .uc-navbar-sticky .uc-navbar-center {
+            justify-content: flex-start !important;
+        }
+        #video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;                
+            background-color: rgba(0, 0, 0, 0.7); /* abu-abu transparan */
+            display: none; /* disembunyikan dulu */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #video-modal.show {
+            display: flex; /* ketika muncul, pakai flex biar konten ditengah */
+        }
+        .bg-navbar-siwa {
+            background: linear-gradient(100deg, #21409a 50%, #5699f3 100%);
+        }
+        .bg-headline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 0%,   /* Transparan di atas */
+                #21409a 100%       /* Gelap di bawah */
+            );
+        }           
+        .bg-footer-siwa {
+            background-color: rgb(240, 239, 239) !important;
+        }
+        .text-footer {
+            color:rgb(29, 28, 28)
+        }
+        .sidenav {
+            height: auto;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #fdfdfd;
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #ee3333;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .headline-font-size {
+            font-size: 27px;
+            line-height: 1.2;
+        }        
+        .bg-blue-siwa {
+            background-color: #ee3333 !important;
+        }
+        .border-bottom-siwa {
+            border-bottom: 4px solid #21409a !important;
+        }
+        .text-truncate-siwa-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;  /* jumlah baris */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }                                              
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "100%";
+        }
+            
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </head>
-<body>
-    <p>Ini Halaman Mobile</p>
+<body class="max-w-7xl mx-auto px-4">
+    <!-- iklan 1 start -->
+    <div class="justify-center items-center max-w-[700px] mx-auto">
+        <img src="../80_2.jpg" alt="iklan 1" loading="lazy">
+    </div>
+    <!-- iklan 1 end -->
+    <!-- logo & iklan 2 start -->
+    <div class="flex items-center mt-2 justify-between">
+        <!-- Logo -->
+        <img class="w-1/3 md:w-1/3" src="../logoSiwalima.png" alt="logo">
+    
+        <!-- Iklan -->
+        <img class="w-2/3 md:w-2/3" src="../Coming_1_1.jpg" alt="iklan 2">
+    </div>
+    <!-- logo & iklan 2 end -->
+
+    <!-- Navbar start -->
+    <nav class="sticky top-0 bg-white shadow z-50 mt-2 bg-navbar-siwa">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">            
+            <div id="mySidenav" class="sidenav flex justify-center items-center text-center">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Kriminal</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Daerah</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Politik</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Pendidikan</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Visi</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Hukum</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Pemerintahan</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Olahraga</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Opini</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Online</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Covid-19</a></li>
+                    <li><a href="#" class="navbar-text text-uppercase hover:text-red">Suplemen</a></li>
+                </ul>                                                    
+            </div>                                            
+            <div onclick="openNav()">
+                <span class="btn btn-sm text-white w-32px h-32px rounded-circle">
+                    &#9776;
+                </span>                                                     
+            </div>        
+            <!-- Menu -->
+
+            <!-- Search -->
+            <div class="flex items-center space-x-2">
+                <input type="text" 
+                        class="rounded fs-6 px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Cari berita...">
+                <button class="btn btn-sm bg-white border border-blue-800 text-black w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-800 hover:text-white">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <!-- Search -->
+            
+        </div>
+    </nav>      
+    <!-- Navbar end -->
+
+    <!-- Master berita -->
+    <div class="swiper-wrapper mt-2" id="swiperberita">
+        <!-- JS akan inject berita di sini -->
+    </div>
+    <!-- Master berita -->
+
+    <!-- Memanggil API Siwalima -->
+    <script src="berita.js"></script>
+    <script src="../rubrikfoto.js"></script>
 </body>
 </html>
