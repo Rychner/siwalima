@@ -197,7 +197,7 @@ function beritaTerkait() {
 
 function beritaTerkini2()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=4&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaterkini2');
@@ -271,27 +271,19 @@ function beritaTerkini2()
 
         const item = document.createElement('div');        
 
-        item.innerHTML = `         
-        <div>
-            <article class="rounded-top-1 rounded-bottom-1 post type-post panel vstack gap-1 lg:gap-2">
-                <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
-                    </div>
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
-                </div>
-                <div class="post-header panel vstack justify-between gap-1">                    
-                    <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
-                    </h3>
-                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                        <div class="post-date hstack gap-narrow">
-                            <span>${formatTanggal(post.date)}</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
+        item.innerHTML = `        
+        <article class="min-w-[50%] snap-start rounded overflow-hidden bg-white shadow">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover">
+            <div class="p-3">
+                <h3 class="text-base font-semibold text-gray-900 line-clamp-2">
+                    ${judul}
+                </h3>
+                <p class="text-sm text-gray-500 mt-1">
+                    <span>${formatTanggal(post.date)}</span>
+                </p>
+            </div>
+        </article>
+        
         `;
 
         container.appendChild(item);
