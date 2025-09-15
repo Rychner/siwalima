@@ -272,8 +272,8 @@ function beritaTerkini2()
         const item = document.createElement('div');        
 
         item.innerHTML = `        
-        <article class="width-berita-terkini-2-6-siwa snap-start rounded overflow-hidden bg-white shadow">
-            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover">
+        <article class="width-berita-terkini-2-6-siwa snap-start rounded-lg overflow-hidden bg-white shadow">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-t-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
                     ${judul}
