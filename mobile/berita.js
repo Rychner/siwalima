@@ -671,6 +671,300 @@ function beritaTopnews()
     });
 }
 
+function beritaTerkini16()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=18&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritaterkini16');
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+    
+        data.slice(15).forEach(post => {
+            // Ambil kategori pertama (jika ada)
+            const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+    
+            // Ambil judul
+            const judul = post.title.rendered;
+    
+            // Ambil featured image (jika ada)
+            const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+    
+            const item = document.createElement('div');        
+    
+            item.innerHTML = `        
+            <article class="w-full flex items-center rounded-lg bg-white mb-2">
+                <img src="${gambar}" alt="Judul 1" class="w-[40vw] h-30 object-cover rounded-lg">
+                <div class="p-3">
+                    <h3 class="w-full text-sm font-semibold text-gray-900 text-truncate-siwa-2">
+                        ${judul}
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        <span>${formatTanggal(post.date)}</span>
+                    </p>
+                </div>
+            </article>        
+            `;
+    
+            container.appendChild(item);
+            });
+        })
+        .catch(err => {
+            console.error("Gagal fetch data berita terkini 16-18", err);
+            document.getElementById('beritaterkini16').innerHTML = "<p>Gagal memuat berita.</p>";
+        });
+}
+
+function beritaTerkini19()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=21&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritaterkini19');
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+    
+        data.slice(18).forEach(post => {
+            // Ambil kategori pertama (jika ada)
+            const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+    
+            // Ambil judul
+            const judul = post.title.rendered;
+    
+            // Ambil featured image (jika ada)
+            const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+    
+            const item = document.createElement('div');        
+    
+            item.innerHTML = `        
+            <article class="w-full flex items-center rounded-lg bg-white mb-2">
+                <img src="${gambar}" alt="Judul 1" class="w-[40vw] h-30 object-cover rounded-lg">
+                <div class="p-3">
+                    <h3 class="w-full text-sm font-semibold text-gray-900 text-truncate-siwa-2">
+                        ${judul}
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        <span>${formatTanggal(post.date)}</span>
+                    </p>
+                </div>
+            </article>        
+            `;
+    
+            container.appendChild(item);
+            });
+        })
+        .catch(err => {
+            console.error("Gagal fetch data berita terkini 19-21", err);
+            document.getElementById('beritaterkini19').innerHTML = "<p>Gagal memuat berita.</p>";
+        });
+}
+
+function beritaSuaraNetizen()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=285&per_page=12&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritasuaranetizen');
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+    
+        data.forEach(post => {
+            // Ambil kategori pertama (jika ada)
+            const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+    
+            // Ambil judul
+            const judul = post.title.rendered;
+    
+            // Ambil featured image (jika ada)
+            const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+    
+            const item = document.createElement('div');        
+    
+            item.innerHTML = `        
+            <article class="w-full flex items-center rounded-lg mb-2">
+                <img src="${gambar}" alt="Judul 1" class="w-24 h-24 object-cover rounded-full">
+                <div class="p-3">
+                    <h3 class="w-full text-sm font-semibold text-gray-900 text-truncate-siwa-2">
+                        ${judul}
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        <span>${formatTanggal(post.date)}</span>
+                    </p>
+                </div>
+            </article>        
+            `;
+    
+            container.appendChild(item);
+            });
+        })
+        .catch(err => {
+            console.error("Gagal fetch data berita suara netizen", err);
+            document.getElementById('beritasuaranetizen').innerHTML = "<p>Gagal memuat berita.</p>";
+        });
+}
+
 function beritaKriminal()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=21&_embed")
@@ -1951,7 +2245,10 @@ function initApp() {
     beritaTerkini8();
     beritaTerpopuler();
     beritaTerkini12();
-    beritaTopnews();    
+    beritaTopnews();
+    beritaTerkini16();
+    beritaTerkini19();
+    beritaSuaraNetizen();    
 }
 
 // Jalankan setelah halaman dimuat
