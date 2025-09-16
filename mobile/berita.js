@@ -430,12 +430,12 @@ function bannerKoran()
     });
 }
 
-function beritaPolitik()
+function beritaTerkini8()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=15&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=12&_embed")
     .then(res => res.json())
     .then(data => {
-        const container = document.getElementById('beritapolitik');
+        const container = document.getElementById('beritaterkini8');
 
         const formatTanggal = (str) => {
             const date = new Date(str);            
@@ -493,91 +493,39 @@ function beritaPolitik()
             }
         };
     
-        // Dapatkan URL gambar
-        const getImage = (post) =>
-        post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://html.themewant.com/news5/assets/images/common/img-fallback.png";
-    
-        // ========== POST PERTAMA ==========
-        const post1 = data[7];
-        const post1HTML = `                
-        <div>
-            <article class="post type-post panel">
-                <div class="row child-cols items-center">                    
-                    <div>
-                        <div class="post-header panel vstack gap-1">                    
-                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
-                                    ${post1.title.rendered}
-                                </a>
-                            </h3>
-                            <div class="post-date fs-7 hstack gap-narrow">
-                                <span>${formatTanggal(post1.date)}</span>
-                            </div>                  
-                        </div>                        
-                    </div>
-                    <div class="col-auto" style="padding-left:0;padding-right:24px;">
-                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
-                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                                <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
-                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                                    data-src="${getImage(post1)}"
-                                    alt="${post1.title.rendered}" data-uc-img="loading: lazy">
-                            </div>
-                            <a href="detail.html?id=${post1.id}" class="position-cover"></a>
-                        </div>
-                    </div>                            
-                </div>
-            </article>
-        </div>
-        `;
-    
-        // ========== POST 2–4 ==========
-        let postListHTML = '';
         data.slice(8).forEach(post => {
-        postListHTML += `
-            <div>
-                <article class="post type-post panel">
-                    <div class="row child-cols items-center">
-                        <div class="col-auto">
-                            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-72px min-w-72px lg:min-w-215px">
-                                <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
-                                        src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                                        data-src="${getImage(post)}"
-                                        alt="${post.title.rendered}" data-uc-img="loading: lazy">
-                                </div>
-                                <a href="#" class="position-cover"></a>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="post-header panel vstack gap-1">                    
-                                <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
-                                        ${post.title.rendered}
-                                    </a>
-                                </h3>
-                                <div class="post-date fs-7 hstack gap-narrow">
-                                    <span>${formatTanggal(post.date)}</span>
-                                </div>                    
-                            </div>                        
-                        </div>                        
-                    </div>
-                </article>
-            </div>
-        `;
-        });
+            // Ambil kategori pertama (jika ada)
+            const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
     
-        // Gabungkan semuanya dan masukkan ke DOM
-        container.innerHTML = `
-        ${post1HTML}
-        ${postListHTML}
-        </div> <!-- tutup block-content -->
-        `;
-    })
-    .catch(err => {
-        console.error("Gagal fetch berita", err);
-        document.getElementById('beritapolitik').innerHTML = "<p>Gagal memuat berita.</p>";
-    });
+            // Ambil judul
+            const judul = post.title.rendered;
+    
+            // Ambil featured image (jika ada)
+            const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+    
+            const item = document.createElement('div');        
+    
+            item.innerHTML = `        
+            <article class="w-full flex items-center rounded-lg bg-white mb-2">
+                <img src="${gambar}" alt="Judul 1" class="w-[40vw] h-30 object-cover rounded-lg">
+                <div class="p-3">
+                    <h3 class="w-full text-sm font-semibold text-gray-900 text-truncate-siwa-2">
+                        ${judul}
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        <span>${formatTanggal(post.date)}</span>
+                    </p>
+                </div>
+            </article>        
+            `;
+    
+            container.appendChild(item);
+            });
+        })
+        .catch(err => {
+            console.error("Gagal fetch data berita terkini 8-12", err);
+            document.getElementById('beritaterkini8').innerHTML = "<p>Gagal memuat berita.</p>";
+        });
 }
 
 function beritaTopnews()
@@ -1971,7 +1919,8 @@ function initApp() {
     swiperBerita();    
     beritaTerkini2();
     beritaTerkini5();
-    bannerKoran();    
+    bannerKoran();
+    beritaTerkini8();    
 }
 
 // Jalankan setelah halaman dimuat
