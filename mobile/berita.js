@@ -451,21 +451,20 @@ function beritaTerpopuler()
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('beritaterpopuler');
+
             data.forEach((post, index) => {            
             //const jamTerbit = post.date.slice(11, 16);
             const nomor = index + 1;
             const item = document.createElement('div');
             item.innerHTML = `
-            <div>
-                <article class="post type-post panel d-flex">
-                    <div>
-                        <div class="fs-2 py-2 fw-bold text-center text-white bg-blue-siwa dark:bg-white dark:text-red min-w-48px border-bottom-siwa">${nomor}</div>
-                    </div>
-                    <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 dark:bg-white">
-                        <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
-                    </h6>
-                </article>
-            </div>
+            <article class="flex items-center gap-2 py-2">
+                <div>
+                    <div class="text-base py-2 w-[10vw] font-bold text-center text-white bg-blue-siwa border-bottom-siwa">${nomor}</div>
+                </div>
+                <div class="text-truncate-siwa-2 text-none w-full">
+                    <a class="text-sm font-medium" href="detail.html?id=${post.post_id}">${post.title}</a>
+                </div>
+            </article>            
             `;
             container.appendChild(item);
             });
@@ -474,6 +473,104 @@ function beritaTerpopuler()
         document.getElementById('beritaterpopuler').innerHTML = '<p>Gagal memuat data berita.</p>';
         console.error('Terjadi kesalahan:', error);
     });
+}
+
+function beritaTerkini12()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=15&_embed")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('beritaterkini12');
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+    
+        data.slice(11).forEach(post => {
+            // Ambil kategori pertama (jika ada)
+            const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+    
+            // Ambil judul
+            const judul = post.title.rendered;
+    
+            // Ambil featured image (jika ada)
+            const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+    
+            const item = document.createElement('div');        
+    
+            item.innerHTML = `        
+            <article class="w-full flex items-center rounded-lg bg-white mb-2">
+                <img src="${gambar}" alt="Judul 1" class="w-[40vw] h-30 object-cover rounded-lg">
+                <div class="p-3">
+                    <h3 class="w-full text-sm font-semibold text-gray-900 text-truncate-siwa-2">
+                        ${judul}
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                        <span>${formatTanggal(post.date)}</span>
+                    </p>
+                </div>
+            </article>        
+            `;
+    
+            container.appendChild(item);
+            });
+        })
+        .catch(err => {
+            console.error("Gagal fetch data berita terkini 12-15", err);
+            document.getElementById('beritaterkini12').innerHTML = "<p>Gagal memuat berita.</p>";
+        });
 }
 
 function beritaTopnews()
@@ -1868,7 +1965,9 @@ function initApp() {
     beritaTerkini2();
     beritaTerkini5();
     bannerKoran();
-    beritaTerkini8();    
+    beritaTerkini8();
+    beritaTerpopuler();
+    beritaTerkini12();    
 }
 
 // Jalankan setelah halaman dimuat
