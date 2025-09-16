@@ -1,4 +1,3 @@
-//Section 1 start
 function swiperBerita()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
@@ -650,22 +649,15 @@ function beritaTopnews()
         const item = document.createElement('div');
 
         item.innerHTML = ` 
-        <article class="post type-post panel vstack gap-1 lg:gap-2">
-            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
-                </div>
-                <a href="detail.html?id=${post.id}" class="position-cover"></a>
-            </div>
-            <div class="post-header panel vstack gap-1">                                        
-                <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
-                    <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
+        <article class="w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-30 object-cover rounded-t-lg">
+            <div class="p-3">
+                <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
+                    ${judul}
                 </h3>
-                <div class="d-none md:d-block">
-                    <div class="post-date text-white hstack gap-narrow">
-                        <span>${formatTanggal(post.date)}</span>
-                    </div>
-                </div>
+                <p class="text-sm text-gray-500 mt-1">
+                    <span>${formatTanggal(post.date)}</span>
+                </p>
             </div>
         </article>
         `;
@@ -678,9 +670,7 @@ function beritaTopnews()
         document.getElementById('beritatopnews').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
-//Section 1 end
 
-//Section 2 start
 function beritaKriminal()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=21&_embed")
@@ -999,9 +989,7 @@ function beritaOpini()
         document.getElementById('beritaopini').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
-//Section 2 end
 
-//Section 3 start
 function beritaPendidikan()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=32&_embed")
@@ -1130,9 +1118,7 @@ function beritaPendidikan()
         document.getElementById('beritapendidikan').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
-//Section 3 end
 
-//Section 4 start
 function beritaOlahraga()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=33&_embed")
@@ -1368,9 +1354,7 @@ function beritaVisi()
         document.getElementById('beritavisi').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
-//Section 4 end
 
-//Section 5 start
 function beritaPemerintahan()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=40&_embed")
@@ -1628,7 +1612,6 @@ function beritaDaerah()
         document.getElementById('beritadaerah').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
-//Section 5 end
 
 function beritaHukum()
 {
@@ -1967,7 +1950,8 @@ function initApp() {
     bannerKoran();
     beritaTerkini8();
     beritaTerpopuler();
-    beritaTerkini12();    
+    beritaTerkini12();
+    beritaTopnews();    
 }
 
 // Jalankan setelah halaman dimuat
