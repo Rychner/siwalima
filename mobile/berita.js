@@ -1,35 +1,4 @@
 //Section 1 start
-function beritaTerkini()
-{
-    fetch("https://siwalimanews.com/wp-json/wp/v2/get_data_pvc")
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById('beritaterkini');
-            data.forEach((post, index) => {            
-            //const jamTerbit = post.date.slice(11, 16);
-            const nomor = index + 1;
-            const item = document.createElement('div');
-            item.innerHTML = `
-            <div>
-                <article class="post type-post panel d-flex">
-                    <div>
-                        <div class="fs-2 py-2 fw-bold text-center text-white bg-blue-siwa dark:bg-white dark:text-red min-w-48px border-bottom-siwa">${nomor}</div>
-                    </div>
-                    <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 dark:bg-white">
-                        <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
-                    </h6>
-                </article>
-            </div>
-            `;
-            container.appendChild(item);
-            });
-        })
-    .catch(error => {
-        document.getElementById('berita').innerHTML = '<p>Gagal memuat data berita.</p>';
-        console.error('Terjadi kesalahan:', error);
-    });
-}
-
 function swiperBerita()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
@@ -140,58 +109,6 @@ function swiperBerita()
     .catch(err => {
         console.error("Gagal fetch data:", err);
         document.getElementById('swiperberita').innerHTML = "<p>Gagal memuat berita.</p>";
-    });
-}
-
-function beritaTerkait() {
-    // 1️⃣ Ambil berita terakhir
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
-    .then(res => res.json())
-    .then(latestPosts => {
-        if (!latestPosts.length) return;
-
-        const latestPost = latestPosts[0];
-        const latestId = latestPost.id;
-
-        // 2️⃣ Ambil kategori dari berita terakhir
-        const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
-        const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
-
-        if (!kategoriIds.length) {
-            console.warn("Berita terakhir tidak punya kategori.");
-            return;
-        }
-
-        // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
-        const kategoriParam = kategoriIds.join(",");
-        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${kategoriParam}&per_page=2&exclude=${latestId}&_embed`;
-
-        return fetch(url)
-            .then(res => res.json())
-            .then(posts => {
-                const container = document.getElementById('beritaterkait');
-                container.innerHTML = ""; // reset konten
-
-                posts.forEach(post => {
-                    const judul = post.title.rendered;
-
-                    container.innerHTML += `
-                    <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
-                        <div class="post-header panel vstack justify-between gap-1">                    
-                            <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0">
-                                <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
-                                    ${judul}
-                                </a>
-                            </h3>                                                                
-                        </div>
-                    </article>
-                    `;                    
-                });
-            });
-    })
-    .catch(err => {
-        console.error("Gagal fetch data:", err);
-        document.getElementById('beritatopnews').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
 
@@ -432,7 +349,7 @@ function bannerKoran()
 
 function beritaTerkini8()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=12&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=11&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaterkini8');
@@ -493,7 +410,7 @@ function beritaTerkini8()
             }
         };
     
-        data.slice(8).forEach(post => {
+        data.slice(7).forEach(post => {
             // Ambil kategori pertama (jika ada)
             const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
     
@@ -526,6 +443,37 @@ function beritaTerkini8()
             console.error("Gagal fetch data berita terkini 8-12", err);
             document.getElementById('beritaterkini8').innerHTML = "<p>Gagal memuat berita.</p>";
         });
+}
+
+function beritaTerpopuler()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/get_data_pvc")
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('beritaterpopuler');
+            data.forEach((post, index) => {            
+            //const jamTerbit = post.date.slice(11, 16);
+            const nomor = index + 1;
+            const item = document.createElement('div');
+            item.innerHTML = `
+            <div>
+                <article class="post type-post panel d-flex">
+                    <div>
+                        <div class="fs-2 py-2 fw-bold text-center text-white bg-blue-siwa dark:bg-white dark:text-red min-w-48px border-bottom-siwa">${nomor}</div>
+                    </div>
+                    <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 dark:bg-white">
+                        <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
+                    </h6>
+                </article>
+            </div>
+            `;
+            container.appendChild(item);
+            });
+        })
+    .catch(error => {
+        document.getElementById('beritaterpopuler').innerHTML = '<p>Gagal memuat data berita.</p>';
+        console.error('Terjadi kesalahan:', error);
+    });
 }
 
 function beritaTopnews()
