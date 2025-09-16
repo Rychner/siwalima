@@ -648,7 +648,7 @@ function beritaTopnews()
         const item = document.createElement('div');
 
         item.innerHTML = ` 
-        <article class="min-w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
+        <article class="w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
             <img src="${gambar}" alt="Judul 1" class="w-full h-30 object-cover rounded-t-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
