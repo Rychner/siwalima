@@ -273,7 +273,7 @@ function beritaTerkini2()
 
         item.innerHTML = `        
         <article class="w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
-            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-t-lg">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-30 object-cover rounded-t-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
                     ${judul}
@@ -372,7 +372,7 @@ function beritaTerkini5()
 
         item.innerHTML = `        
         <article class="w-[43.7vw] snap-start rounded-lg overflow-x-hidden bg-white border">
-            <img src="${gambar}" alt="Judul 1" class="w-full h-40 object-cover rounded-t-lg">
+            <img src="${gambar}" alt="Judul 1" class="w-full h-30 object-cover rounded-t-lg">
             <div class="p-3">
                 <h3 class="text-base font-semibold text-gray-900 text-truncate-siwa-2">
                     ${judul}
