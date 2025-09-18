@@ -200,7 +200,7 @@
     <script>
         function handleNavbarScroll() {
             const navbar = document.getElementById("navbar");
-            if (window.scrollY > 0) {
+            if (window.scrollY > 100) {
                 navbar.classList.add("bg-white", "border-bottom-siwa", "shadow-sm");
                 navbar.classList.remove("bg-navbar-siwa");
             } else {
@@ -219,7 +219,7 @@
     <script>
         window.addEventListener("scroll", function () {
         const menu = document.getElementById("menu");
-        if (window.scrollY > 0) {
+        if (window.scrollY > 100) {
             menu.classList.add("bg-blue-siwa");
         } else {
             menu.classList.remove("bg-blue-siwa");
@@ -230,7 +230,7 @@
     <script>
         window.addEventListener("scroll", function () {
         const search = document.getElementById("search");
-        if (window.scrollY > 0) {
+        if (window.scrollY > 100) {
             search.classList.add("bg-blue-siwa");
         } else {
             search.classList.remove("bg-blue-siwa");
