@@ -1566,10 +1566,9 @@ function beritaTerkini44()
 
         data.slice(43).forEach(post => {
         // Ambil kategori pertama (jika ada)
-        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";        
 
-        
-        // Ambil tanggal (format: Mar 8, 2025)        
+        // Ambil tanggal (format: Mar 8, 2025)
         const formatTanggal = (str) => {
             const date = new Date(str);            
             const now = new Date();
@@ -1651,7 +1650,7 @@ function beritaTerkini44()
                         <div class="post-date hstack gap-narrow">
                             <span>${formatTanggal(post.date)}</span>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </article>
         </div>
@@ -1661,7 +1660,7 @@ function beritaTerkini44()
         });
     })
     .catch(err => {
-        console.error("Gagal fetch data berita terkini 44-49", err);
+        console.error("Gagal fetch data:", err);
         document.getElementById('beritaterkini44').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
@@ -2011,11 +2010,11 @@ function initApp() {
     beritaOpini();
     //beritaPendidikan();
     beritaDaerah();
+    beritaTerkini44();    
     beritaPemerintahan();
     beritaVisi();
     videoYoutube();
     rubrikVideo();
-    beritaTerkini44();    
 }
 
 // Jalankan setelah halaman dimuat
