@@ -1,7 +1,5 @@
 function detailBerita()
-{
-    
-    
+{  
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
@@ -44,6 +42,23 @@ function detailBerita()
         </div>
         `;
 
+        // ✅ Render template HTML awal
+        const container = document.getElementById("detailberita");
+        container.innerHTML = `
+        <article class="px-4">
+            <p class="mt-2 text-xs">SIWALIMA.id > Berita</p>
+            <p class="mt-4 text-base text-center judul-detail">${judul}</p>
+            <div class="text-center">
+                <span class="text-xs font-bold">${kategori}</span>
+                <span class="text-xs">|</span>
+                <span class="text-xs">${tanggal} WIT</span>
+            </div>
+            <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy">
+            <div class="mt-2 text-sm" id="konten-berita"></div>
+            <div id="pagination-controls" class="mt-4 text-center"></div>            
+        </article>
+        `;
+
         // ✅ Lanjutkan fetch "Baca Juga" setelah sisipkan iklan
         const kataPertama = judul.split(" ")[0]; // ambil keyword dari judul, misalnya
         fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?search=${kataPertama}&exclude=${id}&per_page=1&_embed`)
@@ -61,7 +76,10 @@ function detailBerita()
 
         const paragrafPerHalaman = 6;
         let halamanSekarang = 1;
-        const totalHalaman = Math.ceil(paragrafAsli.length / paragrafPerHalaman);          
+        const totalHalaman = Math.ceil(paragrafAsli.length / paragrafPerHalaman);
+        console.log("Panjang paragraf:", paragrafAsli.length);
+        console.log("Total halaman:", totalHalaman);
+        console.log("Pagination div:", document.getElementById("pagination-controls"));          
 
         function renderHalaman(page) {
             const mulai = (page - 1) * paragrafPerHalaman;
@@ -118,8 +136,7 @@ function detailBerita()
             prevBtn.className = "page-link";
             prevBtn.innerHTML = "&laquo;";
             prevBtn.hidden = halamanSekarang === 1;
-            prevBtn.addEventListener("click", () => {
-                document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+            prevBtn.addEventListener("click", () => {                
                 if (halamanSekarang > 1) {
                     halamanSekarang--;
                     renderHalaman(halamanSekarang);
@@ -135,8 +152,7 @@ function detailBerita()
                 btn.className = `page-link ${halamanSekarang === i ? "active" : ""}`;
                 btn.innerText = i;
                 btn.addEventListener("click", () => {
-                    // Scroll ke atas konten setelah btn di klik
-                    document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                    // Scroll ke atas konten setelah btn di klik                    
                     halamanSekarang = i;
                     renderHalaman(halamanSekarang);
                 });
@@ -164,25 +180,7 @@ function detailBerita()
             pagination.appendChild(ul);
             }
 
-
-        // ✅ Render template HTML awal
-        const container = document.getElementById("detailberita");
-        container.innerHTML = `
-        <article class="px-4">
-            <p class="mt-2 text-xs">SIWALIMA.id > Berita</p>
-            <p class="mt-4 text-base text-center judul-detail">${judul}</p>
-            <div class="text-center">
-                <span class="text-xs font-bold">${kategori}</span>
-                <span class="text-xs">|</span>
-                <span class="text-xs">${tanggal} WIT</span>
-            </div>
-            <img class="mt-2 w-full h-50" src="${gambar}" data-src="${gambar}" alt="bannerKoran" data-uc-img="loading: lazy" loading="lazy">
-            <div class="mt-2 text-sm" id="konten-berita"></div>
-            <div id="pagination-controls" class="mt-4 text-center"></div>
-        </article>
-        `;
-
-    renderHalaman(halamanSekarang); 
+        renderHalaman(halamanSekarang);
     })
     .catch((error) => {
     console.error("Gagal memuat Baca Juga:", error);
@@ -192,6 +190,7 @@ function detailBerita()
     console.error("Terjadi kesalahan:", error);
     });    
 }
+
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {    

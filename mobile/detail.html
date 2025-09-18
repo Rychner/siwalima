@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siwalima.id</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -74,6 +77,39 @@
             display: flex !important;
             inset: 0 !important;
         }
+        .pagination-list {
+            display: inline-flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 5px;
+            font-size: 12px;
+        }
+        .page-item {
+            display: inline;
+        }
+        .page-link {
+            border: 1px solid #ccc;
+            padding: 3px 12px;
+            cursor: pointer;
+            background-color: white;
+            color: #007bff;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+        .page-link:hover {
+            background-color: #e9ecef;
+        }
+        .page-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .page-link:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
+        }
         .uc-navbar-sticky {
             background-color: white !important; /* ubah background jadi hitam */                
             /*border-bottom: 2px solid rgb(234, 67, 53) !important;*/
@@ -89,18 +125,17 @@
         }
         /* Default: tampilkan semua menu */
         .nav-full {
-        display: flex;
+            display: flex;
         }
         .nav-mini {
-        display: none;
+            display: none;
         }
-
         /* Saat sticky, sembunyikan menu lain dan tampilkan hanya Home */
         .uc-navbar-sticky .nav-full {
-        display: none !important;
+            display: none !important;
         }
         .uc-navbar-sticky .nav-mini {
-        display: flex !important;
+            display: flex !important;
         }
         /* Saat sticky -> geser ke kiri */
         .uc-navbar-sticky .uc-navbar-center {
@@ -185,8 +220,7 @@
             display: none;
         }                                           
     </style>
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "100%";
@@ -255,7 +289,7 @@
     </nav>      
     <!-- Navbar end -->
     
-    <div id="detailberita"></div>
+    <div id="detailberita"></div>    
 
     <script src="detail.js"></script>
 </body>
