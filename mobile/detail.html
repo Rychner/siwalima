@@ -218,7 +218,19 @@
         }
         ::-webkit-scrollbar {
             display: none;
-        }                                           
+        }
+        .share-menu {
+            display: none; /* awalnya hidden */
+            position: fixed;
+            bottom: 5px;          /* nempel di bawah layar */
+            left: 50%;          /* taruh titik referensi di tengah */
+            transform: translateX(-50%); /* geser supaya benar-benar center */
+            border: 1px solid #ddd;
+            z-index: 50;
+            padding: 8px 16px;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+            border-radius: 12px; /* opsional, biar lebih rapi */
+        }                                            
     </style>
     
     <script>
@@ -229,6 +241,17 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+    </script>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            const shareMenu = document.querySelector(".share-menu");
+            if (window.scrollY > 100) { // angka 100 bisa diganti sesuai kebutuhan
+                shareMenu.style.display = "block";
+            } else {
+                shareMenu.style.display = "none";
+            }
+        });
     </script>
 </head>
 <body class="max-w-7xl mx-auto overflow-x-hidden">
@@ -274,19 +297,37 @@
             </div>        
             <!-- Menu -->
 
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <img class="h-10 md:h-12" src="../logoSiwalima.png" alt="logo">
+            </div>
+
             <!-- Search -->
-            <div class="flex items-center space-x-2">
-                <input type="text" 
-                        class="rounded text-sm px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                        placeholder="Cari berita...">
-                <button class="btn btn-sm bg-white border border-blue-800 text-black w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-800 hover:text-white">
+            <div class="flex items-center space-x-2">                
+                <button class="text-white w-8 h-8">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
             <!-- Search -->
             
         </div>
-    </nav>      
+    </nav>
+    <!-- 🔽 Menu Share -->
+    <div class="share-menu bg-gray-100 py-1 rounded max-w-sm mx-auto fixed px-4">
+        <div class="flex justify-center items-center gap-3">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://contoh.com" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=https://contoh.com&text=Judul+Berita" target="_blank" class="btn btn-sm bg-black text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Judul+Berita%20https://contoh.com" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://t.me/share/url?url=https://contoh.com&text=Judul+Berita" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        </div>
+    </div>
     <!-- Navbar end -->
     
     <div id="detailberita"></div>    
