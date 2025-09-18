@@ -53,7 +53,7 @@ function detailBerita()
                 <span class="text-xs">|</span>
                 <span class="text-xs">${tanggal} WIT</span>
             </div>
-            <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy">
+            <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy" id="gambarArtikel">
             <div class="mt-2 text-sm" id="konten-berita"></div>
             <div id="pagination-controls" class="mt-4 text-center"></div>            
         </article>
@@ -136,7 +136,8 @@ function detailBerita()
             prevBtn.className = "page-link";
             prevBtn.innerHTML = "&laquo;";
             prevBtn.hidden = halamanSekarang === 1;
-            prevBtn.addEventListener("click", () => {                
+            prevBtn.addEventListener("click", () => {
+                document.getElementById("gambarArtikel").scrollIntoView({ behavior: "smooth" });                
                 if (halamanSekarang > 1) {
                     halamanSekarang--;
                     renderHalaman(halamanSekarang);
@@ -152,6 +153,7 @@ function detailBerita()
                 btn.className = `page-link ${halamanSekarang === i ? "active" : ""}`;
                 btn.innerText = i;
                 btn.addEventListener("click", () => {
+                    document.getElementById("gambarArtikel").scrollIntoView({ behavior: "smooth" });
                     // Scroll ke atas konten setelah btn di klik                    
                     halamanSekarang = i;
                     renderHalaman(halamanSekarang);
@@ -168,7 +170,7 @@ function detailBerita()
             nextBtn.innerHTML = "&raquo;";
             nextBtn.hidden = halamanSekarang === totalHalaman;
             nextBtn.addEventListener("click", () => {
-                document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                document.getElementById("gambarArtikel").scrollIntoView({ behavior: "smooth" });
                 if (halamanSekarang < totalHalaman) {
                 halamanSekarang++;
                 renderHalaman(halamanSekarang);
