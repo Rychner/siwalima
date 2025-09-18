@@ -1765,6 +1765,482 @@ function beritaTerkini43()
         });
 }
 
+function detailBerita()
+{
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+
+        if (!id) {
+            document.getElementById("detailberita").innerHTML = "<p>ID tidak ditemukan.</p>";
+            return;
+        }
+        
+        fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
+        .then((response) => response.json())
+        .then((post) => {          
+            const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
+            const kategoriId = post._embedded["wp:term"]?.[0]?.[0]?.id;
+            const date = new Date(post.date);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            let tanggal = date.toLocaleDateString('id-ID', options);
+            const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+            const judul = post.title.rendered;
+
+            // Ambil isi konten dan ubah kata jika diperlukan
+            const isi = post.content.rendered.replace(/Siwalimanews/g, "Siwalima.id");
+            // ✅ Gunakan tempDiv untuk memproses semua elemen HTML dari isi
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = isi;
+
+            const semuaElemen = Array.from(tempDiv.children);
+            const paragrafAsli = semuaElemen.filter(el => el.tagName.toLowerCase() === "p");
+
+            const iklanbody1 = `<div class="mt-2 mb-2 d-flex justify-center">
+                <div class='p-2 max-w-500px'>
+                    <img src="../iklan_body_isi_berita_1.jpg">
+                </div>
+            </div>
+            `;
+            
+            const iklanbody2 = `<div class="mt-2 mb-2 d-flex justify-center">
+                <div class='p-2 max-w-500px'>
+                    <img src="../iklan_body_isi_berita_2.jpg">
+                </div>
+            </div>
+            `;
+
+            // ✅ Lanjutkan fetch "Baca Juga" setelah sisipkan iklan
+            const kataPertama = judul.split(" ")[0]; // ambil keyword dari judul, misalnya
+            fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?search=${kataPertama}&exclude=${id}&per_page=1&_embed`)
+            .then(res => res.json())
+            .then(posts => {
+                let bacaJugaHTML = "";
+                if(posts.length > 0) {
+                bacaJugaHTML = `<div class="mt-2 mb-2">
+                    <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>
+                        <a href='detail.html?id=${posts[0].id}' class="judul fs-3 text-none">${posts[0].title.rendered}</a>
+                    </div>
+                </div>
+                `;
+                }          
+
+            const paragrafPerHalaman = 6;
+            let halamanSekarang = 1;
+            const totalHalaman = Math.ceil(paragrafAsli.length / paragrafPerHalaman);          
+
+            function renderHalaman(page) {
+                const mulai = (page - 1) * paragrafPerHalaman;
+                const akhir = mulai + paragrafPerHalaman;
+                const paragrafHalaman = paragrafAsli.slice(mulai, akhir);
+    
+                let kontenHTML = "";
+    
+                for (let i = 0; i < paragrafHalaman.length; i++) {
+                    kontenHTML += paragrafHalaman[i].outerHTML;
+    
+                    // Hanya pada halaman pertama dan setelah paragraf ke-3
+                    if (i === 0) {
+                    kontenHTML += iklanbody1;
+                    }
+
+                    // Hanya pada halaman pertama dan setelah paragraf ke-3
+                    if (i === 2) {                        
+                    kontenHTML += bacaJugaHTML;
+                    }
+    
+                    // Hanya pada halaman pertama dan setelah paragraf ke-4
+                    if (i === 4) {
+                    kontenHTML += iklanbody2;
+                    }
+                }
+                document.getElementById("konten-berita").innerHTML = kontenHTML;
+                /*  document.getElementById("pageInfo").innerText = `Halaman ${page} dari ${totalHalaman}`;
+                document.getElementById("prevBtn").disabled = page === 1;
+                document.getElementById("nextBtn").disabled = page === totalHalaman; */
+                // Jalankan lozad setelah DOM diisi
+                const observer = lozad(); 
+                observer.observe();
+                
+                renderPagination();                
+            }
+
+            function renderPagination() {
+                const pagination = document.getElementById("pagination-controls");
+                pagination.innerHTML = "";
+
+                // Jika hanya ada 1 halaman, tidak usah tampilkan pagination
+                if (totalHalaman <= 1) {
+                    return; 
+                }
+
+                const ul = document.createElement("ul");
+                ul.className = "pagination-list";
+
+                // Tombol previous «
+                const liPrev = document.createElement("li");
+                liPrev.className = "page-item";
+                const prevBtn = document.createElement("button");
+                prevBtn.className = "page-link";
+                prevBtn.innerHTML = "&laquo;";
+                prevBtn.hidden = halamanSekarang === 1;
+                prevBtn.addEventListener("click", () => {
+                    document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                    if (halamanSekarang > 1) {
+                        halamanSekarang--;
+                        renderHalaman(halamanSekarang);
+                    }
+                });
+                liPrev.appendChild(prevBtn);
+                ul.appendChild(liPrev);
+
+                for (let i = 1; i <= totalHalaman; i++) {
+                    const li = document.createElement("li");
+                    li.className = "page-item";
+                    const btn = document.createElement("button");
+                    btn.className = `page-link ${halamanSekarang === i ? "active" : ""}`;
+                    btn.innerText = i;
+                    btn.addEventListener("click", () => {
+                        // Scroll ke atas konten setelah btn di klik
+                        document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                        halamanSekarang = i;
+                        renderHalaman(halamanSekarang);
+                    });
+                    li.appendChild(btn);
+                    ul.appendChild(li);
+                }
+
+                // Tombol next
+                const liNext = document.createElement("li");
+                liNext.className = "page-item";
+                const nextBtn = document.createElement("button");
+                nextBtn.className = "page-link";
+                nextBtn.innerHTML = "&raquo;";
+                nextBtn.hidden = halamanSekarang === totalHalaman;
+                nextBtn.addEventListener("click", () => {
+                    document.getElementById("iklan-panjang").scrollIntoView({ behavior: "smooth" });
+                    if (halamanSekarang < totalHalaman) {
+                    halamanSekarang++;
+                    renderHalaman(halamanSekarang);
+                    }
+                });
+                liNext.appendChild(nextBtn);
+                ul.appendChild(liNext);
+
+                pagination.appendChild(ul);
+                }
+
+
+            // ✅ Render template HTML awal
+            const container = document.getElementById("detailberita");
+            container.innerHTML = `
+            <div class="post-header">                    
+                <div class="panel vstack mx-auto gap-2 md:gap-3">
+                    <div class="post-meta panel hstack justify-start gap-1 fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60 md:d-flex z-1">
+                        <div>
+                            <div class="post-category hstack gap-narrow fw-semibold">
+                                <a class="text-none hover:text-red dark:text-primary duration-150" href="tes.html">${kategori}</a>
+                            </div>
+                        </div>
+                        <div class="sep md:d-block">❘</div>
+                            <div class="md:d-block">
+                                <div class="post-date hstack gap-narrow">
+                                    <span>${tanggal} WIT</span>
+                                </div>
+                            </div>                                                                
+                        </div>
+                        <div class="h4 judul fw-bold sm:h2 lg:h2 xl:h2">
+                            ${judul}
+                        </div>
+                        <figure class="featured-image m-0">
+                            <figure
+                                class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                <img class="media-cover image uc-transition-opaque"
+                                    src="${gambar}"
+                                    data-src="${gambar}"
+                                    alt="${judul}"
+                                    data-uc-img="loading: lazy">
+                            </figure>
+                        </figure>
+                    </div>                                        
+                </div> 
+                <!-- Iklan 1 start -->
+                <div class="mt-3">
+                    <div class="section-inner panel" id="iklan-panjang">                                                    
+                        <img class="text-dark dark:text-white" src="../iklanpanjang.png" data-src="../iklanpanjang.png" alt="iklanpanjang" data-uc-img="loading: lazy">
+                        <a href=#" class="position-cover"></a>
+                    </div>
+                </div>
+                <!-- Iklan 1 end -->
+        <div class="panel position-relative mt-2 lg:mt-2 xl:mt-4">
+            <div class="container">
+                <div class="content-wrap row child-col-12 lg:child-cols g-4 lg:g-6">
+                    <div class="max-w-lg">
+                        <!-- Isi start -->
+                        <div class="isi row panel fs-6 md:fs-5" data-uc-lightbox="animation: scale">
+                            <div class="lg:col-9 lg:order-1 px-2 none-padding-left">
+                                <div id="konten-berita"></div>
+                                <div id="pagination-controls" class="mt-4 text-center"></div>                                                                                                                                                                                                                               
+                            </div>
+                            <div class="lg:col-3 lg:order-2 align-item-top none-padding-right">
+                                <div class="iklanpanjangkebawah" data-uc-sticky="sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">                                                        
+                                    <img src="../iklan_panjangkebawah_isiberita.jpg" data-src="../iklan_panjangkebawah_isiberita.jpg" alt="iklan_panjangkebawah_isiberita" data-uc-img="loading: lazy">                                                                                                             
+                                </div>
+                            </div>                                                    
+                        </div>
+                        <!-- Isi end -->
+                        <!-- Tags & Share start -->
+                        <div
+                            class="post-footer panel vstack sm:hstack gap-3 justify-between border-top py-4 mt-2 xl:mt-5">
+                            <ul class="nav-x gap-narrow text-primary">
+                                <li><span class="text-black dark:text-white me-narrow">Tags:</span></li>
+                                <li>
+                                    <a href="#" class="uc-link gap-0 dark:text-white">Food <span
+                                            class="text-black dark:text-white">,</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="uc-link gap-0 dark:text-white">Life Style <span
+                                            class="text-black dark:text-white">,</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="uc-link gap-0 dark:text-white">Tech <span
+                                            class="text-black dark:text-white">,</span></a>
+                                </li>
+                                <li><a href="#" class="uc-link gap-0 dark:text-white">Travel</a></li>
+                            </ul>
+                            <ul class="post-share-icons nav-x gap-narrow">
+                                <li class="me-1"><span class="text-black dark:text-white">Share:</span></li>
+                                <li>
+                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                        href="#"><i class="unicon-logo-facebook icon-1"></i></a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                        href="#"><i class="unicon-logo-x-filled icon-1"></i></a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                        href="#"><i class="unicon-email icon-1"></i></a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-md btn-outline-gray-100 p-0 w-32px lg:w-40px h-32px lg:h-40px text-dark dark:text-white dark:border-gray-600 hover:bg-primary hover:border-primary hover:text-white rounded-circle"
+                                        href="#"><i class="unicon-link icon-1"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Tags & Share end -->
+                        <!-- Next & Previous Article start -->                                                
+                        <div class="post-navigation panel vstack sm:hstack justify-between gap-2 mt-0 xl:mt-1">
+                            <div class="new-post panel hstack w-100 sm:w-1/2">
+                                <div class="panel hstack justify-center w-100px h-100px">
+                                    <figure
+                                        class="featured-image m-0 ratio ratio-1x1 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                        <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                            src="../assets/images/common/img-fallback.png"
+                                            data-src="../assets/images/demo-two/posts/img-02.jpg"
+                                            alt="Tech Innovations Reshaping the Retail Landscape: AI Payments"
+                                            data-uc-img="loading: lazy">
+                                        <a href="blog-details.html" class="position-cover"
+                                            data-caption="Tech Innovations Reshaping the Retail Landscape: AI Payments"></a>
+                                    </figure>
+                                </div>
+                                <div class="panel vstack justify-center px-2 gap-1 w-1/3">
+                                    <span class="fs-7 opacity-60">Prev Article</span>
+                                    <h6 class="h6 lg:h5 m-0">Tech Innovations Reshaping the Retail Landscape: AI
+                                        Payments</h6>
+                                </div>
+                                <a href="blog-details.html" class="position-cover"></a>
+                            </div>
+                            <div class="new-post panel hstack w-100 sm:w-1/2">
+                                <div class="panel vstack justify-center px-2 gap-1 w-1/3 text-end">
+                                    <span class="fs-7 opacity-60">Next Article</span>
+                                    <h6 class="h6 lg:h5 m-0">The Rise of AI-Powered Personal Assistants: How
+                                        They Manage</h6>
+                                </div>
+                                <div class="panel hstack justify-center w-100px h-100px">
+                                    <figure
+                                        class="featured-image m-0 ratio ratio-1x1 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                        <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                            src="../assets/images/common/img-fallback.png"
+                                            data-src="../assets/images/demo-two/posts/img-01.jpg"
+                                            alt="The Rise of AI-Powered Personal Assistants: How They Manage"
+                                            data-uc-img="loading: lazy">
+                                        <a href="blog-details.html" class="position-cover"
+                                            data-caption="The Rise of AI-Powered Personal Assistants: How They Manage"></a>
+                                    </figure>
+                                </div>
+                                <a href="blog-details.html" class="position-cover"></a>
+                            </div>
+                        </div>
+                        <!-- Next & Previous Article end -->
+                        <!-- Berita Terkait start -->
+                        <div class="post-related panel border-top pt-2 mt-8 xl:mt-9">
+                            <div class="block-header panel gap-1 mb-2">
+                                <h2 class="text-blue block-title h5 m-0 gap-1 d-inline-block border-bottom border-red border-md-5 pb-1 dark:text-blue">                                                    
+                                    <span>BERITA TERKAIT</span>
+                                </h2>
+                            </div>
+                            <div class="row child-cols-6 md:child-cols-4 gx-2 gy-4 sm:gx-3 sm:gy-6">
+                                <div>
+                                    <article class="post type-post panel vstack gap-2">
+                                        <figure
+                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                src="../assets/images/common/img-fallback.png"
+                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                data-uc-img="loading: lazy">
+                                            <a href="blog-details.html" class="position-cover"
+                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                        </figure>
+                                        <div class="post-header panel vstack gap-1">
+                                            <h5 class="h6 md:h5 m-0">
+                                                <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                    From Classic Bread to Artisan Pastries</a>
+                                            </h5>
+                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                <span>Feb 28, 2025</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div>
+                                    <article class="post type-post panel vstack gap-2">
+                                        <figure
+                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                src="../assets/images/common/img-fallback.png"
+                                                data-src="../assets/images/demo-two/posts/img-08.jpg"
+                                                alt="AI and Marketing: Unlocking Customer Insights"
+                                                data-uc-img="loading: lazy">
+                                            <a href="blog-details.html" class="position-cover"
+                                                data-caption="AI and Marketing: Unlocking Customer Insights"></a>
+                                        </figure>
+                                        <div class="post-header panel vstack gap-1">
+                                            <h5 class="h6 md:h5 m-0">
+                                                <a class="text-none" href="blog-details.html">AI and Marketing:
+                                                    Unlocking Customer Insights</a>
+                                            </h5>
+                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                <span>Feb 28, 2025</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div>
+                                    <article class="post type-post panel vstack gap-2">
+                                        <figure
+                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                src="../assets/images/common/img-fallback.png"
+                                                data-src="../assets/images/demo-two/posts/img-09.jpg"
+                                                alt="Hidden Gems: Underrated Travel Destinations Around the World"
+                                                data-uc-img="loading: lazy">
+                                            <a href="blog-details.html" class="position-cover"
+                                                data-caption="Hidden Gems: Underrated Travel Destinations Around the World"></a>
+                                        </figure>
+                                        <div class="post-header panel vstack gap-1">
+                                            <h5 class="h6 md:h5 m-0">
+                                                <a class="text-none" href="blog-details.html">Hidden Gems:
+                                                    Underrated Travel Destinations Around the World</a>
+                                            </h5>
+                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                <span>Feb 28, 2025</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div>
+                                    <article class="post type-post panel vstack gap-2">
+                                        <figure
+                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                src="../assets/images/common/img-fallback.png"
+                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                data-uc-img="loading: lazy">
+                                            <a href="blog-details.html" class="position-cover"
+                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                        </figure>
+                                        <div class="post-header panel vstack gap-1">
+                                            <h5 class="h6 md:h5 m-0">
+                                                <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                    From Classic Bread to Artisan Pastries</a>
+                                            </h5>
+                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                <span>Feb 28, 2025</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div>
+                                    <article class="post type-post panel vstack gap-2">
+                                        <figure
+                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                src="../assets/images/common/img-fallback.png"
+                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                data-uc-img="loading: lazy">
+                                            <a href="blog-details.html" class="position-cover"
+                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                        </figure>
+                                        <div class="post-header panel vstack gap-1">
+                                            <h5 class="h6 md:h5 m-0">
+                                                <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                    From Classic Bread to Artisan Pastries</a>
+                                            </h5>
+                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                <span>Feb 28, 2025</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div>
+                                    <article class="post type-post panel vstack gap-2">
+                                        <figure
+                                            class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                            <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                                src="../assets/images/common/img-fallback.png"
+                                                data-src="../assets/images/demo-two/posts/img-07.jpg"
+                                                alt="The Art of Baking: From Classic Bread to Artisan Pastries"
+                                                data-uc-img="loading: lazy">
+                                            <a href="blog-details.html" class="position-cover"
+                                                data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                                        </figure>
+                                        <div class="post-header panel vstack gap-1">
+                                            <h5 class="h6 md:h5 m-0">
+                                                <a class="text-none" href="blog-details.html">The Art of Baking:
+                                                    From Classic Bread to Artisan Pastries</a>
+                                            </h5>
+                                            <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                                <span>Feb 28, 2025</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Berita Terkait end -->
+                    </div>
+                </div>
+            </div>
+        </div>            
+        `;
+
+        renderHalaman(halamanSekarang); 
+        })
+        .catch((error) => {
+        console.error("Gagal memuat Baca Juga:", error);
+        });
+        })
+    .catch((error) => {
+    console.error("Terjadi kesalahan:", error);
+    });
+    });
+}
+
 function beritaCoba()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=25&per_page=7&_embed")
@@ -1905,7 +2381,8 @@ function initApp() {
     beritaTerkini29();
     beritaTerkini33();
     beritaTerkini37();
-    beritaTerkini43();    
+    beritaTerkini43();
+    detailBerita();    
 }
 
 // Jalankan setelah halaman dimuat
