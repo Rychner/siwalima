@@ -189,11 +189,9 @@
             display: block;
             transition: 0.3s;
         }
-
         .sidenav a:hover {
             color: #ee3333;
         }
-
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -230,6 +228,9 @@
             padding: 8px 16px;
             box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
             border-radius: 12px; /* opsional, biar lebih rapi */
+        }
+        .bg-blue-siwa {
+            background-color: #21409a !important;
         }                                            
     </style>
     
@@ -247,10 +248,51 @@
         window.addEventListener("scroll", function () {
             const shareMenu = document.querySelector(".share-menu");
             if (window.scrollY > 100) { // angka 100 bisa diganti sesuai kebutuhan
-                shareMenu.style.display = "block";
+                shareMenu.style.display = "block";                
             } else {
-                shareMenu.style.display = "none";
+                shareMenu.style.display = "none";                
             }
+        });
+    </script>
+
+    <script>
+        function handleNavbarScroll() {
+            const navbar = document.getElementById("navbar");
+            if (window.scrollY > 0) {
+                navbar.classList.add("bg-white", "border-bottom-siwa", "shadow-sm");
+                navbar.classList.remove("bg-navbar-siwa");
+            } else {
+                navbar.classList.remove("bg-white", "border-bottom-siwa", "shadow-sm");
+                navbar.classList.add("bg-navbar-siwa");
+            }
+        }
+
+        // jalankan sekali saat page load
+        document.addEventListener("DOMContentLoaded", handleNavbarScroll);
+
+        // jalankan setiap scroll
+        window.addEventListener("scroll", handleNavbarScroll);
+    </script>
+
+    <script>
+        window.addEventListener("scroll", function () {
+        const menu = document.getElementById("menu");
+        if (window.scrollY > 0) {
+            menu.classList.add("bg-blue-siwa");
+        } else {
+            menu.classList.remove("bg-blue-siwa");
+        }
+        });
+    </script>
+
+    <script>
+        window.addEventListener("scroll", function () {
+        const search = document.getElementById("search");
+        if (window.scrollY > 0) {
+            search.classList.add("bg-blue-siwa");
+        } else {
+            search.classList.remove("bg-blue-siwa");
+        }
         });
     </script>
 </head>
@@ -271,43 +313,46 @@
     <!-- logo & iklan 2 end -->
 
     <!-- Navbar start -->
-    <nav class="sticky top-0 bg-white shadow z-50 mt-2 bg-navbar-siwa">
-        <div class="max-w-7xl mx-auto px-2 py-3 flex items-center justify-between">            
-            <div id="mySidenav" class="sidenav flex justify-center items-center text-center">
-                <a href="javascript:void(0)" class="closebtn text-xl md:text-3xl" onclick="closeNav()">&times;</a>
-                <ul>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Kriminal</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Daerah</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Politik</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Pendidikan</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Visi</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Hukum</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Pemerintahan</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Olahraga</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Opini</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Online</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Covid-19</a></li>
-                    <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Suplemen</a></li>
-                </ul>                                                    
-            </div>                                            
-            <div onclick="openNav()">
-                <span class="btn btn-sm text-white w-32px h-32px rounded-circle">
-                    &#9776;
-                </span>                                                     
-            </div>        
-            <!-- Menu -->
-
-            <div class="absolute left-1/2 transform -translate-x-1/2">
+    <nav class="sticky top-0 shadow z-50 mt-2" id="navbar">
+        <div class="max-w-7xl mx-auto px-2 py-3 flex items-center justify-between">
+            <div class="flex items-center">
                 <img class="h-10 md:h-12" src="../logoSiwalima.png" alt="logo">
             </div>
 
-            <!-- Search -->
-            <div class="flex items-center space-x-2">                
-                <button class="text-white w-8 h-8">
-                    <i class="fas fa-search"></i>
-                </button>
+            <div class="flex items-center space-x-2">
+                <div id="mySidenav" class="sidenav flex items-center justify-center text-center">
+                    <a href="javascript:void(0)" class="closebtn text-xl md:text-3xl" onclick="closeNav()">&times;</a>
+                    <ul>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Kriminal</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Daerah</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Politik</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Pendidikan</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Visi</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Hukum</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Pemerintahan</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Olahraga</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Opini</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Online</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Covid-19</a></li>
+                        <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Suplemen</a></li>
+                    </ul>                                                    
+                </div>                                            
+                <div onclick="openNav()">
+                    <span class="flex items-center justify-center 
+                    btn btn-sm text-white 
+                    w-8 h-8 rounded-full" id="menu">
+                        &#9776;
+                    </span>                                                     
+                </div>        
+                <!-- Menu -->            
+    
+                <!-- Search -->                            
+                <div onclick="openNav()">
+                    <i class="fas fa-search flex items-center justify-center 
+                    text-white w-8 h-8 rounded-full" id="search"></i>
+                </div>
+                <!-- Search -->
             </div>
-            <!-- Search -->
             
         </div>
     </nav>
