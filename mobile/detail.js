@@ -47,12 +47,12 @@ function detailBerita()
         container.innerHTML = `
         <article class="px-4">
             <p class="mt-2 text-xs">SIWALIMA.id > Berita</p>
-            <p class="mt-4 text-base text-center judul-detail">${judul}</p>
-            <div class="text-center">
+            <div class="mt-4">
                 <span class="text-xs font-bold">${kategori}</span>
                 <span class="text-xs">|</span>
                 <span class="text-xs">${tanggal} WIT</span>
             </div>
+            <p class="text-base judul-detail">${judul}</p>
             <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy" id="gambarArtikel">
             <div class="mt-2 text-sm" id="konten-berita"></div>
             <div id="pagination-controls" class="mt-4 text-center"></div>            
