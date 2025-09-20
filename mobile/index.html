@@ -218,11 +218,16 @@
 
     <script>
         window.addEventListener("scroll", function () {
-        const menu = document.getElementById("menu");
+        const menuright = document.getElementById("menurightwrap");
+        const menuleft  = document.getElementById("menuleftwrap");
         if (window.scrollY > 100) {
-            menu.classList.add("bg-blue-siwa");
+            menuright.classList.add("bg-blue-siwa", "rounded-full");
+            menuleft.classList.add("hidden");
+            menuright.classList.remove("hidden");
         } else {
-            menu.classList.remove("bg-blue-siwa");
+            menuright.classList.remove("bg-blue-siwa", "rounded-full");
+            menuleft.classList.remove("hidden");
+            menuright.classList.add("hidden");
         }
         });
     </script>
@@ -230,10 +235,16 @@
     <script>
         window.addEventListener("scroll", function () {
         const search = document.getElementById("search");
+        const logo = document.getElementById("logoSiwalima");
+        const home = document.getElementById("homeIcon");
         if (window.scrollY > 100) {
             search.classList.add("bg-blue-siwa");
+            logo.classList.remove("hidden");
+            home.classList.add("hidden");
         } else {
             search.classList.remove("bg-blue-siwa");
+            logo.classList.add("hidden");
+            home.classList.remove("hidden");
         }
         });
     </script>
@@ -269,7 +280,17 @@
     <nav class="sticky top-0 shadow z-50 mt-2" id="navbar">
         <div class="max-w-7xl mx-auto px-2 py-3 flex items-center justify-between">
             <div class="flex items-center">
-                <img class="h-10 md:h-12" src="../logoSiwalima.png" alt="logo">
+                <img class="h-10 md:h-12 hidden" src="../logoSiwalima.png" alt="logo" id="logoSiwalima">
+                <i class="fas fa-home flex items-center text-lg text-white px-2" id="homeIcon"></i>
+                <div id="menuleftwrap">
+                    <div onclick="openNav()">
+                        <span class="flex items-center justify-center 
+                        btn btn-sm text-white 
+                        text-lg rounded-full font-bold px-2">
+                            &#9776;
+                        </span>                                                     
+                    </div>
+                </div>
             </div>
 
             <div class="flex items-center space-x-2">
@@ -289,14 +310,16 @@
                         <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Covid-19</a></li>
                         <li><a href="#" class="navbar-text text-uppercase text-sm md:text-xl hover:text-red">Suplemen</a></li>
                     </ul>                                                    
+                </div>
+                <div id="menurightwrap" class="hidden">
+                    <div onclick="openNav()">
+                        <span class="flex items-center justify-center 
+                        btn btn-sm text-white 
+                        w-8 h-8 font-bold">
+                            &#9776;
+                        </span>                                                     
+                    </div>
                 </div>                                            
-                <div onclick="openNav()">
-                    <span class="flex items-center justify-center 
-                    btn btn-sm text-white 
-                    w-8 h-8 rounded-full" id="menu">
-                        &#9776;
-                    </span>                                                     
-                </div>        
                 <!-- Menu -->            
     
                 <!-- Search -->                            
