@@ -168,7 +168,7 @@ function beritaTerkait() {
 
         // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
         const tagParam = tagIds.join(",");
-        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${tagParam}&per_page=20&exclude=${latestId}&_embed`;
+        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?tags=${tagParam}&per_page=20&exclude=${latestId}&_embed`;
 
         return fetch(url)
             .then(res => res.json())
@@ -186,6 +186,8 @@ function beritaTerkait() {
                     const j = Math.floor(Math.random() * (i + 1));
                     [posts[i], posts[j]] = [posts[j], posts[i]];
                 }
+
+                console.log(posts);
 
                 // Ambil hanya 2 berita pertama setelah shuffle
                 const randomPosts = posts.slice(0, 2);
