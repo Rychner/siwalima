@@ -153,17 +153,22 @@ function beritaTerkait() {
         const latestId = latestPost.id;
 
         // 2️⃣ Ambil kategori dari berita terakhir
-        const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
-        const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
+        //const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
+        //const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
 
-        if (!kategoriIds.length) {
-            console.warn("Berita terakhir tidak punya kategori.");
+        const tagObj = latestPost._embedded["wp:term"]?.[1] || [];
+        const tagIds = tagObj.map(tag => tag.id);
+
+        console.log(tagIds);
+
+        if (!tagIds.length) {
+            console.warn("Berita terakhir tidak punya tags.");
             return;
         }
 
         // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
-        const kategoriParam = kategoriIds.join(",");
-        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${kategoriParam}&per_page=2&exclude=${latestId}&_embed`;
+        const tagParam = tagIds.join(",");
+        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${tagParam}&per_page=20&exclude=${latestId}&_embed`;
 
         return fetch(url)
             .then(res => res.json())
@@ -171,7 +176,21 @@ function beritaTerkait() {
                 const container = document.getElementById('beritaterkait');
                 container.innerHTML = ""; // reset konten
 
-                posts.forEach(post => {
+                if (!posts.length) {
+                    container.innerHTML = "<p>Tidak ada berita terkait berdasarkan tag.</p>";
+                    return;
+                }
+
+                // 🔀 Shuffle array (Fisher–Yates)
+                for (let i = posts.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [posts[i], posts[j]] = [posts[j], posts[i]];
+                }
+
+                // Ambil hanya 2 berita pertama setelah shuffle
+                const randomPosts = posts.slice(0, 2);
+
+                randomPosts.forEach(post => {
                     const judul = post.title.rendered;
 
                     container.innerHTML += `
