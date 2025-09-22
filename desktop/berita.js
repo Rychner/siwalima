@@ -211,7 +211,7 @@ function beritaTerkait() {
     })
     .catch(err => {
         console.error("Gagal fetch data:", err);
-        document.getElementById('beritatopnews').innerHTML = "<p>Gagal memuat berita.</p>";
+        document.getElementById('beritaterkait').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
 
@@ -2016,6 +2016,149 @@ function rubrikVideo()
         }
 }
 
+function beritaTerkaitDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    // 1️⃣ Ambil berita terakhir
+    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
+    .then(res => res.json())
+    .then(latestPost => {
+        if (!latestPost || !latestPost.id) return;
+
+        const latestId = latestPost.id;
+
+        // 2️⃣ Ambil kategori dari berita terakhir
+        //const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
+        //const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
+
+        const tagObj = latestPost._embedded["wp:term"]?.[1] || [];
+        const tagIds = tagObj.map(tag => tag.id);
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+
+        if (!tagIds.length) {
+            console.warn("Berita terakhir tidak punya tags.");
+            return;
+        }
+
+        // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
+        const tagParam = tagIds.join(",");
+        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?tags=${tagParam}&per_page=50&exclude=${latestId}&_embed`;
+
+        return fetch(url)
+            .then(res => res.json())
+            .then(posts => {
+                const container = document.getElementById('beritaterkaitdetail');
+                container.innerHTML = ""; // reset konten
+
+                if (!posts.length) {
+                    container.innerHTML = "<p>Tidak ada berita terkait berdasarkan tag.</p>";
+                    return;
+                }
+
+                // 🔀 Shuffle array (Fisher–Yates)
+                for (let i = posts.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [posts[i], posts[j]] = [posts[j], posts[i]];
+                }
+
+                console.log(posts);
+
+                // Ambil hanya 2 berita pertama setelah shuffle
+                const randomPosts = posts.slice(0, 9);
+
+                randomPosts.forEach(post => {
+                    const judul = post.title.rendered;
+                    const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+                    container.innerHTML += `
+                    <div>
+                        <article class="post type-post panel vstack gap-2">
+                            <figure
+                                class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                    src="${gambar}"
+                                    data-src="${gambar}"
+                                    alt="${judul}"
+                                    data-uc-img="loading: lazy">
+                                <a href="#" class="position-cover"
+                                    data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                            </figure>
+                            <div class="post-header panel vstack gap-1">
+                                <h5 class="h6 md:h5 m-0">
+                                    <a class="text-none text-truncate-2" href="blog-details.html">${judul}</a>
+                                </h5>
+                                <div class="post-date hstack gap-narrow fs-7 opacity-60">
+                                    <span>${formatTanggal(post.date)}</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    `;                    
+                });
+            });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('beritaterkaitdetail').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
@@ -2036,6 +2179,7 @@ function initApp() {
     beritaVisi();
     videoYoutube();
     rubrikVideo();
+    beritaTerkaitDetail();
 }
 
 // Jalankan setelah halaman dimuat
