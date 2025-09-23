@@ -52,7 +52,7 @@ function detailBerita()
                 <span class="text-xs">|</span>
                 <span class="text-xs">${tanggal} WIT</span>
             </div>
-            <p class="text-lg judul-detail">${judul}</p>
+            <p class="text-2xl judul-detail">${judul}</p>
             <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy" id="gambarArtikel">
             <div class="mt-2 text-base" id="konten-berita"></div>
             <div id="pagination-controls" class="mt-4 text-center"></div>            
