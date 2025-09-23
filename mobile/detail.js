@@ -54,7 +54,7 @@ function detailBerita()
             </div>
             <p class="text-base judul-detail">${judul}</p>
             <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy" id="gambarArtikel">
-            <div class="mt-2 text-sm" id="konten-berita"></div>
+            <div class="mt-2 text-base" id="konten-berita"></div>
             <div id="pagination-controls" class="mt-4 text-center"></div>            
         </article>
         `;
