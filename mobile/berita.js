@@ -868,7 +868,7 @@ function beritaTerkini19()
 
 function beritaSuaraNetizen()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=285&per_page=8&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?categories=285&per_page=5&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritasuaranetizen');
