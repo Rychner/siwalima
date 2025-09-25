@@ -11,8 +11,14 @@ function detailBerita()
     fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
     .then((response) => response.json())
     .then((post) => {          
-        const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
-        const kategoriId = post._embedded["wp:term"]?.[0]?.[0]?.id;
+        // 1️⃣ Ambil kategori (array)
+        const kategori = post._embedded["wp:term"]?.[0] || [];
+        // 2️⃣ Ambil tag (array)
+        const tags = post._embedded["wp:term"]?.[1] || [];
+
+        // Ubah ke HTML string
+        const kategoriHTML = kategori.map(cat => `<a href="#" class="text-none hover:text-red dark:text-primary duration-150">${cat.name}</a>`).join(", ");
+        const tagHTML = tags.map(tag => `<a href="#" class="bg-blue-800 border-tag-siwa p-2 text-white text-xs gap-0 dark:text-white"># ${tag.name}</a>`).join(" ");
         const date = new Date(post.date);
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         let tanggal = date.toLocaleDateString('id-ID', options);
@@ -48,14 +54,17 @@ function detailBerita()
         <article class="px-4">
             <p class="mt-2 text-xs">SIWALIMA.id > Berita</p>
             <div class="mt-4">
-                <span class="text-xs font-bold">${kategori}</span>
+                <span class="text-xs font-bold">${kategoriHTML}</span>
                 <span class="text-xs">|</span>
                 <span class="text-xs">${tanggal} WIT</span>
             </div>
             <p class="text-2xl judul-detail">${judul}</p>
             <img class="mt-2 w-full h-50" src="${gambar}" alt="bannerKoran" loading="lazy" id="gambarArtikel">
             <div class="mt-2 text-base" id="konten-berita"></div>
-            <div id="pagination-controls" class="mt-4 text-center"></div>            
+            <div id="pagination-controls" class="mt-4 mb-2 text-center"></div>           
+            <hr class="text-gray-800">
+            <div class="text-black text-sm pt-2">Tags:</div>
+            <div class="tags-container-siwa">${tagHTML}</div>            
         </article>
         `;
 
@@ -193,10 +202,154 @@ function detailBerita()
     });    
 }
 
+function beritaTerkaitDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    // 1️⃣ Ambil berita terakhir
+    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
+    .then(res => res.json())
+    .then(latestPost => {
+        if (!latestPost || !latestPost.id) return;
+
+        const latestId = latestPost.id;
+
+        // 2️⃣ Ambil kategori dari berita terakhir
+        //const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
+        //const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
+
+        const tagObj = latestPost._embedded["wp:term"]?.[1] || [];
+        const tagIds = tagObj.map(tag => tag.id);
+
+        const formatTanggal = (str) => {
+            const date = new Date(str);            
+            const now = new Date();
+            
+            const formatter = new Intl.DateTimeFormat('en-EN', {
+                weekday: 'short',   // Tue
+                year: 'numeric',    // 2025
+                month: 'short',     // Aug
+                day: '2-digit',     // 05
+                hour: '2-digit',    // 14
+                minute: '2-digit',  // 10
+                second: '2-digit',  // 12
+                hour12: false,      // <- ini untuk hilangkan AM/PM
+                timeZone: 'Asia/Jayapura' // opsional, kalau mau pakai UTC+9
+            });
+
+            //console.log("📌 Waktu Postingan :", date);
+            //console.log("📌 Waktu Sekarang  :", formatter.format(now));
+            const waktuPengunjung = new Date(formatter.format(now));
+            //console.log("📌 Waktu Pengunjung :", waktuPengunjung);
+            
+            const diffMs = waktuPengunjung - date;
+            //console.log("📌 diffMs:", diffMs);
+            
+            const diffSeconds = Math.floor(diffMs / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+            
+            //console.log("📌 diffMin:", diffMinutes);
+        
+            if (diffMinutes < 1) {
+                return 'baru saja';
+            } else if (diffMinutes < 60) {
+                return `${diffMinutes} menit lalu`;
+            } else if (diffHours < 24) {
+                return `${diffHours} jam lalu`;
+            } else if (diffDays >= 1 && diffDays < 7) {
+                return `${diffDays} hari lalu`;
+            } else {
+                const tanggal = date.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const jam = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                return `${tanggal} ${jam} WIB`; 
+                
+            }
+        };
+
+        if (!tagIds.length) {
+            console.warn("Berita terakhir tidak punya tags.");
+            return;
+        }
+
+        // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
+        const tagParam = tagIds.join(",");
+        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?tags=${tagParam}&per_page=50&exclude=${latestId}&_embed`;
+
+        return fetch(url)
+            .then(res => res.json())
+            .then(posts => {
+                const container = document.getElementById('beritaterkaitdetail');
+                container.innerHTML = ""; // reset konten
+
+                if (!posts.length) {
+                    container.innerHTML = "<p>Tidak ada berita terkait berdasarkan tag.</p>";
+                    return;
+                }
+
+                // 🔀 Shuffle array (Fisher–Yates)
+                for (let i = posts.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [posts[i], posts[j]] = [posts[j], posts[i]];
+                }
+
+                console.log(posts);
+
+                // Ambil hanya 2 berita pertama setelah shuffle
+                const randomPosts = posts.slice(0, 6);
+
+                randomPosts.forEach(post => {
+                    const judul = post.title.rendered;
+                    const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+
+                    container.innerHTML += `
+                    <div>
+                        <article class="post type-post panel vstack gap-2">
+                            <figure
+                                class="featured-image m-0 ratio ratio-4x3 rounded uc-transition-toggle overflow-hidden bg-gray-25 dark:bg-gray-800">
+                                <img class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                    src="${gambar}"
+                                    data-src="${gambar}"
+                                    alt="${judul}"
+                                    data-uc-img="loading: lazy">
+                                <a href="#" class="position-cover"
+                                    data-caption="The Art of Baking: From Classic Bread to Artisan Pastries"></a>
+                            </figure>
+                            <div class="post-header panel vstack gap-1">
+                                <h3 class="text-sm font-semibold text-gray-900 text-truncate-siwa-2">
+                                    <a class="text-none" href="#">${judul}</a>
+                                </h3>
+                                <div class="text-xs text-gray-500 mt-1">
+                                    <span>${formatTanggal(post.date)}</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    `;                    
+                });
+            });
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('beritaterkaitdetail').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {    
-    detailBerita();    
+    detailBerita();
+    beritaTerkaitDetail();    
 }
 
 // Jalankan setelah halaman dimuat

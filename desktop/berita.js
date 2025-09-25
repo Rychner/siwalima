@@ -2159,6 +2159,50 @@ function beritaTerkaitDetail() {
     });
 }
 
+function menuShare() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts/${id}?_embed`)
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('menushare');
+        container.innerHTML = "";
+        
+        // Ambil judul
+        const judul = data.title.rendered;
+
+        const item = document.createElement('div');        
+
+        item.innerHTML = `        
+        <span class="text-black fw-semibold px-1 text-uppercase">Bagikan:</span>
+        <a href="#" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" target="_blank" class="btn btn-sm bg-black text-white rounded-circle w-32px h-32px flex items-center justify-center">
+            <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="#" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="#" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+            <i class="fab fa-telegram-plane"></i>
+        </a>
+        <a href="#" target="_blank" class="btn btn-sm bg-gray-800 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+            <i class="fas fa-link"></i>
+        </a>            
+        <span class="fw-semibold px-1 judul">${judul}</span>  
+        `;
+
+        container.appendChild(item);       
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('menushare').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+    
+}
+
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     swiperBerita();
@@ -2180,6 +2224,7 @@ function initApp() {
     videoYoutube();
     rubrikVideo();
     beritaTerkaitDetail();
+    menuShare();
 }
 
 // Jalankan setelah halaman dimuat

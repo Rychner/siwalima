@@ -234,7 +234,16 @@
         }
         p+p {
             margin-top: 1rem;
-        }                                            
+        }
+        .border-tag-siwa {
+            border: 1px solid white !important;
+            border-radius: 10px;
+        }
+        .tags-container-siwa {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px; /* jarak antar tag */
+        }                                             
     </style>
     
     <script>
@@ -385,23 +394,33 @@
     <!-- 🔽 Menu Share -->
     <div class="share-menu bg-gray-100 py-1 rounded max-w-sm mx-auto fixed px-4">
         <div class="flex justify-center items-center gap-3">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://contoh.com" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+            <a href="#" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://twitter.com/intent/tweet?url=https://contoh.com&text=Judul+Berita" target="_blank" class="btn btn-sm bg-black text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+            <a href="#" target="_blank" class="btn btn-sm bg-black text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
                 <i class="fa-brands fa-x-twitter"></i>
             </a>
-            <a href="https://api.whatsapp.com/send?text=Judul+Berita%20https://contoh.com" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+            <a href="#" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://t.me/share/url?url=https://contoh.com&text=Judul+Berita" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+            <a href="#" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
                 <i class="fab fa-telegram-plane"></i>
+            </a>
+            <a href="#" target="_blank" class="btn btn-sm bg-gray-800 text-white rounded-full w-[24px] h-[24px] flex items-center justify-center">
+                <i class="fas fa-link text-xs"></i>
             </a>
         </div>
     </div>
     <!-- Navbar end -->
     
-    <div id="detailberita"></div>    
+    <div id="detailberita"></div>
+
+    <div class="pt-2 px-4">
+        <hr class="text-gray-800">
+    </div>
+
+    <div class="px-4 pt-2 text-base text-blue-800 font-bold">Berita Terkait</div>
+    <div class="grid grid-cols-2 gap-4 mt-2 px-4" id="beritaterkaitdetail"></div>    
 
     <script src="detail.js"></script>
 </body>
