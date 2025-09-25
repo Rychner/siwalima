@@ -2191,7 +2191,7 @@ function menuShare() {
         <a href="#" target="_blank" class="btn btn-sm bg-gray-800 text-white rounded-circle w-32px h-32px flex items-center justify-center">
             <i class="fas fa-link"></i>
         </a>            
-        <span class="fw-semibold px-1 judul">${judul}</span>  
+        <span class="fw-semibold px-1 judul text-truncate-2 fs-4">${judul}</span>  
         `;
 
         container.appendChild(item);       
