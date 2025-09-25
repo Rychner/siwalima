@@ -2171,30 +2171,30 @@ function menuShare() {
         
         // Ambil judul
         const judul = data.title.rendered;
-
-        const item = document.createElement('div');        
-
-        item.innerHTML = `        
-        <span class="text-black fw-semibold px-1 text-uppercase">Bagikan:</span>
-        <a href="#" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-circle w-32px h-32px flex items-center justify-center">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" target="_blank" class="btn btn-sm bg-black text-white rounded-circle w-32px h-32px flex items-center justify-center">
-            <i class="fa-brands fa-x-twitter"></i>
-        </a>
-        <a href="#" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="#" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
-            <i class="fab fa-telegram-plane"></i>
-        </a>
-        <a href="#" target="_blank" class="btn btn-sm bg-gray-800 text-white rounded-circle w-32px h-32px flex items-center justify-center">
-            <i class="fas fa-link"></i>
-        </a>            
-        <span class="fw-semibold px-1 judul fs-4">${judul}</span>  
-        `;
-
-        container.appendChild(item);       
+        
+        container.innerHTML = `
+        <div class="hstack items-center gap-1 min-w-0">        
+            <span class="text-black fw-semibold px-1 text-uppercase">Bagikan:</span>
+            <div class="hstack gap-1">
+                <a href="#" target="_blank" class="btn btn-sm bg-blue-600 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" target="_blank" class="btn btn-sm bg-black text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="#" target="_blank" class="btn btn-sm bg-green-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" target="_blank" class="btn btn-sm bg-blue-500 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                    <i class="fab fa-telegram-plane"></i>
+                </a>
+                <a href="#" target="_blank" class="btn btn-sm bg-gray-800 text-white rounded-circle w-32px h-32px flex items-center justify-center">
+                    <i class="fas fa-link"></i>
+                </a>
+            </div>               
+            <span class="fw-semibold px-1 judul text-truncate-2 fs-4">${judul}</span>
+        </div>  
+        `;              
     })
     .catch(err => {
         console.error("Gagal fetch data:", err);
