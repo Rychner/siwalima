@@ -198,7 +198,7 @@ function beritaTerkait() {
                     container.innerHTML += `
                     <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
                         <div class="post-header panel vstack justify-between gap-1">                    
-                            <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0">
+                            <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 pb-1">
                                 <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
                                     ${judul}
                                 </a>
@@ -346,17 +346,11 @@ function bannerKoran()
         const item = document.createElement('div');
 
         item.innerHTML = `
-        <div class="block-header panel vstack items-center justify-center text-center gap-1 mb-1">
-            <h2 class="text-yellow block-title h5 m-0 hstack justify-center gap-1 dark:text-yellow">                                                    
-                <span class="bg-dark p-1 rounded dark:bg-gray-25">
-                    Edisi Cetak, ${tanggal}                    
-                </span>
-            </h2>
-        </div>
+        
         <div class="block-layout lg:gap-3 panel overflow-hidden bg-gray-25 dark:bg-gray-800">
             <div class="block-content">
                 <div>                                                    
-                    <img class="uc-transition-scale-up uc-transition-opaque image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="bannerKoran" data-uc-img="loading: lazy">                    
+                    <img class="uc-transition-scale-up uc-transition-opaque image" src="${gambar}" alt="bannerKoran" loading="lazy">                    
                 </div> 
             </div>
         </div>
