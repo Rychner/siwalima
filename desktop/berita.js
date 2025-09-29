@@ -392,7 +392,7 @@ function tglKoran()
         let tanggal = date.toLocaleDateString('id-ID', options);
 
         container.innerHTML = `        
-            <span>${tanggal}</span>
+            <span class="fs-6">${tanggal}</span>
         `;        
         });
         console.log("Banner Koran berhasil di-render.");
