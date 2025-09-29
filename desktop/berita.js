@@ -117,7 +117,7 @@ function swiperBerita()
                     <img class="rounded-top-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                     <!-- Overlay + Judul -->
                     <div class="bg-headline post-header panel vstack justify-end items-start">
-                        <span class="px-2 headline-font-size pt-1 text-white m-0 text-truncate-2 w-100">
+                        <span class="px-2 headline-font-size text-white m-0 text-truncate-2 w-100">
                             <a class="judul text-white text-none" href="detail.html?id=${post.id}">${judul}</a>                                    
                         </span>
                         <div class="w-100">
