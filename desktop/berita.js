@@ -111,7 +111,7 @@ function swiperBerita()
         item.className = "swiper-slide";
 
         item.innerHTML = `
-        <article class="rounded-top-1 post type-post panel vstack gap-1 bg-dark">
+        <article class="rounded-top-1 post type-post panel vstack bg-dark">
             <div class="rounded-top-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1 hover:rounded-bottom-1">
                 <div class="featured-image rounded-top-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                     <img class="rounded-top-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
@@ -124,11 +124,11 @@ function swiperBerita()
                             <div class="px-2 w-100 text-white post-date fs-7 text-white hstack gap-narrow">
                                 <span class="mb-1">${formatTanggal(post.date)}</span>
                             </div>
-                        </div>                                
+                        </div>                                                        
                     </div>
                     <a href="detail.html?id=${post.id}" class="position-cover"></a>
-                </div>                
-            </div>
+                </div>                               
+            </div>                         
         </article>                    
         `;
 

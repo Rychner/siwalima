@@ -1,18 +1,513 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-    
-    <!-- Master Berita & Banner Koran -->
-    <div class="flex flex-col">
-        <div class="w-full bg-red">Kolom 1</div>
-        <div class="w-full bg-blue">Kolom 2</div>
-    </div>
-</body>
+<html lang="zxx" dir="ltr">    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Siwalima</title>
+        <meta name="description" content="News5 a clean, modern and pixel-perfect multipurpose blogging HTML5 website template.">
+        <meta name="keywords" content="saas, saas template, site template, software, startup, digital product, html5, landing, marketing, bootstrap, uikit3, agency, ai, digital agency, it solutions, nodejs">
+        <link rel="canonical" href="https://unistudio.co/html/News5">
+        <meta name="theme-color" content="#2757fd">
+
+        <!-- Open Graph Tags -->
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Siwalima">
+        <meta property="og:description" content="Full-featured, professional-looking news, editorial and magazine website template.">
+        <meta property="og:url" content="https://unistudio.co/html/news5/">
+        <meta property="og:site_name" content="Siwalima">
+        <meta property="og:image" content="https://unistudio.co/html/news5/assets/images/common/seo-image.jpg">
+        <meta property="og:image:width" content="1180">
+        <meta property="og:image:height" content="600">
+        <meta property="og:image:type" content="image/png">
+
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Siwalima">
+        <meta name="twitter:description" content="Full-featured, professional-looking news, editorial and magazine website template.">
+        <meta name="twitter:image" content="https://unistudio.co/html/news5/assets/images/common/seo-image.jpg">
+
+        <link rel="canonical" href="https://unistudio.co/html/news5/">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        <!-- preload head styles -->
+        <link rel="preload" href="https://html.themewant.com/news5/assets/css/unicons.min.css" as="style">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/css/swiper-bundle.min.css" as="style">
+
+        <!-- preload footer scripts -->
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/libs/jquery.min.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/libs/scrollmagic.min.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/libs/swiper-bundle.min.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/libs/anime.min.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/helpers/data-attr-helper.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/helpers/swiper-helper.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/helpers/anime-helper.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/helpers/anime-helper-defined-timelines.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/uikit-components-bs.js" as="script">
+        <link rel="preload" href="https://html.themewant.com/news5/assets/js/app.js" as="script">
+
+        <!-- app head for bootstrap core -->
+        <script src="https://html.themewant.com/news5/assets/js/app-head-bs.js"></script>
+
+        <!-- include uni-core components -->
+        <link rel="stylesheet" href="https://html.themewant.com/news5/assets/js/uni-core/css/uni-core.min.css">
+
+        <!-- include styles -->
+        <link rel="stylesheet" href="https://html.themewant.com/news5/assets/css/unicons.min.css">
+        <link rel="stylesheet" href="https://html.themewant.com/news5/assets/css/prettify.min.css">
+        <link rel="stylesheet" href="https://html.themewant.com/news5/assets/css/swiper-bundle.min.css">
+
+        <!-- include main style -->
+        <link rel="stylesheet" href="https://html.themewant.com/news5/assets/css/theme/demo-two.min.css">
+
+        <!-- include scripts -->
+        <script src="https://html.themewant.com/news5/assets/js/uni-core/js/uni-core-bundle.min.js"></script>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        <style>
+            a {
+                font-family: 'Montserrat', sans-serif;
+            }            
+            @media (min-width:1200px) {
+                .lg\:min-w-215px {
+                min-width: 215px !important;
+                }
+            }            
+            .lg\:fs-2 {
+                font-size: 20px !important;
+            }
+            .uc-transition-active.uc-active .uc-transition-scale-up,.uc-transition-toggle .uc-transition-scale-up:focus-within,.uc-transition-toggle:focus .uc-transition-scale-up,.uc-transition-toggle:hover .uc-transition-scale-up {
+                --uc-scale-x: 1.2;
+                --uc-scale-y: 1.2;
+                opacity: 1
+            }
+            .judul{
+                font-family: 'Inter' !important;            
+                font-weight: bold !important;                
+            }
+            .navbar-text {
+                font-weight: bold !important;
+            }
+            .home-icon {
+                display: none;
+            }
+            .sticky-active .home-text {
+                display: none;
+            }
+            .sticky-active .home-icon {
+                display: inline;
+            }
+            .photo-count {
+                position: relative;
+                top: 0px;     
+                right: 0px;   
+                background-color: rgba(0, 0, 0, 0.7); /* background gelap transparan */
+                color: white;
+                padding: 4px 8px;
+                border-radius: 5px;
+                font-size: 14px;
+                display: inline-flex; /* mengikuti ukuran konten */
+                align-items: center;
+                gap: 4px; /* jarak icon & teks */
+                white-space: nowrap; /* mencegah teks turun ke bawah */
+            }
+            .photo-count img {
+                width: 16px;
+                height: 16px;                
+            }
+            .hidden {
+                display: none !important;
+            }
+            .flex {
+                display: flex !important;
+                inset: 0 !important;
+            }
+            .uc-navbar-sticky {
+                background-color: white !important; /* ubah background jadi hitam */                
+                /*border-bottom: 2px solid rgb(234, 67, 53) !important;*/
+                border-bottom: 4px solid #21409a !important;                
+            }
+            .uc-navbar-sticky .nav-x li a {
+                color: black !important; /* teks menu jadi hitam */
+                font-weight: bold !important;
+            }
+            .uc-navbar-sticky .nav-x li a:hover{
+                color: red !important; /* teks menu jadi merah saat di hover */
+                font-weight: bold !important;
+            }
+            /* Default: tampilkan semua menu */
+            .nav-full {
+            display: flex;
+            }
+            .nav-mini {
+            display: none;
+            }
+
+            /* Saat sticky, sembunyikan menu lain dan tampilkan hanya Home */
+            .uc-navbar-sticky .nav-full {
+            display: none !important;
+            }
+            .uc-navbar-sticky .nav-mini {
+            display: flex !important;
+            }
+            /* Saat sticky -> geser ke kiri */
+            .uc-navbar-sticky .uc-navbar-center {
+                justify-content: flex-start !important;
+            }
+            #video-modal {
+                position: fixed;
+                top: 0;
+                left: 0;                
+                background-color: rgba(0, 0, 0, 0.7); /* abu-abu transparan */
+                display: none; /* disembunyikan dulu */
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+            #video-modal.show {
+                display: flex; /* ketika muncul, pakai flex biar konten ditengah */
+            }
+            .bg-navbar-siwa {
+                background: linear-gradient(100deg, #21409a 50%, #5699f3 100%);
+            }
+            .bg-headline {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0) 70%,   /* Transparan di atas */
+                    rgb(0, 0, 0) 100%       /* Gelap di bawah */
+                );
+            }           
+            .bg-footer-siwa {
+                background-color: rgb(240, 239, 239) !important;
+            }
+            .text-footer {
+                color:rgb(29, 28, 28)
+            }
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: #fdfdfd;
+                overflow-x: hidden;
+                transition: 0.5s;
+            }
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+            .sidenav a:hover {
+                color: #ee3333;
+            }
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+            .headline-font-size {
+                font-size: 27px;
+                line-height: 1.2;
+            }
+            .post-media:hover .judul {
+                color: #ee3333 !important;
+            }
+            .bg-blue-siwa {
+                background-color: #ee3333 !important;
+            }
+            .border-bottom-siwa {
+                border-bottom: 4px solid #21409a !important;
+            }           
+            .marquee {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;           
+            }
+            .marquee p {
+                display: inline-block;
+                padding-left: 100%; /* mulai dari kanan layar */
+                animation: marquee 100s linear infinite;
+            }
+            @keyframes marquee {
+                0%   { transform: translateX(0%); }
+                100% { transform: translateX(-100%); }
+            }
+            .flashnews-title-siwa
+            {
+                background: #c81c1c;
+                width: 20%;
+                position: relative;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;                
+            }
+            .flashnews-title-siwa::after
+            {
+                position: absolute;
+                content: "";
+                right: -22%;
+                border-left: 18px solid #c81c1c;
+                border-top: 12px solid transparent;
+                border-right: 18px solid transparent;
+                border-bottom: 12px solid transparent;
+                top: 0;                
+            }
+            .flashnews-news-siwa {
+                background: white;
+                width: 80%;
+                padding: 0 0 0 22px;
+                color: black;
+            }
+            .flashnews-koran-siwa
+            {
+                background: #c81c1c;
+                width: 20%;
+                position: relative;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;                
+            }
+            .flashnews-koran-siwa::after
+            {
+                position: absolute;
+                content: "";
+                right: -35%;
+                border-left: 18px solid #c81c1c;
+                border-top: 12px solid transparent;
+                border-right: 18px solid transparent;
+                border-bottom: 12px solid transparent;
+                top: 0;                
+            }
+            .flashnews-news-siwa:hover .marquee p {
+                animation-play-state: paused;
+                cursor: pointer;
+            }                                             
+        </style>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+                
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const navbar = document.querySelector('.uc-navbar-container');
+                const body = document.body;
+
+                const observer = new MutationObserver(function (mutationsList) {
+                    for (const mutation of mutationsList) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (navbar.classList.contains('uc-navbar-sticky')) {
+                                document.getElementById('home-nav-item').classList.add('sticky-active');
+                            } else {
+                                document.getElementById('home-nav-item').classList.remove('sticky-active');
+                            }
+                        }
+                    }
+                });
+
+                observer.observe(navbar, { attributes: true });
+            });
+        </script>        
+    </head>
+
+    <body class="uni-body panel bg-white text-gray-900 dark:bg-black dark:text-gray-200 overflow-x-hidden">
+
+        <!--  Bottom Actions Sticky start -->
+        <div class="backtotop-wrap position-fixed bottom-0 end-0 z-99 m-2 vstack">                        
+            <a class="btn btn-sm bg-blue-800 text-white w-40px h-40px rounded-circle" href="to_top" data-uc-backtotop>
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
+        <!--  Bottom Actions Sticky end -->
+        
+        <!-- Header start -->
+        <div class="uc-center-navbar panel z-2">                    
+            <div class="container max-w-xl">
+                <div class="d-flex justify-center">
+                    <div class="lg:max-w-700px">
+                        <img src="../80_2.jpg" alt="iklan">
+                    </div>
+                </div>
+                <div class="uc-navbar pt-1 pb-1 min-h-72px lg:min-h-100px text-gray-900 dark:text-white gap-2" data-uc-navbar=" animation: uc-animation-slide-top-small; duration: 150;">
+                    <div class="uc-navbar-left">
+                        <div class="uc-logo text-black dark:text-white">
+                            <a href="index.html">
+                                <img class="max-w-150px text-dark dark:text-white lg:max-w-300px md:max-w-300px" src="../logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="uc-navbar-right">
+                        <img class="w-900px text-dark dark:text-white" src="../Coming_1_1.jpg" alt="Siwalima" data-uc-svg>
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        <header class="uc-header header-two uc-navbar-sticky-wrap z-999" data-uc-sticky="sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;">
+            <div class="container max-w-xl">
+                <nav class="uc-navbar-container shadow-xs bg-navbar-siwa dark:bg-gray-900 fs-6 z-1">                
+                    <div class="uc-bottom-navbar panel hstack z-1 min-h-48px lg:min-h-48px border-top border-bottom uc-navbar-sticky-wrap top-0 z-50" data-uc-navbar=" animation: uc-animation-slide-top-small; duration: 150; bg-white; text-black">
+                        <div class="container max-w-xl">
+                            <div class="hstack">                            
+                                <div class="uc-navbar-center gap-2 lg:gap-3 flex justify-center w-full">
+                                    <div class="uc-navbar-item" style="--uc-nav-height: 36px">
+                                        <ul class="nav-full nav-x fw-semibold flex-nowrap overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-2 text-white">
+                                            <li class="uc-active text-red" id="home-nav-item">
+                                                <a href="index.html">
+                                                    <span class="home-text navbar-text text-uppercase fs-6">Home</span>                                                    
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="home-text navbar-text text-uppercase fs-6 hover:text-red">Kriminal</span>                                                    
+                                                </a>                                                
+                                            </li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Daerah</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Politik</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pendidikan</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Visi</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Hukum</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pemerintahan</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Olahraga</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Opini</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Online</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
+                                            <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
+                                        </ul>
+                                        <ul class="nav-mini nav-x fw-semibold flex-nowrap justify-between overflow-x-auto hide-scrollbar uc-horizontal-scroll w-screen md:w-auto md:mask-end-0 mx-n2 px-1 text-white">
+                                            <li class="uc-active">
+                                                <a href="index.html">                                                    
+                                                    <img class="w-350px text-dark dark:text-white lg:w-150px" src="../logoSiwalima.png" alt="Siwalima" data-uc-svg>
+                                                </a>
+                                            </li>
+                                            <li style="padding-left: 360px; padding-right: 360px;">
+                                                <input type="text" class="rounded fs-6 px-1" placeholder="Cari berita...">
+                                                <span class="btn btn-sm bg-white border border-blue-800 text-black w-32px h-32px rounded-circle hover:bg-blue-800 hover:text-white">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <div id="mySidenav" class="sidenav">
+                                                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                                    <ul>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Kriminal</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Daerah</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Politik</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pendidikan</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Visi</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Hukum</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Pemerintahan</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Olahraga</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Opini</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Online</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Covid-19</a></li>
+                                                        <li><a href="#" class="navbar-text text-uppercase fs-6 hover:text-red">Suplemen</a></li>
+                                                    </ul>                                                    
+                                                </div>                                            
+                                                <div onclick="openNav()">
+                                                    <span class="fs-5 text-black text-uppercase">
+                                                        Menu
+                                                    </span>
+                                                    <span class="btn btn-sm bg-blue-800 text-white w-32px h-32px rounded-circle">
+                                                        &#9776;
+                                                    </span>                                                     
+                                                </div>                                                    
+                                            </li>
+                                        </ul>                                        
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+                </nav>                
+            </div>
+        </header>
+        <div class="container max-w-xl">
+            <div class="flex border-bottom border-black gap-2">
+                <div class="w-2/3 flex items-center">                    
+                    <div class="flashnews-title-siwa flex items-center justify-center">
+                        Breaking News
+                    </div>            
+                    <!-- Sub kolom: Marquee -->
+                    <div class="flashnews-news-siwa overflow-hidden">
+                        <div class="marquee">
+                            <p class="fs-6" id="flashnews"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/3 flex items-center">
+                    <div class="w-1/4 flashnews-koran-siwa flex items-center justify-center">
+                        Koran
+                    </div>
+                    <div class="w-3/4 bg-white text-black overflow-hidden flex items-center justify-center">
+                        <p id="tglkoran"></p>                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- Header end -->
+
+        <div id="wrapper" class="wrap overflow-hidden-x">
+
+        <!-- Master Berita & Banner Koran -->
+        <div class="section panel overflow-hidden">
+            <div class="section-outer panel pt-3">
+                <div class="container max-w-xl">
+                    <div class="section-inner panel vstack gap-4">
+                        <div class="section-content">
+                            <div class="flex gap-4">
+                                <div class="w-2/3">
+                                    <div id="swiperberita"></div>                                    
+                                </div>
+                                <div class="w-1/3 flex items-center">
+                                    <div id="bannerKoran"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- include jquery & bootstrap js -->
+        <script defer src="https://html.themewant.com/news5/assets/js/libs/jquery.min.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/libs/bootstrap.min.js"></script>
+
+        <!-- include scripts -->
+        <script defer src="https://html.themewant.com/news5/assets/js/libs/anime.min.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/libs/swiper-bundle.min.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/libs/scrollmagic.min.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/helpers/data-attr-helper.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/helpers/swiper-helper.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/helpers/anime-helper.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/helpers/anime-helper-defined-timelines.js"></script>
+        <script defer src="https://html.themewant.com/news5/assets/js/uikit-components-bs.js"></script>
+
+        <!-- include app script -->
+        <script defer src="https://html.themewant.com/news5/assets/js/app.js"></script>        
+
+        <!-- Memanggil API Siwalima -->
+        <script src="berita.js"></script>
+        <script src="rubrikfoto.js"></script>
+
+    </body>
+
 </html>
