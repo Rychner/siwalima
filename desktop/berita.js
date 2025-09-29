@@ -253,6 +253,7 @@ function beritaTerkini2()
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaterkini2');
+        let html = "";
 
         // Ambil tanggal (format: Mar 8, 2025)        
         const formatTanggal = (str) => {
@@ -311,7 +312,7 @@ function beritaTerkini2()
             }
         };
 
-        data.slice(1).forEach(post => {
+        data.slice(1, 7).forEach(post => {
         // Ambil kategori pertama (jika ada)
         const kategori = post._embedded["wp:term"]?.[0]?.[0]?.name || "Tanpa Kategori";
 
@@ -323,30 +324,28 @@ function beritaTerkini2()
 
         const item = document.createElement('div');        
 
-        item.innerHTML = `         
-        <div>
-            <article class="rounded-top-1 rounded-bottom-1 post type-post panel vstack gap-1 lg:gap-2">
-                <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
-                    <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
-                        <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
-                    </div>
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
+        html += `
+        <article class="rounded-top-1 rounded-bottom-1 type-post panel vstack gap-1 lg:gap-2">
+            <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
+                <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
+                    <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="Berita Terkini [2]" data-uc-img="loading: lazy">
                 </div>
-                <div class="post-header panel vstack justify-between gap-1">                    
-                    <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
-                    </h3>
-                    <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
-                        <div class="post-date hstack gap-narrow">
-                            <span>${formatTanggal(post.date)}</span>
-                        </div>
+                <a href="detail.html?id=${post.id}" class="position-cover"></a>
+            </div>
+            <div class="post-header panel vstack justify-between gap-1">                    
+                <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
+                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                </h3>
+                <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
+                    <div class="post-date hstack gap-narrow">
+                        <span>${formatTanggal(post.date)}</span>
                     </div>
                 </div>
-            </article>
-        </div>
+            </div>
+        </article>
         `;
 
-        container.appendChild(item);
+        container.innerHTML= `${html}`;
         });
     })
     .catch(err => {
@@ -430,7 +429,7 @@ function bannerKoran()
         <div class="block-layout lg:gap-3 panel overflow-hidden bg-gray-25 dark:bg-gray-800">
             <div class="block-content">
                 <div>                                                    
-                    <img class="uc-transition-scale-up uc-transition-opaque image" src="${gambar}" alt="bannerKoran" loading="lazy">                    
+                    <img class="w-full h-full uc-transition-scale-up uc-transition-opaque image" src="${gambar}" alt="bannerKoran" loading="lazy">                    
                 </div> 
             </div>
         </div>
