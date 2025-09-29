@@ -145,39 +145,27 @@ function swiperBerita()
 function beritaTerkait() {
     // 1️⃣ Ambil berita terakhir
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=1&_embed")
-    .then(res => res.json())
-    .then(latestPosts => {
-        if (!latestPosts.length) return;
+        .then(res => res.json())
+        .then(latestPosts => {
+            if (!latestPosts.length) return;
 
-        const latestPost = latestPosts[0];
-        const latestId = latestPost.id;
+            const latestPost = latestPosts[0];
+            const latestId = latestPost.id;
 
-        // 2️⃣ Ambil kategori dari berita terakhir
-        //const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
-        //const kategoriIds = kategoriObj.map(cat => cat.id); // array ID kategori
+            // 2️⃣ Ambil tags & kategori
+            const tagObj = latestPost._embedded["wp:term"]?.[1] || [];
+            const tagIds = tagObj.map(tag => tag.id);
 
-        const tagObj = latestPost._embedded["wp:term"]?.[1] || [];
-        const tagIds = tagObj.map(tag => tag.id);
+            const kategoriObj = latestPost._embedded["wp:term"]?.[0] || [];
+            const kategoriIds = kategoriObj.map(cat => cat.id);
 
-        console.log(tagIds);
+            const container = document.getElementById('beritaterkait');
+            container.innerHTML = ""; // reset konten
 
-        if (!tagIds.length) {
-            console.warn("Berita terakhir tidak punya tags.");
-            return;
-        }
-
-        // 3️⃣ Ambil berita lain dari kategori tsb (exclude berita terakhir)
-        const tagParam = tagIds.join(",");
-        const url = `https://siwalimanews.com/wp-json/wp/v2/posts?tags=${tagParam}&per_page=20&exclude=${latestId}&_embed`;
-
-        return fetch(url)
-            .then(res => res.json())
-            .then(posts => {
-                const container = document.getElementById('beritaterkait');
-                container.innerHTML = ""; // reset konten
-
+            // 🔄 Fungsi untuk render
+            function renderPosts(posts) {
                 if (!posts.length) {
-                    container.innerHTML = "<p>Tidak ada berita terkait berdasarkan tag.</p>";
+                    container.innerHTML = "<p class='text-white fs-6 pb-1'>Tidak ada berita terkait.</p>";
                     return;
                 }
 
@@ -187,8 +175,6 @@ function beritaTerkait() {
                     [posts[i], posts[j]] = [posts[j], posts[i]];
                 }
 
-                console.log(posts);
-
                 // Ambil hanya 2 berita pertama setelah shuffle
                 const randomPosts = posts.slice(0, 2);
 
@@ -196,23 +182,69 @@ function beritaTerkait() {
                     const judul = post.title.rendered;
 
                     container.innerHTML += `
-                    <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
-                        <div class="post-header panel vstack justify-between gap-1">                    
-                            <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 pb-1">
-                                <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
-                                    ${judul}
-                                </a>
-                            </h3>                                                                
-                        </div>
-                    </article>
-                    `;                    
+                        <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
+                            <div class="post-header panel vstack justify-between gap-1">                    
+                                <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 pb-1">
+                                    <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                        ${judul}
+                                    </a>
+                                </h3>                                                                
+                            </div>
+                        </article>
+                    `;
                 });
-            });
-    })
-    .catch(err => {
-        console.error("Gagal fetch data:", err);
-        document.getElementById('beritaterkait').innerHTML = "<p>Gagal memuat berita.</p>";
-    });
+            }
+
+            // 3️⃣ Coba ambil berita terkait dari TAG dulu
+            if (tagIds.length) {
+                const tagParam = tagIds.join(",");
+                const url = `https://siwalimanews.com/wp-json/wp/v2/posts?tags=${tagParam}&per_page=20&exclude=${latestId}&_embed`;
+
+                fetch(url)
+                    .then(res => res.json())
+                    .then(posts => {
+                        if (posts.length) {
+                            renderPosts(posts);
+                        } else if (kategoriIds.length) {
+                            // 4️⃣ Kalau tidak ada, fallback ke kategori
+                            const catParam = kategoriIds.join(",");
+                            const catUrl = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${catParam}&per_page=20&exclude=${latestId}&_embed`;
+
+                            fetch(catUrl)
+                                .then(res => res.json())
+                                .then(postsByCat => renderPosts(postsByCat))
+                                .catch(err => {
+                                    console.error("Gagal fetch kategori:", err);
+                                    container.innerHTML = "<p>Gagal memuat berita terkait kategori.</p>";
+                                });
+                        } else {
+                            container.innerHTML = "<p class='text-white fs-6 pb-1'>Tidak ada berita terkait.</p>";
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Gagal fetch tag:", err);
+                        container.innerHTML = "<p>Gagal memuat berita terkait.</p>";
+                    });
+            } else if (kategoriIds.length) {
+                // Kalau dari awal tidak ada tag → langsung fallback kategori
+                const catParam = kategoriIds.join(",");
+                const catUrl = `https://siwalimanews.com/wp-json/wp/v2/posts?categories=${catParam}&per_page=20&exclude=${latestId}&_embed`;
+
+                fetch(catUrl)
+                    .then(res => res.json())
+                    .then(postsByCat => renderPosts(postsByCat))
+                    .catch(err => {
+                        console.error("Gagal fetch kategori:", err);
+                        container.innerHTML = "<p>Gagal memuat berita terkait kategori.</p>";
+                    });
+            } else {
+                container.innerHTML = "<p class='text-white fs-6 pb-1'>Tidak ada berita terkait.</p>";
+            }
+        })
+        .catch(err => {
+            console.error("Gagal fetch data:", err);
+            document.getElementById('beritaterkait').innerHTML = "<p>Gagal memuat berita.</p>";
+        });
 }
 
 function beritaTerkini2()
@@ -320,6 +352,26 @@ function beritaTerkini2()
     .catch(err => {
         console.error("Gagal fetch data:", err);
         document.getElementById('beritaterkini2').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
+function flashNews() {
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=20&_embed")
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById('flashnews');
+
+            let teks = "";
+            data.forEach(post => {
+                const judul = post.title.rendered;
+                teks += ` &bull; ${judul}`;
+            });
+
+        container.innerHTML = teks;
+        })
+        .catch(err => {
+        console.error("Gagal fetch flashnews:", err);
+        document.getElementById('flashnews').innerHTML = "<p>Gagal memuat berita.</p>";
     });
 }
 
@@ -2199,6 +2251,7 @@ function menuShare() {
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
+    flashNews();
     swiperBerita();
     beritaTerkait();
     beritaTerkini2();
@@ -2218,7 +2271,7 @@ function initApp() {
     videoYoutube();
     rubrikVideo();
     beritaTerkaitDetail();
-    menuShare();
+    menuShare();    
 }
 
 // Jalankan setelah halaman dimuat
