@@ -408,17 +408,7 @@
                         Koran
                     </div>
                     <div class="w-3/4 bg-white text-black overflow-hidden flex items-center justify-center">
-                        <p id="tanggal"></p>
-                        <script>
-                            function tampilkanTanggal() {
-                            const now = new Date();
-                            const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-                            const tanggal = now.toLocaleDateString("id-ID", options);
-                            document.getElementById("tanggal").textContent = tanggal;
-                            }
-
-                            tampilkanTanggal();
-                        </script>
+                        <p id="tglkoran"></p>                        
                     </div>
                 </div>
             </div>

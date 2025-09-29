@@ -375,6 +375,34 @@ function flashNews() {
     });
 }
 
+function tglKoran()
+{
+    fetch("https://siwalimanews.com/wp-json/wp/v2/media?search=banner-1-HL&per_page=1")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('tglkoran');
+        if (!container) {
+            console.error("Elemen #bannerKoran tidak ditemukan!");
+            return;
+        }
+
+        data.forEach(post => {
+        const date = new Date(post.date);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let tanggal = date.toLocaleDateString('id-ID', options);
+
+        container.innerHTML = `        
+            <span>${tanggal}</span>
+        `;        
+        });
+        console.log("Banner Koran berhasil di-render.");
+    })
+    .catch(err => {
+        console.error("Gagal fetch data:", err);
+        document.getElementById('tglkoran').innerHTML = "<p>Gagal memuat iklan.</p>";
+    });
+}
+
 function bannerKoran()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/media?search=banner-1-HL&per_page=1")
@@ -2252,6 +2280,7 @@ function menuShare() {
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
     flashNews();
+    tglKoran();
     swiperBerita();
     beritaTerkait();
     beritaTerkini2();
