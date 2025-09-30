@@ -64,7 +64,7 @@ function detailBerita()
             <div id="pagination-controls" class="mt-4 mb-2 text-center"></div>           
             <hr class="text-gray-800">
             <div class="text-black text-sm pt-2">Tags:</div>
-            <div class="tags-container-siwa">${tagHTML}</div>            
+            <div class="tags-container-siwa text-lowercase">${tagHTML}</div>            
         </article>
         `;
 
