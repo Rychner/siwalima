@@ -123,8 +123,8 @@ function swiperBerita()
                         <span class="mb-1 px-2 w-100 text-white post-date fs-7 text-white hstack gap-narrow">
                             ${formatTanggal(post.date)}
                         </span>
-                        <div class="bg-navbar-siwa w-100 px-2 pt-1">
-                            <div class="flex items-start">
+                        <div class="bg-navbar-siwa w-100 px-2 pt-2">
+                            <div class="flex">
                                 <span class="text-red fs-5 fw-bold whitespace-nowrap">Berita Terkait</span>
                                 <div class="flex-grow garis-siwa"></div>
                             </div>
