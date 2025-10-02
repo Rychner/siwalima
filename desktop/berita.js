@@ -7,21 +7,17 @@ function beritaTerkini()
             const container = document.getElementById('beritaterkini');
             data.forEach((post, index) => {            
             //const jamTerbit = post.date.slice(11, 16);
-            const nomor = index + 1;
-            const item = document.createElement('div');
-            item.innerHTML = `
-            <div>
-                <article class="post type-post panel d-flex">
-                    <div>
-                        <div class="fs-2 py-2 fw-bold text-center text-white bg-blue-siwa dark:bg-white dark:text-red min-w-48px border-bottom-siwa">${nomor}</div>
-                    </div>
-                    <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 dark:bg-white">
-                        <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
-                    </h6>
-                </article>
-            </div>
+            const nomor = index + 1;           
+            container.innerHTML += `
+            <article class="post type-post panel d-flex">
+                <div>
+                    <div class="fs-2 py-2 fw-bold text-center text-white bg-blue-siwa dark:bg-white dark:text-red min-w-48px border-bottom-siwa">${nomor}</div>
+                </div>
+                <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 dark:bg-white">
+                    <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
+                </h6>
+            </article>
             `;
-            container.appendChild(item);
             });
         })
     .catch(error => {
@@ -534,7 +530,7 @@ function beritaPolitik()
                             </div>                  
                         </div>                        
                     </div>
-                    <div class="col-auto" style="padding-left:0;padding-right:24px;">
+                    <div class="col-auto">
                         <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-400px">
                             <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                                 <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
@@ -671,12 +667,10 @@ function beritaTopnews()
         const judul = post.title.rendered;
 
         // Ambil featured image (jika ada)
-        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";        
 
-        const item = document.createElement('div');
-
-        item.innerHTML = ` 
-        <article class="post type-post panel vstack gap-1 lg:gap-2">
+        container.innerHTML += ` 
+        <article class="post type-post panel vstack gap-1 lg:gap-2 pt-2 px-2">
             <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
                 <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                     <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
@@ -695,8 +689,6 @@ function beritaTopnews()
             </div>
         </article>
         `;
-
-        container.appendChild(item);
         });
     })
     .catch(err => {
@@ -1161,7 +1153,7 @@ function beritaPendidikan()
 //Section 4 start
 function beritaOlahraga()
 {
-    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=33&_embed")
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=34&_embed")
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('beritaolahraga');
@@ -1363,10 +1355,8 @@ function beritaVisi()
         // Ambil featured image (jika ada)
         const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
 
-        const item = document.createElement('div');
-
-        item.innerHTML = `         
-        <article class="post type-post panel vstack gap-1 lg:gap-2">
+        container.innerHTML += `         
+        <article class="post type-post panel vstack gap-1 lg:gap-2 pt-2 px-2">
             <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden">
                 <div class="rounded-top-1 rounded-bottom-1 featured-image uc-transition-scale-up uc-transition-opaque bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                     <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="https://html.themewant.com/news5/assets/images/common/img-fallback.png" data-src="${gambar}" alt="The Rise of AI-Powered Personal Assistants: How They Manage" data-uc-img="loading: lazy">
@@ -1385,8 +1375,6 @@ function beritaVisi()
             </div>
         </article>
         `;
-
-        container.appendChild(item);
         });
     })
     .catch(err => {
