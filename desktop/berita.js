@@ -14,7 +14,7 @@ function beritaTerkini()
                     <div class="fs-2 py-2 fw-bold text-center text-white bg-blue-siwa dark:bg-white dark:text-red min-w-48px border-bottom-siwa">${nomor}</div>
                 </div>
                 <h6 class="fs-6 py-2 px-1 text-truncate-2 lg:fs-6 xl:fs-6 fw-medium text-truncate-2 flex items-center bg-gray-50 w-100 dark:bg-white">
-                    <a class="fw-semibold text-none hover:text-red duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
+                    <a class="fw-semibold text-none hover:text-blue-siwa duration-150 dark:text-black" href="detail.html?id=${post.post_id}">${post.title}</a>
                 </h6>
             </article>
             `;
@@ -121,7 +121,7 @@ function swiperBerita()
                         </span>
                         <div class="bg-navbar-siwa w-100 px-2 pt-2">
                             <div class="flex">
-                                <span class="text-red fs-5 fw-bold whitespace-nowrap">Berita Terkait</span>
+                                <span class="text-orange-siwa fs-5 fw-bold whitespace-nowrap">Berita Terkait</span>
                                 <div class="flex-grow garis-siwa"></div>
                             </div>
                         <div>                                                                     
@@ -185,7 +185,7 @@ function beritaTerkait() {
                         <article class="w-1/2 post type-post panel vstack gap-1 lg:gap-2">                                                            
                             <div class="post-header panel vstack justify-between gap-1">                    
                                 <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 pb-1">
-                                    <a class="w-full text-white text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    <a class="w-full text-white text-none hover:text-orange-siwa" href="detail.html?id=${post.id}">
                                         ${judul}
                                     </a>
                                 </h3>                                                                
@@ -332,7 +332,7 @@ function beritaTerkini2()
             </div>
             <div class="post-header panel vstack justify-between gap-1">                    
                 <h3 class="post-title fs-6 lg:fs-6 fw-semibold m-0 text-truncate-2">
-                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                    <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                 </h3>
                 <div class="post-meta fs-7 fw-medium text-gray-900 dark:text-white text-opacity-60">
                     <div class="post-date hstack gap-narrow">
@@ -519,7 +519,7 @@ function beritaPolitik()
                     <div>
                         <div class="post-header panel vstack gap-1">                    
                             <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>
                             </h3>
@@ -565,7 +565,7 @@ function beritaPolitik()
                         <div>
                             <div class="post-header panel vstack gap-1">                    
                                 <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
@@ -677,7 +677,7 @@ function beritaTopnews()
             </div>
             <div class="post-header panel vstack gap-1">                                        
                 <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
-                    <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                    <a class="text-none text-white hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                 </h3>
                 <div class="d-none md:d-block">
                     <div class="post-date text-white hstack gap-narrow">
@@ -785,7 +785,7 @@ function beritaKriminal()
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                        <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                     <div class="d-none md:d-block">
                         <div class="post-date hstack gap-narrow">
@@ -893,7 +893,7 @@ function beritaKesehatan()
                     <div>
                         <div class="post-header panel vstack gap-1">                    
                             <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>                                
                             </h3>
@@ -917,7 +917,7 @@ function beritaKesehatan()
                         <div>
                             <div class="post-header panel vstack gap-1">                    
                                 <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
@@ -997,7 +997,7 @@ function beritaOpini()
                 <div class="row child-cols g-2" data-uc-grid>                    
                     <div class="post-header panel vstack justify-between gap-1">
                         <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                            <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">
                             ${judul}
                             </a>
                         </h3>                        
@@ -1126,7 +1126,7 @@ function beritaPendidikan()
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                        <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                     <div class="d-none md:d-block">
                         <div class="post-date hstack gap-narrow">
@@ -1225,7 +1225,7 @@ function beritaOlahraga()
                     <div>
                         <div class="post-header panel vstack gap-1">                    
                             <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>
                             </h3>
@@ -1271,7 +1271,7 @@ function beritaOlahraga()
                         <div>
                             <div class="post-header panel vstack gap-1">                    
                                 <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
@@ -1363,7 +1363,7 @@ function beritaVisi()
             </div>
             <div class="post-header panel vstack gap-1">                                        
                 <h3 class="post-title fs-4 lg:h5 fw-semibold m-0 text-truncate-2">
-                    <a class="text-none text-white hover:text-white duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                    <a class="text-none text-white hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                 </h3>
                 <div class="d-none md:d-block">
                     <div class="post-date text-white hstack gap-narrow">
@@ -1470,7 +1470,7 @@ function beritaPemerintahan()
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                        <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                     <div class="d-none md:d-block">
                         <div class="post-date hstack gap-narrow">
@@ -1578,7 +1578,7 @@ function beritaDaerah()
                     <div>
                         <div class="post-header panel vstack gap-1">                    
                             <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">
+                                <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post1.id}">
                                     ${post1.title.rendered}
                                 </a>
                             </h3>
@@ -1602,7 +1602,7 @@ function beritaDaerah()
                         <div>
                             <div class="post-header panel vstack gap-1">                    
                                 <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">
                                         ${post.title.rendered}
                                     </a>
                                 </h3>
@@ -1728,7 +1728,7 @@ function beritaTerkini44()
                 </div>
                 <div class="post-header panel vstack gap-1">                    
                     <h3 class="post-title h6 lg:h5 fw-semibold m-0 text-truncate-2 mb-1">
-                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">${judul}</a>
+                        <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">${judul}</a>
                     </h3>
                     <div class="d-none md:d-block">
                         <div class="post-date hstack gap-narrow">
@@ -1782,7 +1782,7 @@ function beritaHukum()
                     </div>               
                 </div>                
                 <h3 class="post-title h6 xl:h5 m-0 text-truncate-2 mb-1">
-                    <a class="text-none hover:text-red duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
+                    <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post1.id}">${post1.title.rendered}</a>
                 </h3>
                 </div>
             </article>
@@ -1799,7 +1799,7 @@ function beritaHukum()
                 <div>
                     <div class="post-header panel vstack justify-between gap-1">
                         <h3 class="post-title h6 m-0 text-truncate-2">
-                            <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                            <a class="text-none hover:text-blue-siwa duration-150" href="detail.html?id=${post.id}">
                             ${post.title.rendered}
                             </a>
                         </h3>                    
