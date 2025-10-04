@@ -126,7 +126,7 @@ function swiperBerita()
                             </div>
                         <div>                                                                     
                     </div>                                        
-                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="judul position-cover"></a>
                 </div>                               
             </div>                         
         </article>                    
