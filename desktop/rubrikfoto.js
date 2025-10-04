@@ -11,11 +11,11 @@ function tampilkanFoto(container, images) {
 }
 
 // Array gambar masing-masing kolom
-const images1 = ["https://siwalimanews.com/wp-content/uploads/2025/08/Bendera.jpg", "foto2.jpg", "foto3.jpg"];
+const images1 = ["../rubrik_foto/upacara_pthd.jpg", "../rubrik_foto/upacara_pthd_1.jpg"];
 
-const images2 = ["https://siwalimanews.com/wp-content/uploads/2025/08/Bendera1.jpg", "foto5.jpg", "foto6.jpg", "foto7.jpg"];
+const images2 = ["../rubrik_foto/gegana_1.jpg", "../rubrik_foto/gegana_2.jpg", "../rubrik_foto/gegana_3.jpg", "../rubrik_foto/gegana_4.jpg", "../rubrik_foto/gegana_5.jpg"];
 
-const images3 = ["https://siwalimanews.com/wp-content/uploads/2025/08/Bendera2.jpg", "foto9.jpg", "foto10.jpg"];
+const images3 = ["../rubrik_foto/pangan_murah_1.jpg", "../rubrik_foto/pangan_murah_2.jpg", "../rubrik_foto/pangan_murah_3.jpg", "../rubrik_foto/pangan_murah_4.jpg"];
 
 // Jalankan setelah halaman siap
 document.addEventListener("DOMContentLoaded", () => {

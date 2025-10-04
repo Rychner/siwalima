@@ -320,9 +320,7 @@ function beritaTerkini2()
         const judul = post.title.rendered;
 
         // Ambil featured image (jika ada)
-        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";
-
-        const item = document.createElement('div');        
+        const gambar = post._embedded["wp:featuredmedia"]?.[0]?.source_url || "";                
 
         html += `
         <article class="rounded-top-1 rounded-bottom-1 type-post panel vstack gap-1 lg:gap-2">
@@ -2229,8 +2227,148 @@ function menuShare() {
     
 }
 
+function kategoriBerita() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?categories_slug=${id}&per_page=10&_embed`)
+        .then(response => response.json())
+        .then(data => {
+        const container = document.getElementById("kategoriberita");
+
+        if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML = "Tidak ada berita untuk kategori ini.";
+            return;
+        }
+
+        // mulai gabung semua HTML di sini
+        let html = "";
+
+        data.forEach(post => {
+            const image =
+            post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+            "https://via.placeholder.com/120x80?text=No+Image";
+
+            const tanggal = new Date(post.date).toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            });
+
+            html += `
+            <article class="post type-post panel pb-2">
+                <div class="row child-cols items-center">
+                    <div class="col-auto">
+                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-215px">
+                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${image}"
+                                    alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
+                            <a href="#" class="position-cover"></a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="post-header panel vstack gap-1">                    
+                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
+                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    ${post.title.rendered}
+                                </a>
+                            </h3>
+                            <div class="post-date fs-7 hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>                    
+                        </div>                        
+                    </div>                        
+                </div>
+            </article>
+            `;
+        });
+
+        // masukkan semua ke container
+        container.innerHTML = html;
+        })
+        .catch(err => {
+        console.error("Gagal fetch berita kategori:", err);
+        const container = document.getElementById("kategoriberita");
+        container.innerHTML = "<p>Gagal memuat berita kategori.</p>";
+        });
+}
+
+function tagBerita() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?tags=${id}&per_page=10&_embed`)
+        .then(response => response.json())
+        .then(data => {
+        const container = document.getElementById("tagberita");
+
+        if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML = "Tidak ada berita untuk tag ini.";
+            return;
+        }
+
+        // mulai gabung semua HTML di sini
+        let html = "";
+
+        data.forEach(post => {
+            const image =
+            post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+            "https://via.placeholder.com/120x80?text=No+Image";
+
+            const tanggal = new Date(post.date).toLocaleDateString("id-ID", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            });
+
+            html += `
+            <article class="post type-post panel pb-2">
+                <div class="row child-cols items-center">
+                    <div class="col-auto">
+                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-215px">
+                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
+                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                    data-src="${image}"
+                                    alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                            </div>
+                            <a href="#" class="position-cover"></a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="post-header panel vstack gap-1">                    
+                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
+                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                    ${post.title.rendered}
+                                </a>
+                            </h3>
+                            <div class="post-date fs-7 hstack gap-narrow">
+                                <span>${tanggal}</span>
+                            </div>                    
+                        </div>                        
+                    </div>                        
+                </div>
+            </article>
+            `;
+        });
+
+        // masukkan semua ke container
+        container.innerHTML = html;
+        })
+        .catch(err => {
+        console.error("Gagal fetch berita kategori:", err);
+        const container = document.getElementById("tagberita");
+        container.innerHTML = "<p>Gagal memuat berita kategori.</p>";
+        });
+}  
+
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
+    kategoriBerita();
+    tagBerita();
     flashNews();
     tglKoran();
     swiperBerita();
