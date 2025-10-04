@@ -108,7 +108,7 @@ function swiperBerita()
 
         item.innerHTML = `
         <article class="rounded-top-1 post type-post panel vstack bg-dark">
-            <div class="rounded-top-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1">
+            <div class="rounded-top-1 post-media panel uc-transition-toggle overflow-hidden position-relative hover:rounded-top-1 hover:fs-bold">
                 <div class="featured-image rounded-top-1 bg-gray-25 dark:bg-gray-800 ratio ratio-16x9">
                     <img class="rounded-top-1 uc-transition-scale-up uc-transition-opaque media-cover image" src="${gambar}" data-src="${gambar}" alt="${judul}" data-uc-img="loading: lazy">
                     <!-- Overlay + Judul -->
@@ -126,7 +126,7 @@ function swiperBerita()
                             </div>
                         <div>                                                                     
                     </div>                                        
-                    <a href="detail.html?id=${post.id}" class="judul position-cover"></a>
+                    <a href="detail.html?id=${post.id}" class="position-cover"></a>
                 </div>                               
             </div>                         
         </article>                    
