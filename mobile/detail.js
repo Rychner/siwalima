@@ -95,7 +95,7 @@ function detailBerita()
             if(bacaJugaPost1) {
             bacaJugaHTML1 = `<div class="mt-2 mb-2">
                 <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>
-                    <a href='detail.html?id=${bacaJugaPost1.id}' class="judul fs-3 text-none">${bacaJugaPost1.title.rendered}</a>
+                    <a href='detail.html?id=${bacaJugaPost1.id}' class="judul-detail text-base text-none">${bacaJugaPost1.title.rendered}</a>
                 </div>
             </div>
             `;
@@ -104,7 +104,7 @@ function detailBerita()
             if(bacaJugaPost2) {
             bacaJugaHTML2 = `<div class="mt-2 mb-2">
                 <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>
-                    <a href='detail.html?id=${bacaJugaPost2.id}' class="judul fs-3 text-none">${bacaJugaPost2.title.rendered}</a>
+                    <a href='detail.html?id=${bacaJugaPost2.id}' class="judul-detail text-base text-none">${bacaJugaPost2.title.rendered}</a>
                 </div>
             </div>
             `;
