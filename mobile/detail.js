@@ -34,14 +34,14 @@ function detailBerita()
         const semuaElemen = Array.from(tempDiv.children);
         const paragrafAsli = semuaElemen.filter(el => el.tagName.toLowerCase() === "p");
 
-        const iklanbody1 = `<div class="mt-2 mb-2 d-flex justify-center">
+        const iklanbody1 = `<div class="mt-2 mb-2 flex justify-center">
             <div class='p-2 max-w-500px'>
                 <img src="../iklan_body_isi_berita_1.jpg">
             </div>
         </div>
         `;
         
-        const iklanbody2 = `<div class="mt-2 mb-2 d-flex justify-center">
+        const iklanbody2 = `<div class="mt-2 mb-2 flex justify-center">
             <div class='p-2 max-w-500px'>
                 <img src="../iklan_body_isi_berita_2.jpg">
             </div>
@@ -68,27 +68,18 @@ function detailBerita()
         </article>
         `;
 
+        let bacaJugaList = [];
+    
         // ✅ Lanjutkan fetch "Baca Juga" setelah sisipkan iklan
         const kataPertama = judul.split(" ")[0]; // ambil keyword dari judul, misalnya
-        fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?search=${kataPertama}&exclude=${id}&per_page=1&_embed`)
+        fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?search=${kataPertama}&exclude=${id}&per_page=50&_embed`)
         .then(res => res.json())
         .then(posts => {
-            let bacaJugaHTML = "";
-            if(posts.length > 0) {
-            bacaJugaHTML = `<div class="mt-2 mb-2">
-                <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>
-                    <a href='detail.html?id=${posts[0].id}' class="judul-detail text-sm text-none">${posts[0].title.rendered}</a>
-                </div>
-            </div>
-            `;
-            }          
+            bacaJugaList = posts;                             
 
         const paragrafPerHalaman = 6;
         let halamanSekarang = 1;
-        const totalHalaman = Math.ceil(paragrafAsli.length / paragrafPerHalaman);
-        console.log("Panjang paragraf:", paragrafAsli.length);
-        console.log("Total halaman:", totalHalaman);
-        console.log("Pagination div:", document.getElementById("pagination-controls"));          
+        const totalHalaman = Math.ceil(paragrafAsli.length / paragrafPerHalaman);          
 
         function renderHalaman(page) {
             const mulai = (page - 1) * paragrafPerHalaman;
@@ -96,6 +87,28 @@ function detailBerita()
             const paragrafHalaman = paragrafAsli.slice(mulai, akhir);
 
             let kontenHTML = "";
+
+            const bacaJugaPost1 = bacaJugaList[(page * 2 - 2) % bacaJugaList.length];
+            const bacaJugaPost2 = bacaJugaList[(page * 2 - 1) % bacaJugaList.length];
+            let bacaJugaHTML1 = "";
+            let bacaJugaHTML2 = "";
+            if(bacaJugaPost1) {
+            bacaJugaHTML1 = `<div class="mt-2 mb-2">
+                <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>
+                    <a href='detail.html?id=${bacaJugaPost1.id}' class="judul fs-3 text-none">${bacaJugaPost1.title.rendered}</a>
+                </div>
+            </div>
+            `;
+            }
+            
+            if(bacaJugaPost2) {
+            bacaJugaHTML2 = `<div class="mt-2 mb-2">
+                <div class='bg-gray-50 p-2 baca-juga'>Baca Juga:<br>
+                    <a href='detail.html?id=${bacaJugaPost2.id}' class="judul fs-3 text-none">${bacaJugaPost2.title.rendered}</a>
+                </div>
+            </div>
+            `;
+            } 
 
             for (let i = 0; i < paragrafHalaman.length; i++) {
                 kontenHTML += paragrafHalaman[i].outerHTML;
@@ -106,8 +119,12 @@ function detailBerita()
                 }
 
                 // Hanya pada halaman pertama dan setelah paragraf ke-3
-                if (i === 2) {                        
-                kontenHTML += bacaJugaHTML;
+                if (i === 1) {                        
+                kontenHTML += bacaJugaHTML1;
+                }
+
+                if (i === 3) {                        
+                kontenHTML += bacaJugaHTML2;
                 }
 
                 // Hanya pada halaman pertama dan setelah paragraf ke-4
