@@ -477,7 +477,7 @@ function beritaTerpopuler()
             item.innerHTML = `
             <article class="flex items-center gap-2 py-2">
                 <div>
-                    <div class="text-base py-2 w-[10vw] font-bold text-center text-white bg-blue-siwa border-bottom-siwa">${nomor}</div>
+                    <div class="text-base py-2 w-[10vw] font-bold text-center text-white bg-red border-bottom-siwa">${nomor}</div>
                 </div>
                 <div class="text-truncate-siwa-2 text-none w-full">
                     <a class="text-sm font-medium" href="detail.html?id=${post.post_id}">${post.title}</a>
