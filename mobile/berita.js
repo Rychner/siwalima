@@ -210,6 +210,26 @@ function beritaTerkini2()
     });
 }
 
+function flashNews() {
+    fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=20&_embed")
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById('flashnews');
+
+            let teks = "";
+            data.forEach(post => {
+                const judul = post.title.rendered;
+                teks += ` &bull; <a class="text-xs text-none"href="detail.html?id=${post.id}">${judul}</a>`;
+            });
+
+        container.innerHTML = teks;
+        })
+        .catch(err => {
+        console.error("Gagal fetch flashnews:", err);
+        document.getElementById('flashnews').innerHTML = "<p>Gagal memuat berita.</p>";
+    });
+}
+
 function beritaTerkini5()
 {
     fetch("https://siwalimanews.com/wp-json/wp/v2/posts?per_page=7&_embed")
@@ -2363,6 +2383,7 @@ function rubrikVideo()
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
+    flashNews();
     swiperBerita();    
     beritaTerkini2();
     beritaTerkini5();

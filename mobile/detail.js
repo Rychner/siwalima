@@ -362,11 +362,10 @@ function beritaTerkaitDetail() {
     });
 }
 
-
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {    
     detailBerita();
-    beritaTerkaitDetail();    
+    beritaTerkaitDetail();        
 }
 
 // Jalankan setelah halaman dimuat
