@@ -219,7 +219,7 @@ function flashNews() {
             let teks = "";
             data.forEach(post => {
                 const judul = post.title.rendered;
-                teks += ` &bull; <a class="text-sm text-none"href="detail.html?id=${post.id}">${judul}</a>`;
+                teks += ` &bull; <a class="text-15px text-none"href="detail.html?id=${post.id}">${judul}</a>`;
             });
 
         container.innerHTML = teks;
