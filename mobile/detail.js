@@ -36,7 +36,7 @@ function detailBerita()
 
         const iklanbody1 = `<div class="mt-2 mb-2 flex justify-center">
             <div class='p-2 max-w-500px'>
-                <img src="../iklan_body_isi_berita_1.jpg">
+                <img src="../WhatsApp Image 2025-10-22 at 12.37.37_a38bc6cf.jpg">
             </div>
         </div>
         `;
