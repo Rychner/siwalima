@@ -2300,70 +2300,112 @@ function tagBerita() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
-    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?tags=${id}&per_page=10&_embed`)
+    // ambil 100 berita
+    fetch(`https://siwalimanews.com/wp-json/wp/v2/posts?tags=${id}&per_page=100&_embed`)
         .then(response => response.json())
         .then(data => {
-        const container = document.getElementById("tagberita");
+            const container = document.getElementById("tagberita");
+            const pagination = document.getElementById("pagination");
 
-        if (!Array.isArray(data) || data.length === 0) {
-            container.innerHTML = "Tidak ada berita untuk tag ini.";
-            return;
-        }
+            if (!Array.isArray(data) || data.length === 0) {
+                container.innerHTML = "Tidak ada berita untuk tag ini.";
+                return;
+            }
 
-        // mulai gabung semua HTML di sini
-        let html = "";
+            const perPage = 10;
+            let currentPage = 1;
+            const totalPages = Math.ceil(data.length / perPage);
 
-        data.forEach(post => {
-            const image =
-            post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-            "https://via.placeholder.com/120x80?text=No+Image";
+            // fungsi untuk render data per halaman
+            function renderPage(page) {
+                const start = (page - 1) * perPage;
+                const end = start + perPage;
+                const posts = data.slice(start, end);
 
-            const tanggal = new Date(post.date).toLocaleDateString("id-ID", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-            });
+                let html = "";
+                posts.forEach(post => {
+                    const image =
+                        post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                        "https://via.placeholder.com/120x80?text=No+Image";
 
-            html += `
-            <article class="post type-post panel pb-2">
-                <div class="row child-cols items-center">
-                    <div class="col-auto">
-                        <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-215px">
-                            <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
-                                <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
-                                    src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
-                                    data-src="${image}"
-                                    alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                    const tanggal = new Date(post.date).toLocaleDateString("id-ID", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                    });
+
+                    html += `
+                    <article class="post type-post panel pb-2">
+                        <div class="row child-cols items-center">
+                            <div class="col-auto">
+                                <div class="rounded-top-1 rounded-bottom-1 post-media panel uc-transition-toggle overflow-hidden max-w-200px min-w-200px lg:min-w-215px">
+                                    <div class="rounded-top-1 rounded-bottom-1 featured-image bg-gray-25 dark:bg-gray-800 ratio ratio-4x3">
+                                        <img class="rounded-top-1 rounded-bottom-1 uc-transition-scale-up uc-transition-opaque media-cover image"
+                                            src="https://html.themewant.com/news5/assets/images/common/img-fallback.png"
+                                            data-src="${image}"
+                                            alt="${post.title.rendered}" data-uc-img="loading: lazy">
+                                    </div>
+                                    <a href="#" class="position-cover"></a>
+                                </div>
                             </div>
-                            <a href="#" class="position-cover"></a>
+                            <div>
+                                <div class="post-header panel vstack gap-1">                    
+                                    <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
+                                        <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
+                                            ${post.title.rendered}
+                                        </a>
+                                    </h3>
+                                    <div class="post-date fs-7 hstack gap-narrow">
+                                        <span>${tanggal}</span>
+                                    </div>                    
+                                </div>                        
+                            </div>                        
                         </div>
-                    </div>
-                    <div>
-                        <div class="post-header panel vstack gap-1">                    
-                            <h3 class="post-title fs-6 fw-semibold m-0 text-truncate-2 lg:fs-2">
-                                <a class="text-none hover:text-red duration-150" href="detail.html?id=${post.id}">
-                                    ${post.title.rendered}
-                                </a>
-                            </h3>
-                            <div class="post-date fs-7 hstack gap-narrow">
-                                <span>${tanggal}</span>
-                            </div>                    
-                        </div>                        
-                    </div>                        
-                </div>
-            </article>
-            `;
-        });
+                    </article>
+                    `;
+                });
 
-        // masukkan semua ke container
-        container.innerHTML = html;
+                container.innerHTML = html;
+                renderPagination();
+            }
+
+            // fungsi untuk render tombol pagination
+            function renderPagination() {
+                let buttons = "";
+
+                buttons += `<button ${currentPage === 1 ? "disabled" : ""} id="prevPage" class="px-3 py-1 border rounded">Prev</button>`;
+                buttons += `<span class="px-3 py-1">Halaman ${currentPage} dari ${totalPages}</span>`;
+                buttons += `<button ${currentPage === totalPages ? "disabled" : ""} id="nextPage" class="px-3 py-1 border rounded">Next</button>`;
+
+                pagination.innerHTML = buttons;
+
+                // event listener untuk tombol
+                document.getElementById("prevPage").onclick = () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderPage(currentPage);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                };
+                document.getElementById("nextPage").onclick = () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderPage(currentPage);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                };
+            }
+
+            // tampilkan halaman pertama
+            renderPage(currentPage);
         })
-        .catch(err => {
+    .catch(err => {
         console.error("Gagal fetch berita kategori:", err);
-        const container = document.getElementById("tagberita");
-        container.innerHTML = "<p>Gagal memuat berita kategori.</p>";
-        });
-}  
+        document.getElementById("tagberita").innerHTML = "<p>Gagal memuat berita kategori.</p>";
+    });
+}
+
+
 
 // Fungsi inisialisasi yang akan dipanggil saat DOM sudah siap
 function initApp() {
