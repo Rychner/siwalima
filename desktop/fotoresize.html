@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="relative w-full max-w-3xl mx-auto aspect-[16/9] overflow-hidden bg-gray-200">
+        <img 
+        src="WhatsApp Image 2025-10-22 at 16.29.01_00df8540.jpg"
+        alt="Foto Potrait"
+        class="absolute left-0 top-0 w-full h-auto min-h-full object-cover"
+        id="cropImage"
+        >
+    </div>
+    
+    <!-- Slider kontrol posisi crop -->
+    <div class="w-full max-w-3xl mx-auto mt-4">
+        <input 
+        type="range" 
+        id="cropRange" 
+        min="0" 
+        max="100" 
+        value="50"
+        class="w-full"
+        >
+    </div>
+    
+    <script>
+    const img = document.getElementById('cropImage');
+    const slider = document.getElementById('cropRange');
+    
+    slider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        // geser gambar secara vertikal berdasarkan slider
+        img.style.objectPosition = `center ${val}%`;
+    });
+    </script>
+</body>
+</html>
